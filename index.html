@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MetaHub — Katalog Akun FB & WA Premium</title>
+<meta name="description" content="Katalog lengkap akun Facebook, Business Manager, Fanpage, dan WhatsApp Meta. Siap pakai, garansi login, harga bersaing.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;700;800&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0a0e1a;
+  --card: #131826;
+  --fg: #ffffff;
+  --muted: #8895ab;
+  --accent: #4ade80;
+  --accent-2: #facc15;
+  --hot: #ef4444;
+  --border: #1f2937;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: 'Inter', sans-serif;
+  min-height: 100vh;
+  background-image: 
+    radial-gradient(at 20% 10%, rgba(74,222,128,0.08) 0, transparent 50%),
+    radial-gradient(at 80% 80%, rgba(250,204,21,0.06) 0, transparent 50%);
+}
+
+::selection { background: var(--accent); color: var(--bg); }
+
+.container {
+  max-width: 880px;
+  margin: 0 auto;
+  padding: 40px 24px;
+}
+
+/* HEADER */
+.header {
+  text-align: center;
+  margin-bottom: 48px;
+}
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  padding: 8px 16px;
+  border-radius: 100px;
+  margin-bottom: 24px;
+  font-size: 13px;
+  color: var(--muted);
+}
+.brand .dot {
+  width: 6px;
+  height: 6px;
+  background: var(--accent);
+  border-radius: 50%;
+  animation: pulse 2s infinite;
+}
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+
+.logo {
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-size: 64px;
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  line-height: 1;
+  margin-bottom: 16px;
+  background: linear-gradient(135deg, #fff 0%, #8895ab 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.logo .dot-accent { color: var(--accent); -webkit-text-fill-color: var(--accent); }
+
+.subtitle {
+  color: var(--muted);
+  font-size: 17px;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+/* INFO BAR */
+.info-bar {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 20px;
+  margin-bottom: 40px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 16px;
+  text-align: center;
+}
+.info-item {
+  font-size: 12px;
+  color: var(--muted);
+}
+.info-item .icon {
+  display: block;
+  font-size: 24px;
+  margin-bottom: 6px;
+}
+.info-item strong {
+  display: block;
+  color: var(--fg);
+  font-size: 14px;
+}
+
+/* CATEGORY */
+.cat-section {
+  margin-bottom: 40px;
+}
+.cat-title {
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.cat-title::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+
+/* PRODUCT */
+.product {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 24px;
+  margin-bottom: 12px;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 24px;
+  align-items: center;
+  transition: all .2s;
+  position: relative;
+  overflow: hidden;
+}
+.product:hover {
+  border-color: var(--accent);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px rgba(74,222,128,0.1);
+}
+.product.hot {
+  border-color: rgba(250,204,21,0.4);
+  background: linear-gradient(135deg, var(--card) 0%, rgba(250,204,21,0.05) 100%);
+}
+.product.hot::before {
+  content: '🔥 BEST SELLER';
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: var(--accent-2);
+  color: var(--bg);
+  font-size: 10px;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 100px;
+  letter-spacing: 0.05em;
+}
+.product.new::before {
+  content: '✨ NEW';
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: var(--accent);
+  color: var(--bg);
+  font-size: 10px;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 100px;
+  letter-spacing: 0.05em;
+}
+
+.product-info h3 {
+  font-size: 17px;
+  font-weight: 700;
+  margin-bottom: 8px;
+  line-height: 1.3;
+  margin-right: 100px;
+}
+.product-info p {
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.6;
+}
+.product-info p .check {
+  color: var(--accent);
+  margin-right: 4px;
+}
+
+.product-price {
+  text-align: right;
+  flex-shrink: 0;
+}
+.price-num {
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-size: 30px;
+  font-weight: 800;
+  color: var(--fg);
+  line-height: 1;
+}
+.price-unit {
+  font-size: 11px;
+  color: var(--muted);
+  margin-top: 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* CTA */
+.cta-box {
+  background: linear-gradient(135deg, var(--card) 0%, rgba(74,222,128,0.05) 100%);
+  border: 1px solid var(--accent);
+  border-radius: 20px;
+  padding: 40px 32px;
+  text-align: center;
+  margin-top: 56px;
+}
+.cta-box h2 {
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-size: 32px;
+  margin-bottom: 12px;
+}
+.cta-box p {
+  color: var(--muted);
+  margin-bottom: 28px;
+  font-size: 15px;
+}
+.btn {
+  background: var(--accent);
+  color: var(--bg);
+  padding: 16px 40px;
+  border-radius: 100px;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 16px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: transform .2s;
+}
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px rgba(74,222,128,0.3);
+}
+
+/* PAYMENT BAR */
+.payment {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 16px 20px;
+  margin-top: 24px;
+  text-align: center;
+}
+.payment-label {
+  font-size: 12px;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 8px;
+}
+.payment-methods {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.pay-tag {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+/* FOOTER */
+.footer {
+  margin-top: 48px;
+  padding-top: 24px;
+  border-top: 1px solid var(--border);
+  text-align: center;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.8;
+}
+.footer strong { color: var(--fg); }
+
+@media (max-width: 600px) {
+  .logo { font-size: 44px; }
+  .product {
+    grid-template-columns: 1fr;
+  }
+  .product-price {
+    border-top: 1px solid var(--border);
+    padding-top: 16px;
+    text-align: left;
+  }
+  .product-info h3 { margin-right: 70px; }
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <div class="header">
+    <div class="brand"><span class="dot"></span>STOK READY · UPDATE 2026</div>
+    <h1 class="logo">Meta<span class="dot-accent">Hub</span>.</h1>
+    <p class="subtitle">Katalog akun Facebook, Business Manager, Fanpage & WhatsApp Meta — siap pakai dengan garansi.</p>
+  </div>
+
+  <div class="info-bar">
+    <div class="info-item">
+      <span class="icon">🛡️</span>
+      <strong>Garansi Login</strong>
+    </div>
+    <div class="info-item">
+      <span class="icon">⚡</span>
+      <strong>Fast Response</strong>
+    </div>
+    <div class="info-item">
+      <span class="icon">✅</span>
+      <strong>Stok Ready</strong>
+    </div>
+    <div class="info-item">
+      <span class="icon">💳</span>
+      <strong>Bank Lokal</strong>
+    </div>
+  </div>
+
+  <!-- KATEGORI 1: FB + BM + FP -->
+  <div class="cat-section">
+    <div class="cat-title">Paket FB + BM + Fanpage</div>
+
+    <div class="product">
+      <div class="product-info">
+        <h3>FB Isi 1 BM + 1 Fanpage</h3>
+        <p>
+          <span class="check">✓</span>1 Akun FB + 1 BM + 1 Fanpage<br>
+          <span class="check">✓</span>Siap tambah WhatsApp untuk sender<br>
+          <span class="check">✓</span>Garansi login data awal
+        </p>
+      </div>
+      <div class="product-price">
+        <div class="price-num">Rp 65rb</div>
+        <div class="price-unit">per akun</div>
+      </div>
+    </div>
+
+    <div class="product hot">
+      <div class="product-info">
+        <h3>FB Isi 2 BM + 2 Fanpage</h3>
+        <p>
+          <span class="check">✓</span>1 Akun FB + 2 BM + 2 Fanpage<br>
+          <span class="check">✓</span>Tinggal colok WA langsung jalan<br>
+          <span class="check">✓</span>Garansi login data awal
+        </p>
+      </div>
+      <div class="product-price">
+        <div class="price-num">Rp 120rb</div>
+        <div class="price-unit">per akun</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- KATEGORI 2: FB OLD -->
+  <div class="cat-section">
+    <div class="cat-title">Akun FB Old / Aged</div>
+
+    <div class="product">
+      <div class="product-info">
+        <h3>FB Old Polos (Random)</h3>
+        <p>
+          <span class="check">✓</span>Akun tahun random 2009-2023<br>
+          <span class="check">✓</span>Cookies + UID + 2FA<br>
+          <span class="check">✓</span>Polos tanpa fanpage
+        </p>
+      </div>
+      <div class="product-price">
+        <div class="price-num">Rp 25rb</div>
+        <div class="price-unit">per akun</div>
+      </div>
+    </div>
+
+    <div class="product">
+      <div class="product-info">
+        <h3>FB Old + 1 Fanpage</h3>
+        <p>
+          <span class="check">✓</span>Akun tahun random 2009-2023<br>
+          <span class="check">✓</span>Cookies + UID + 2FA<br>
+          <span class="check">✓</span>Include 1 fanpage ready
+        </p>
+      </div>
+      <div class="product-price">
+        <div class="price-num">Rp 30rb</div>
+        <div class="price-unit">per akun</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- KATEGORI 3: WHATSAPP -->
+  <div class="cat-section">
+    <div class="cat-title">WhatsApp Meta</div>
+
+    <div class="product new">
+      <div class="product-info">
+        <h3>WhatsApp Meta New</h3>
+        <p>
+          <span class="check">✓</span>Nomor WA aktif & ready<br>
+          <span class="check">✓</span>Cocok untuk blast / ads campaign<br>
+          <span class="check">✓</span>Garansi 2 hari (replace jika mati)
+        </p>
+      </div>
+      <div class="product-price">
+        <div class="price-num">Rp 150rb</div>
+        <div class="price-unit">per nomor</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div class="cta-box">
+    <h2>Mau Order?</h2>
+    <p>Chat admin via WhatsApp untuk pengecekan stok & order.</p>
+    <a href="https://wa.me/6282127341669" class="btn">
+      <span>💬</span>
+      <span>Chat Admin Sekarang</span>
+    </a>
+  </div>
+
+  <!-- PAYMENT -->
+  <div class="payment">
+    <div class="payment-label">Metode Pembayaran</div>
+    <div class="payment-methods">
+      <span class="pay-tag">BCA</span>
+      <span class="pay-tag">SeaBank</span>
+      <span class="pay-tag">OVO</span>
+      <span class="pay-tag">DANA</span>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <p><strong>Garansi FB:</strong> Login — ganti akun jika gagal login (data awal yang kami berikan)</p>
+    <p><strong>Garansi WA:</strong> 2 hari — replace baru jika nomor mati</p>
+    <p style="margin-top: 16px;">© 2026 MetaHub · Be smart buyer 🛡️</p>
+  </div>
+
+</div>
+
+</body>
+</html>
