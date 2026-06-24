@@ -4,347 +4,577 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>MetaHub — Katalog Akun FB & WA Premium</title>
+<meta name="description" content="Katalog akun Facebook, Business Manager, Fanpage & WhatsApp Meta premium. Garansi login, fast response, harga terjangkau.">
+<meta property="og:title" content="MetaHub — Katalog Akun FB & WA Premium">
+<meta property="og:description" content="Akun FB, BM, Fanpage & WA Meta siap pakai. Garansi & fast response.">
+<meta property="og:url" content="https://metahubid.com">
+<meta property="og:type" content="website">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;700;800&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-:root {
-  --bg: #0a0e1a;
-  --card: #131826;
-  --fg: #ffffff;
-  --muted: #8895ab;
-  --accent: #4ade80;
-  --accent-2: #facc15;
-  --wa: #25D366;
-  --tg: #2AABEE;
-  --border: #1f2937;
-}
 * { margin: 0; padding: 0; box-sizing: border-box; }
-html { scroll-behavior: smooth; }
-body {
-  background: var(--bg);
-  color: var(--fg);
-  font-family: 'Inter', sans-serif;
-  min-height: 100vh;
-  background-image: 
-    radial-gradient(at 20% 10%, rgba(74,222,128,0.08) 0, transparent 50%),
-    radial-gradient(at 80% 80%, rgba(250,204,21,0.06) 0, transparent 50%);
-}
-::selection { background: var(--accent); color: var(--bg); }
-.container { max-width: 880px; margin: 0 auto; padding: 40px 24px; }
-.header { text-align: center; margin-bottom: 48px; }
-.brand {
-  display: inline-flex; align-items: center; gap: 8px;
-  background: var(--card); border: 1px solid var(--border);
-  padding: 8px 16px; border-radius: 100px; margin-bottom: 24px;
-  font-size: 13px; color: var(--muted);
-}
-.brand .dot {
-  width: 6px; height: 6px; background: var(--accent);
-  border-radius: 50%; animation: pulse 2s infinite;
-}
-@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.4} }
-.logo {
-  font-family: 'Bricolage Grotesque', sans-serif;
-  font-size: 64px; font-weight: 800;
-  letter-spacing: -0.04em; line-height: 1; margin-bottom: 16px;
-  background: linear-gradient(135deg, #fff 0%, #8895ab 100%);
-  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-}
-.logo .dot-accent { color: var(--accent); -webkit-text-fill-color: var(--accent); }
-.subtitle { color: var(--muted); font-size: 17px; max-width: 500px; margin: 0 auto; }
-.info-bar {
-  background: var(--card); border: 1px solid var(--border);
-  border-radius: 16px; padding: 20px; margin-bottom: 40px;
-  display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-  gap: 16px; text-align: center;
-}
-.info-item { font-size: 12px; color: var(--muted); }
-.info-item .icon { display: block; font-size: 24px; margin-bottom: 6px; }
-.info-item strong { display: block; color: var(--fg); font-size: 14px; }
-.cat-section { margin-bottom: 40px; }
-.cat-title {
-  font-family: 'Bricolage Grotesque', sans-serif;
-  font-size: 14px; font-weight: 700; color: var(--accent);
-  text-transform: uppercase; letter-spacing: 0.15em;
-  margin-bottom: 16px; display: flex; align-items: center; gap: 12px;
-}
-.cat-title::after { content: ''; flex: 1; height: 1px; background: var(--border); }
-.product {
-  background: var(--card); border: 1px solid var(--border);
-  border-radius: 16px; padding: 24px; margin-bottom: 12px;
-  display: grid; grid-template-columns: 1fr auto; gap: 24px;
-  align-items: center; transition: all .2s;
-  position: relative; overflow: hidden; cursor: pointer;
-}
-.product::after {
-  content: '👆 ORDER SEKARANG';
-  position: absolute; inset: 0;
-  background: rgba(74,222,128,0.95); color: var(--bg);
-  display: flex; align-items: center; justify-content: center;
-  font-weight: 800; font-size: 18px; opacity: 0;
-  transition: opacity .2s; pointer-events: none;
-  font-family: 'Bricolage Grotesque', sans-serif;
-  letter-spacing: 0.1em;
-}
-.product:hover {
-  border-color: var(--accent);
-  transform: translateY(-2px);
-  box-shadow: 0 10px 30px rgba(74,222,128,0.2);
-}
-.product:hover::after { opacity: 1; }
-.product.hot {
-  border-color: rgba(250,204,21,0.4);
-  background: linear-gradient(135deg, var(--card) 0%, rgba(250,204,21,0.05) 100%);
-}
-.product.hot::before {
-  content: '🔥 BEST SELLER';
-  position: absolute; top: 12px; right: 12px;
-  background: var(--accent-2); color: var(--bg);
-  font-size: 10px; font-weight: 700;
-  padding: 4px 10px; border-radius: 100px;
-  letter-spacing: 0.05em; z-index: 1;
-}
-.product.new::before {
-  content: '✨ NEW';
-  position: absolute; top: 12px; right: 12px;
-  background: var(--accent); color: var(--bg);
-  font-size: 10px; font-weight: 700;
-  padding: 4px 10px; border-radius: 100px;
-  letter-spacing: 0.05em; z-index: 1;
-}
-.product-info h3 { font-size: 17px; font-weight: 700; margin-bottom: 8px; line-height: 1.3; margin-right: 100px; }
-.product-info p { font-size: 13px; color: var(--muted); line-height: 1.6; }
-.product-info p .check { color: var(--accent); margin-right: 4px; }
-.product-price { text-align: right; flex-shrink: 0; }
-.price-num { font-family: 'Bricolage Grotesque', sans-serif; font-size: 30px; font-weight: 800; color: var(--fg); line-height: 1; }
-.price-unit { font-size: 11px; color: var(--muted); margin-top: 4px; text-transform: uppercase; letter-spacing: 0.05em; }
-.payment {
-  background: var(--card); border: 1px solid var(--border);
-  border-radius: 12px; padding: 16px 20px; margin-top: 32px; text-align: center;
-}
-.payment-label { font-size: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 8px; }
-.payment-methods { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; }
-.pay-tag { background: var(--bg); border: 1px solid var(--border); padding: 6px 12px; border-radius: 8px; font-size: 13px; font-weight: 600; }
-.footer {
-  margin-top: 32px; padding-top: 24px;
-  border-top: 1px solid var(--border);
-  text-align: center; color: var(--muted);
-  font-size: 13px; line-height: 1.8;
-}
-.footer strong { color: var(--fg); }
 
-/* MODAL */
+:root {
+  --bg: #0a0a0f;
+  --bg-card: #14141c;
+  --bg-card-hover: #1a1a26;
+  --border: #2a2a3a;
+  --text: #ffffff;
+  --text-dim: #8a8aa0;
+  --accent: #7c5cff;
+  --accent-glow: rgba(124, 92, 255, 0.3);
+  --gold: #fbbf24;
+  --green: #25D366;
+  --blue: #2AABEE;
+  --red: #ef4444;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(800px circle at 0% 0%, rgba(124, 92, 255, 0.15), transparent 40%),
+    radial-gradient(600px circle at 100% 100%, rgba(37, 211, 102, 0.08), transparent 40%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 32px 20px 80px;
+  position: relative;
+  z-index: 1;
+}
+
+header {
+  text-align: center;
+  margin-bottom: 50px;
+  padding-top: 24px;
+}
+
+.logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-size: 36px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  margin-bottom: 10px;
+}
+
+.logo-dot {
+  width: 14px;
+  height: 14px;
+  background: var(--accent);
+  border-radius: 50%;
+  box-shadow: 0 0 24px var(--accent-glow);
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.7; transform: scale(1.15); }
+}
+
+.tagline {
+  color: var(--text-dim);
+  font-size: 15px;
+  margin-bottom: 8px;
+}
+
+.contact-bar {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  padding: 8px 18px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 50px;
+  margin-top: 14px;
+  font-size: 13px;
+  color: var(--text-dim);
+}
+
+.contact-bar a {
+  color: var(--text);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+
+.contact-bar a:hover { color: var(--accent); }
+
+.section-title {
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-size: 24px;
+  font-weight: 700;
+  margin: 40px 0 16px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.section-title::before {
+  content: '';
+  width: 4px;
+  height: 22px;
+  background: var(--accent);
+  border-radius: 2px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 16px;
+}
+
+.card {
+  position: relative;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 22px;
+  cursor: pointer;
+  transition: all 0.25s;
+  overflow: hidden;
+}
+
+.card:hover {
+  background: var(--bg-card-hover);
+  border-color: var(--accent);
+  transform: translateY(-3px);
+  box-shadow: 0 10px 30px -10px var(--accent-glow);
+}
+
+.card::after {
+  content: '👆 ORDER SEKARANG';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(124, 92, 255, 0.9), rgba(124, 92, 255, 0.7));
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 16px;
+  opacity: 0;
+  transition: opacity 0.25s;
+  pointer-events: none;
+  border-radius: 16px;
+}
+
+.card:hover::after { opacity: 1; }
+
+.badge {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+
+.badge-hot {
+  background: linear-gradient(135deg, #ff4d4d, #ff8c00);
+  color: white;
+  box-shadow: 0 0 16px rgba(255, 77, 77, 0.4);
+}
+
+.badge-premium {
+  background: linear-gradient(135deg, var(--gold), #f59e0b);
+  color: #1a1a1a;
+}
+
+.badge-baru {
+  background: linear-gradient(135deg, #10b981, #059669);
+  color: white;
+}
+
+.badge-best {
+  background: linear-gradient(135deg, var(--accent), #5b21b6);
+  color: white;
+}
+
+.badge-stok {
+  background: var(--bg);
+  color: var(--text-dim);
+  border: 1px solid var(--border);
+}
+
+.card-title {
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 6px;
+  line-height: 1.2;
+}
+
+.card-desc {
+  color: var(--text-dim);
+  font-size: 13px;
+  line-height: 1.55;
+  margin-bottom: 14px;
+}
+
+.card-price {
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-size: 28px;
+  font-weight: 800;
+  color: var(--accent);
+  letter-spacing: -0.02em;
+}
+
+.card-price-small {
+  font-size: 13px;
+  color: var(--text-dim);
+  font-weight: 400;
+  margin-left: 6px;
+}
+
+.card-min {
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 12px;
+  color: var(--gold);
+  font-weight: 600;
+}
+
+/* Modal */
 .modal-overlay {
-  position: fixed; inset: 0;
-  background: rgba(0,0,0,0.85); backdrop-filter: blur(8px);
-  z-index: 999; display: none;
-  align-items: center; justify-content: center;
-  padding: 20px; animation: fadeIn .2s;
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(8px);
+  z-index: 100;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  animation: fadeIn 0.2s;
 }
+
 .modal-overlay.active { display: flex; }
-@keyframes fadeIn { from{opacity:0} to{opacity:1} }
+
+@keyframes fadeIn {
+  from { opacity: 0; } to { opacity: 1; }
+}
+
 .modal {
-  background: var(--card); border: 1px solid var(--border);
-  border-radius: 20px; padding: 32px;
-  max-width: 440px; width: 100%; position: relative;
-  animation: slideUp .3s;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 32px;
+  max-width: 440px;
+  width: 100%;
+  position: relative;
+  animation: slideUp 0.3s;
 }
-@keyframes slideUp { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
+
+@keyframes slideUp {
+  from { transform: translateY(20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
 .modal-close {
-  position: absolute; top: 16px; right: 16px;
-  background: var(--bg); border: 1px solid var(--border);
-  color: var(--fg); width: 36px; height: 36px;
-  border-radius: 50%; cursor: pointer; font-size: 20px;
-  display: flex; align-items: center; justify-content: center;
-  transition: all .2s;
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: none;
+  border: none;
+  color: var(--text-dim);
+  font-size: 28px;
+  cursor: pointer;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
 }
-.modal-close:hover { background: var(--border); transform: rotate(90deg); }
+
+.modal-close:hover { background: var(--border); color: var(--text); }
+
 .modal-title {
   font-family: 'Bricolage Grotesque', sans-serif;
-  font-size: 22px; font-weight: 800;
-  margin-bottom: 8px; padding-right: 40px;
+  font-size: 26px;
+  font-weight: 700;
+  margin-bottom: 8px;
 }
-.modal-product {
-  background: var(--bg); border: 1px solid var(--border);
-  border-radius: 12px; padding: 16px; margin: 16px 0 24px;
-}
-.modal-product-name { font-size: 14px; color: var(--muted); margin-bottom: 4px; }
-.modal-product-price {
+
+.modal-price {
   font-family: 'Bricolage Grotesque', sans-serif;
-  font-size: 28px; font-weight: 800; color: var(--accent);
+  font-size: 32px;
+  font-weight: 800;
+  color: var(--accent);
+  margin-bottom: 4px;
 }
-.modal-subtitle { color: var(--muted); font-size: 14px; margin-bottom: 20px; }
-.order-btn {
-  display: flex; align-items: center; gap: 12px;
-  padding: 16px 20px; border-radius: 12px;
-  text-decoration: none; font-weight: 700; font-size: 15px;
-  margin-bottom: 12px; transition: all .2s; color: white;
+
+.modal-info {
+  color: var(--text-dim);
+  font-size: 14px;
+  line-height: 1.6;
+  margin-bottom: 20px;
 }
-.order-btn:hover { transform: translateY(-2px); }
-.order-btn .ico-wrap {
-  width: 40px; height: 40px; border-radius: 10px;
-  background: rgba(255,255,255,0.2);
-  display: flex; align-items: center; justify-content: center;
-  font-size: 22px;
+
+.modal-btn-row {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
-.order-btn .label-wrap { flex: 1; }
-.order-btn .label-sm { font-size: 12px; opacity: 0.8; font-weight: 500; }
-.order-btn .label-lg { font-size: 16px; font-weight: 800; }
-.order-btn .arrow { font-size: 24px; opacity: 0.7; }
-.btn-wa { background: var(--wa); }
-.btn-wa:hover { background: #1ebd5a; box-shadow: 0 10px 30px rgba(37,211,102,0.3); }
-.btn-tg { background: var(--tg); }
-.btn-tg:hover { background: #1d99d8; box-shadow: 0 10px 30px rgba(42,171,238,0.3); }
+
+.btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 14px 22px;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 15px;
+  text-decoration: none;
+  transition: all 0.2s;
+  border: none;
+  cursor: pointer;
+}
+
+.btn-wa {
+  background: var(--green);
+  color: white;
+}
+
+.btn-wa:hover {
+  background: #1da851;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(37, 211, 102, 0.3);
+}
+
+.btn-tg {
+  background: var(--blue);
+  color: white;
+}
+
+.btn-tg:hover {
+  background: #1e8bbf;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(42, 171, 238, 0.3);
+}
+
+.payment {
+  margin-top: 60px;
+  padding: 24px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  text-align: center;
+}
+
+.payment-title {
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+.payment-methods {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.payment-pill {
+  padding: 8px 16px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 50px;
+  font-size: 13px;
+  color: var(--text-dim);
+  font-weight: 500;
+}
+
+footer {
+  margin-top: 50px;
+  text-align: center;
+  color: var(--text-dim);
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+footer a { color: var(--text); text-decoration: none; }
+footer a:hover { color: var(--accent); }
 
 @media (max-width: 600px) {
-  .logo { font-size: 44px; }
-  .product { grid-template-columns: 1fr; }
-  .product-price { border-top: 1px solid var(--border); padding-top: 16px; text-align: left; }
-  .product-info h3 { margin-right: 70px; }
+  .logo { font-size: 28px; }
+  .grid { grid-template-columns: 1fr; }
+  .card-title { font-size: 19px; }
+  .card-price { font-size: 24px; }
+  .modal { padding: 24px; }
 }
 </style>
 </head>
 <body>
 
 <div class="container">
-  <div class="header">
-    <div class="brand"><span class="dot"></span>STOK READY · UPDATE 2026</div>
-    <h1 class="logo">Meta<span class="dot-accent">Hub</span>.</h1>
-    <p class="subtitle">Katalog akun Facebook, Business Manager, Fanpage &amp; WhatsApp Meta — siap pakai dengan garansi.</p>
+  <header>
+    <div class="logo">
+      <span class="logo-dot"></span>
+      MetaHub
+    </div>
+    <p class="tagline">Katalog Akun FB & WA Premium · Garansi Login · Fast Response</p>
+    <div class="contact-bar">
+      <a href="https://wa.me/6282127341669" target="_blank">📱 WhatsApp</a>
+      <span>·</span>
+      <a href="https://t.me/dwmlt11" target="_blank">✈️ Telegram</a>
+      <span>·</span>
+      <a href="https://t.me/dwmlt111" target="_blank">📢 Channel</a>
+    </div>
+  </header>
+
+  <h2 class="section-title">🔥 Produk Unggulan</h2>
+  <div class="grid">
+
+    <div class="card" onclick="openModal('WA Meta Spam', 'Rp 150.000', 'Akun WhatsApp Meta untuk kebutuhan messaging skala besar. Custom Numbers HK/US, limit 10/hari. Garansi 2 hari setelah dikirim.')">
+      <span class="badge badge-hot">🔥 HOT</span>
+      <div class="card-title">WA Meta Spam</div>
+      <div class="card-desc">Akun WA Meta · Custom Numbers HK/US · Limit 10/hari · Garansi 2 hari</div>
+      <div class="card-price">Rp 150.000</div>
+    </div>
+
+    <div class="card" onclick="openModal('WA Meta Iklan', 'Rp 350.000', 'Akun WhatsApp Meta khusus iklan/bisnis premium. Custom Numbers HK/US, limit 10/hari. Garansi 2 hari setelah dikirim.')">
+      <span class="badge badge-premium">⭐ PREMIUM</span>
+      <div class="card-title">WA Meta Iklan</div>
+      <div class="card-desc">Akun WA Meta khusus iklan · Custom Numbers HK/US · Limit 10/hari · Garansi 2 hari</div>
+      <div class="card-price">Rp 350.000</div>
+    </div>
+
+    <div class="card" onclick="openModal('FB Fresh', 'Rp 2.500/akun', 'Akun Facebook fresh siap pakai. Minimal pengambilan 10 akun (Rp 25.000). Cocok untuk stok cadangan, warming, atau kebutuhan banyak.')">
+      <span class="badge badge-baru">🆕 BARU</span>
+      <div class="card-title">FB Fresh</div>
+      <div class="card-desc">Akun FB fresh siap pakai · Cocok untuk stok cadangan & warming</div>
+      <div class="card-price">Rp 2.500<span class="card-price-small">/akun</span></div>
+      <div class="card-min">⚡ Min order 10 akun (Rp 25.000)</div>
+    </div>
+
   </div>
 
-  <div class="info-bar">
-    <div class="info-item"><span class="icon">🛡️</span><strong>Garansi Login</strong></div>
-    <div class="info-item"><span class="icon">⚡</span><strong>Fast Response</strong></div>
-    <div class="info-item"><span class="icon">✅</span><strong>Stok Ready</strong></div>
-    <div class="info-item"><span class="icon">💳</span><strong>Bank Lokal</strong></div>
+  <h2 class="section-title">📦 FB Business Manager</h2>
+  <div class="grid">
+
+    <div class="card" onclick="openModal('FB 2BM + 2FP', 'Rp 120.000', 'Akun Facebook lengkap dengan 2 Business Manager + 2 Fanpage. Paket favorit untuk reseller & advertiser.')">
+      <span class="badge badge-best">⭐ BEST SELLER</span>
+      <div class="card-title">FB 2BM + 2FP</div>
+      <div class="card-desc">FB + 2 Business Manager + 2 Fanpage · Login credentials disertakan</div>
+      <div class="card-price">Rp 120.000</div>
+    </div>
+
+    <div class="card" onclick="openModal('FB 1BM + 1FP', 'Rp 65.000', 'Akun Facebook dengan 1 Business Manager + 1 Fanpage. Cocok untuk testing atau bisnis personal.')">
+      <span class="badge badge-stok">STOK READY</span>
+      <div class="card-title">FB 1BM + 1FP</div>
+      <div class="card-desc">FB + 1 Business Manager + 1 Fanpage · Login credentials disertakan</div>
+      <div class="card-price">Rp 65.000</div>
+    </div>
+
   </div>
 
-  <div class="cat-section">
-    <div class="cat-title">Paket FB + BM + Fanpage</div>
-    <div class="product" data-product="FB Isi 1 BM + 1 Fanpage" data-price="65rb">
-      <div class="product-info">
-        <h3>FB Isi 1 BM + 1 Fanpage</h3>
-        <p><span class="check">✓</span>1 Akun FB + 1 BM + 1 Fanpage<br>
-        <span class="check">✓</span>Siap tambah WhatsApp untuk sender<br>
-        <span class="check">✓</span>Garansi login data awal</p>
-      </div>
-      <div class="product-price"><div class="price-num">Rp 65rb</div><div class="price-unit">per akun</div></div>
-    </div>
-    <div class="product hot" data-product="FB Isi 2 BM + 2 Fanpage" data-price="120rb">
-      <div class="product-info">
-        <h3>FB Isi 2 BM + 2 Fanpage</h3>
-        <p><span class="check">✓</span>1 Akun FB + 2 BM + 2 Fanpage<br>
-        <span class="check">✓</span>Tinggal colok WA langsung jalan<br>
-        <span class="check">✓</span>Garansi login data awal</p>
-      </div>
-      <div class="product-price"><div class="price-num">Rp 120rb</div><div class="price-unit">per akun</div></div>
-    </div>
-  </div>
+  <h2 class="section-title">📘 FB Old Account</h2>
+  <div class="grid">
 
-  <div class="cat-section">
-    <div class="cat-title">Akun FB Old / Aged</div>
-    <div class="product" data-product="FB Old Polos (Random)" data-price="25rb">
-      <div class="product-info">
-        <h3>FB Old Polos (Random)</h3>
-        <p><span class="check">✓</span>Akun tahun random 2009-2023<br>
-        <span class="check">✓</span>Cookies + UID + 2FA<br>
-        <span class="check">✓</span>Polos tanpa fanpage</p>
-      </div>
-      <div class="product-price"><div class="price-num">Rp 25rb</div><div class="price-unit">per akun</div></div>
+    <div class="card" onclick="openModal('FB Old + 1FP', 'Rp 30.000', 'Akun Facebook aged sudah dilengkapi 1 Fanpage. Login credentials disertakan.')">
+      <span class="badge badge-stok">STOK READY</span>
+      <div class="card-title">FB Old + 1FP</div>
+      <div class="card-desc">Akun FB aged + 1 Fanpage · Login credentials disertakan</div>
+      <div class="card-price">Rp 30.000</div>
     </div>
-    <div class="product" data-product="FB Old + 1 Fanpage" data-price="30rb">
-      <div class="product-info">
-        <h3>FB Old + 1 Fanpage</h3>
-        <p><span class="check">✓</span>Akun tahun random 2009-2023<br>
-        <span class="check">✓</span>Cookies + UID + 2FA<br>
-        <span class="check">✓</span>Include 1 fanpage ready</p>
-      </div>
-      <div class="product-price"><div class="price-num">Rp 30rb</div><div class="price-unit">per akun</div></div>
-    </div>
-  </div>
 
-  <div class="cat-section">
-    <div class="cat-title">WhatsApp Meta</div>
-    <div class="product new" data-product="WhatsApp Meta New" data-price="150rb">
-      <div class="product-info">
-        <h3>WhatsApp Meta New</h3>
-        <p><span class="check">✓</span>Nomor WA aktif &amp; ready<br>
-        <span class="check">✓</span>Cocok untuk blast / ads campaign<br>
-        <span class="check">✓</span>Garansi 2 hari (replace jika mati)</p>
-      </div>
-      <div class="product-price"><div class="price-num">Rp 150rb</div><div class="price-unit">per nomor</div></div>
+    <div class="card" onclick="openModal('FB Old Polos', 'Rp 25.000', 'Akun Facebook aged polos. Login credentials disertakan.')">
+      <span class="badge badge-stok">STOK READY</span>
+      <div class="card-title">FB Old Polos</div>
+      <div class="card-desc">Akun FB aged tanpa Fanpage · Login credentials disertakan</div>
+      <div class="card-price">Rp 25.000</div>
     </div>
+
   </div>
 
   <div class="payment">
-    <div class="payment-label">Metode Pembayaran</div>
+    <div class="payment-title">💳 Metode Pembayaran</div>
     <div class="payment-methods">
-      <span class="pay-tag">BCA</span><span class="pay-tag">SeaBank</span>
-      <span class="pay-tag">OVO</span><span class="pay-tag">DANA</span>
+      <span class="payment-pill">🏦 BCA</span>
+      <span class="payment-pill">🏦 SeaBank</span>
+      <span class="payment-pill">💜 DANA</span>
+      <span class="payment-pill">💳 OVO</span>
+      <span class="payment-pill">💰 USDT TRC20</span>
     </div>
   </div>
 
-  <div class="footer">
-    <p><strong>Garansi FB:</strong> Login — ganti akun jika gagal login</p>
-    <p><strong>Garansi WA:</strong> 2 hari — replace baru jika nomor mati</p>
-    <p style="margin-top: 16px;">© 2026 MetaHub · Be smart buyer 🛡️</p>
-  </div>
+  <footer>
+    <p>© 2026 MetaHub · Katalog Akun FB & WA Premium</p>
+    <p style="margin-top: 8px;">
+      <a href="https://wa.me/6282127341669" target="_blank">WhatsApp</a> ·
+      <a href="https://t.me/dwmlt11" target="_blank">Telegram</a> ·
+      <a href="https://t.me/dwmlt111" target="_blank">Channel</a> ·
+      <a href="mailto:admin@metahubid.com">Email</a>
+    </p>
+  </footer>
 </div>
 
-<div class="modal-overlay" id="orderModal">
+<div class="modal-overlay" id="modal" onclick="if(event.target===this)closeModal()">
   <div class="modal">
     <button class="modal-close" onclick="closeModal()">×</button>
-    <div class="modal-title">Pilih Cara Order</div>
-    <div class="modal-subtitle">Hubungi admin via WhatsApp atau Telegram untuk order produk ini.</div>
-    <div class="modal-product">
-      <div class="modal-product-name" id="modalProductName">Produk</div>
-      <div class="modal-product-price" id="modalProductPrice">Rp 0</div>
+    <div class="modal-title" id="modal-title"></div>
+    <div class="modal-price" id="modal-price"></div>
+    <div class="modal-info" id="modal-info"></div>
+    <div class="modal-btn-row">
+      <a href="#" id="btn-wa" class="btn btn-wa" target="_blank">
+        📱 Order via WhatsApp
+      </a>
+      <a href="#" id="btn-tg" class="btn btn-tg" target="_blank">
+        ✈️ Order via Telegram
+      </a>
     </div>
-    <a href="#" class="order-btn btn-wa" id="btnWA">
-      <div class="ico-wrap">💬</div>
-      <div class="label-wrap">
-        <div class="label-sm">Order via</div>
-        <div class="label-lg">WhatsApp</div>
-      </div>
-      <div class="arrow">→</div>
-    </a>
-    <a href="#" class="order-btn btn-tg" id="btnTG">
-      <div class="ico-wrap">✈️</div>
-      <div class="label-wrap">
-        <div class="label-sm">Order via</div>
-        <div class="label-lg">Telegram</div>
-      </div>
-      <div class="arrow">→</div>
-    </a>
   </div>
 </div>
 
 <script>
-const WA_NUMBER = "6282127341669";
-const TG_USERNAME = "dwmlt11";
-const modal = document.getElementById('orderModal');
-const modalName = document.getElementById('modalProductName');
-const modalPrice = document.getElementById('modalProductPrice');
-const btnWA = document.getElementById('btnWA');
-const btnTG = document.getElementById('btnTG');
+function openModal(name, price, info) {
+  document.getElementById('modal-title').textContent = name;
+  document.getElementById('modal-price').textContent = price;
+  document.getElementById('modal-info').textContent = info;
 
-document.querySelectorAll('.product').forEach(p => {
-  p.addEventListener('click', () => {
-    const name = p.dataset.product;
-    const price = p.dataset.price;
-    modalName.textContent = name;
-    modalPrice.textContent = 'Rp ' + price;
-    const msg = `Halo, mau order *${name}* (Rp ${price}). Cek stok ya 🙏`;
-    btnWA.href = `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(msg)}`;
-    btnTG.href = `https://t.me/${TG_USERNAME}?text=${encodeURIComponent(msg)}`;
-    modal.classList.add('active');
-  });
+  const msg = encodeURIComponent(`Halo MetaHub! 👋\nSaya tertarik order produk:\n\n📦 ${name}\n💰 ${price}\n\nMohon info stok & cara order ya. Terima kasih!`);
+  document.getElementById('btn-wa').href = `https://wa.me/6282127341669?text=${msg}`;
+  document.getElementById('btn-tg').href = `https://t.me/dwmlt11?text=${msg}`;
+
+  document.getElementById('modal').classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeModal() {
+  document.getElementById('modal').classList.remove('active');
+  document.body.style.overflow = '';
+}
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') closeModal();
 });
-
-function closeModal() { modal.classList.remove('active'); }
-modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
-document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
 </script>
 
 </body>
