@@ -352,7 +352,12 @@ let depMethod="",depAmount=0;
 let allLinks=[];
 
 window.onload=function(){
-  if(!API_URL)showScreen("setup");else showScreen("auth");
+  if(!API_URL){showScreen("setup")}
+  else{
+    var saved=localStorage.getItem("metahub_user");
+    if(saved){U=saved;showScreen("app");initDash()}
+    else{showScreen("auth")}
+  }
   $$("loginPass").onkeydown=e=>{if(e.key==="Enter")doLogin()};
   $$("regPass").onkeydown=e=>{if(e.key==="Enter")doRegister()};
   $$("apiUrlInput").onkeydown=e=>{if(e.key==="Enter")testApi()};
@@ -388,7 +393,7 @@ async function doLogin(){
   if(!u||!p){m.className="msg err";m.textContent="Isi username dan password";return}
   b.disabled=true;b.innerHTML='<span class="loader"></span>';
   try{var r=await api({action:"login",username:u,password:p});
-    if(r.success){U=u;m.className="msg ok";m.textContent="Berhasil!";setTimeout(()=>{showScreen("app");initDash()},400)}
+    if(r.success){U=u;localStorage.setItem("metahub_user",u);m.className="msg ok";m.textContent="Berhasil!";setTimeout(()=>{showScreen("app");initDash()},400)}
     else{m.className="msg err";m.textContent=r.error}
   }catch(e){m.className="msg err";m.textContent="Koneksi gagal"}
   b.disabled=false;b.textContent="Masuk";
@@ -403,7 +408,7 @@ async function doRegister(){
   }catch(e){m.className="msg err";m.textContent="Koneksi gagal"}
   b.disabled=false;b.textContent="Daftar";
 }
-function doLogout(){U=null;$$("loginUser").value="";$$("loginPass").value="";clrMsg();showScreen("auth")}
+function doLogout(){U=null;localStorage.removeItem("metahub_user");$$("loginUser").value="";$$("loginPass").value="";clrMsg();showScreen("auth")}
 
 // Sidebar
 function goPage(p){
