@@ -3,578 +3,914 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
-<title>MetaHub — Katalog Akun FB & WA Premium</title>
-<meta name="description" content="Katalog akun Facebook, Business Manager, Fanpage & WhatsApp Meta premium. Garansi login, fast response, harga terjangkau.">
-<meta property="og:title" content="MetaHub — Katalog Akun FB & WA Premium">
-<meta property="og:description" content="Akun FB, BM, Fanpage & WA Meta siap pakai. Garansi & fast response.">
-<meta property="og:url" content="https://metahubid.com">
-<meta property="og:type" content="website">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<title>MetaHub — Panel</title>
 <style>
-* { margin: 0; padding: 0; box-sizing: border-box; }
+/* ─── RESET & BASE ─── */
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#f7f6f3;
+  --surface:#ffffff;
+  --surface2:#f0efec;
+  --border:#e5e3de;
+  --text:#1a1a1a;
+  --text2:#6b6b6b;
+  --text3:#999;
+  --accent:#5b6abf;
+  --accent2:#4a57a3;
+  --accent-soft:#eef0ff;
+  --green:#2d8a4e;
+  --green-soft:#e8f5e9;
+  --red:#c0392b;
+  --red-soft:#fdecea;
+  --amber:#e67e22;
+  --amber-soft:#fef3e2;
+  --radius:12px;
+  --shadow:0 1px 3px rgba(0,0,0,0.06),0 1px 2px rgba(0,0,0,0.04);
+  --shadow2:0 4px 12px rgba(0,0,0,0.08);
+  --font:-apple-system,BlinkMacSystemFont,'Segoe UI','Hiragino Sans',sans-serif;
+  --mono:'SF Mono','Consolas','Roboto Mono',monospace;
+}
+body{
+  font-family:var(--font);
+  background:var(--bg);
+  color:var(--text);
+  min-height:100vh;
+  line-height:1.6;
+  font-size:15px;
+}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
 
-:root {
-  --bg: #0a0a0f;
-  --bg-card: #14141c;
-  --bg-card-hover: #1a1a26;
-  --border: #2a2a3a;
-  --text: #ffffff;
-  --text-dim: #8a8aa0;
-  --accent: #7c5cff;
-  --accent-glow: rgba(124, 92, 255, 0.3);
-  --gold: #fbbf24;
-  --green: #25D366;
-  --blue: #2AABEE;
-  --red: #ef4444;
+/* ─── LAYOUT ─── */
+.app{max-width:860px;margin:0 auto;padding:24px 16px 80px}
+
+/* ─── HEADER ─── */
+.header{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:16px 0;
+  margin-bottom:8px;
+}
+.logo{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+.logo-mark{
+  width:36px;height:36px;
+  background:var(--accent);
+  border-radius:10px;
+  display:flex;align-items:center;justify-content:center;
+  color:#fff;font-weight:700;font-size:16px;
+  letter-spacing:-0.5px;
+}
+.logo-text{font-size:18px;font-weight:700;letter-spacing:-0.3px}
+.logo-sub{font-size:11px;color:var(--text3);margin-top:-2px}
+.header-right{display:flex;align-items:center;gap:12px}
+.user-badge{
+  display:flex;align-items:center;gap:8px;
+  background:var(--surface);
+  border:1px solid var(--border);
+  padding:6px 14px;border-radius:24px;
+  font-size:13px;font-weight:500;
+}
+.user-badge .dot{width:7px;height:7px;border-radius:50%;background:var(--green)}
+.btn-logout{
+  background:none;border:1px solid var(--border);
+  padding:6px 14px;border-radius:24px;
+  font-size:13px;color:var(--text2);
+  cursor:pointer;font-family:var(--font);
+}
+.btn-logout:hover{background:var(--red-soft);color:var(--red);border-color:var(--red)}
+
+/* ─── AUTH SCREENS ─── */
+.auth-wrap{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  min-height:80vh;
+}
+.auth-card{
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  padding:40px 36px;
+  width:100%;max-width:400px;
+  box-shadow:var(--shadow2);
+}
+.auth-card .logo{justify-content:center;margin-bottom:28px}
+.auth-card .logo-mark{width:44px;height:44px;font-size:20px;border-radius:12px}
+.auth-title{font-size:20px;font-weight:700;text-align:center;margin-bottom:4px}
+.auth-sub{font-size:13px;color:var(--text2);text-align:center;margin-bottom:24px}
+
+.field{margin-bottom:16px}
+.field label{display:block;font-size:12px;font-weight:600;color:var(--text2);margin-bottom:5px;text-transform:uppercase;letter-spacing:0.04em}
+.field input{
+  width:100%;padding:10px 14px;
+  border:1px solid var(--border);border-radius:8px;
+  font-size:14px;font-family:var(--font);
+  background:var(--surface2);
+  transition:border-color .2s;
+}
+.field input:focus{outline:none;border-color:var(--accent);background:#fff}
+.btn-primary{
+  width:100%;padding:12px;
+  background:var(--accent);color:#fff;
+  border:none;border-radius:8px;
+  font-size:14px;font-weight:600;
+  cursor:pointer;font-family:var(--font);
+  transition:background .2s;
+  margin-top:8px;
+}
+.btn-primary:hover{background:var(--accent2)}
+.btn-primary:disabled{opacity:0.5;cursor:not-allowed}
+.auth-switch{text-align:center;margin-top:20px;font-size:13px;color:var(--text2)}
+.auth-switch a{cursor:pointer;font-weight:600}
+.msg{padding:10px 14px;border-radius:8px;font-size:13px;margin-bottom:16px;display:none}
+.msg.err{display:block;background:var(--red-soft);color:var(--red)}
+.msg.ok{display:block;background:var(--green-soft);color:var(--green)}
+
+/* ─── DASHBOARD ─── */
+.dash{display:none}
+.section-title{
+  font-size:12px;font-weight:700;
+  text-transform:uppercase;letter-spacing:0.06em;
+  color:var(--text3);margin:28px 0 12px;
 }
 
-body {
-  font-family: 'Inter', sans-serif;
-  background: var(--bg);
-  color: var(--text);
-  min-height: 100vh;
-  overflow-x: hidden;
-  -webkit-font-smoothing: antialiased;
+/* Stat cards */
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin-bottom:8px}
+.stat-card{
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  padding:18px 20px;
+  box-shadow:var(--shadow);
+}
+.stat-label{font-size:11px;color:var(--text3);text-transform:uppercase;letter-spacing:0.04em}
+.stat-value{font-size:28px;font-weight:700;font-family:var(--mono);margin-top:4px;letter-spacing:-0.5px}
+.stat-card.saldo .stat-value{color:var(--accent)}
+.stat-card.stok .stat-value{color:var(--green)}
+.stat-hint{font-size:11px;color:var(--text3);margin-top:4px}
+
+/* Product card */
+.prod-card{
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  padding:24px;
+  box-shadow:var(--shadow);
+  margin-bottom:12px;
+}
+.prod-header{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;flex-wrap:wrap}
+.prod-name{font-size:18px;font-weight:700}
+.prod-desc{font-size:13px;color:var(--text2);margin-top:6px;line-height:1.5}
+.prod-price{
+  font-size:22px;font-weight:700;
+  color:var(--accent);
+  white-space:nowrap;
+}
+.prod-stock{
+  display:inline-flex;align-items:center;gap:5px;
+  padding:4px 10px;border-radius:6px;
+  font-size:12px;font-weight:600;
+  margin-top:8px;
+}
+.prod-stock.available{background:var(--green-soft);color:var(--green)}
+.prod-stock.empty{background:var(--red-soft);color:var(--red)}
+.btn-buy{
+  display:inline-flex;align-items:center;gap:6px;
+  padding:10px 24px;
+  background:var(--accent);color:#fff;
+  border:none;border-radius:8px;
+  font-size:14px;font-weight:600;
+  cursor:pointer;font-family:var(--font);
+  transition:all .2s;
+  margin-top:16px;
+}
+.btn-buy:hover{background:var(--accent2);transform:translateY(-1px);box-shadow:var(--shadow2)}
+.btn-buy:disabled{opacity:0.4;cursor:not-allowed;transform:none;box-shadow:none}
+
+/* Success modal */
+.modal-overlay{
+  position:fixed;top:0;left:0;right:0;bottom:0;
+  background:rgba(0,0,0,0.4);
+  display:none;align-items:center;justify-content:center;
+  z-index:100;padding:16px;
+  backdrop-filter:blur(4px);
+}
+.modal-overlay.active{display:flex}
+.modal-box{
+  background:var(--surface);
+  border-radius:16px;
+  padding:32px;
+  max-width:520px;width:100%;
+  box-shadow:0 20px 60px rgba(0,0,0,0.15);
+  animation:modalIn .25s ease;
+}
+@keyframes modalIn{from{transform:scale(0.95);opacity:0}to{transform:scale(1);opacity:1}}
+.modal-icon{font-size:48px;text-align:center;margin-bottom:12px}
+.modal-title{font-size:18px;font-weight:700;text-align:center;margin-bottom:8px}
+.modal-sub{font-size:13px;color:var(--text2);text-align:center;margin-bottom:20px}
+.link-box{
+  background:var(--surface2);
+  border:1px solid var(--border);
+  border-radius:8px;
+  padding:12px 16px;
+  font-family:var(--mono);
+  font-size:12px;
+  word-break:break-all;
+  line-height:1.6;
+  margin-bottom:16px;
+  position:relative;
+  max-height:120px;
+  overflow-y:auto;
+}
+.btn-copy{
+  width:100%;padding:10px;
+  background:var(--accent);color:#fff;
+  border:none;border-radius:8px;
+  font-size:14px;font-weight:600;
+  cursor:pointer;font-family:var(--font);
+}
+.btn-copy:hover{background:var(--accent2)}
+.btn-close-modal{
+  width:100%;padding:10px;
+  background:none;color:var(--text2);
+  border:1px solid var(--border);border-radius:8px;
+  font-size:13px;cursor:pointer;font-family:var(--font);
+  margin-top:8px;
 }
 
-body::before {
-  content: '';
-  position: fixed;
-  inset: 0;
-  background:
-    radial-gradient(800px circle at 0% 0%, rgba(124, 92, 255, 0.15), transparent 40%),
-    radial-gradient(600px circle at 100% 100%, rgba(37, 211, 102, 0.08), transparent 40%);
-  pointer-events: none;
-  z-index: 0;
+/* History */
+.history-table{
+  width:100%;border-collapse:collapse;
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  overflow:hidden;
+  box-shadow:var(--shadow);
 }
-
-.container {
-  max-width: 1100px;
-  margin: 0 auto;
-  padding: 32px 20px 80px;
-  position: relative;
-  z-index: 1;
+.history-table th{
+  font-size:11px;text-transform:uppercase;letter-spacing:0.04em;
+  color:var(--text3);background:var(--surface2);
+  padding:10px 14px;text-align:left;font-weight:600;
+  border-bottom:1px solid var(--border);
 }
-
-header {
-  text-align: center;
-  margin-bottom: 50px;
-  padding-top: 24px;
+.history-table td{
+  padding:10px 14px;
+  border-bottom:1px solid var(--border);
+  font-size:13px;
+  vertical-align:top;
 }
-
-.logo {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  font-family: 'Bricolage Grotesque', sans-serif;
-  font-size: 36px;
-  font-weight: 800;
-  letter-spacing: -0.02em;
-  margin-bottom: 10px;
+.history-table tr:last-child td{border-bottom:none}
+.history-table .link-cell{
+  font-family:var(--mono);font-size:11px;
+  color:var(--accent);word-break:break-all;
+  max-width:200px;
 }
-
-.logo-dot {
-  width: 14px;
-  height: 14px;
-  background: var(--accent);
-  border-radius: 50%;
-  box-shadow: 0 0 24px var(--accent-glow);
-  animation: pulse 2s infinite;
+.history-empty{
+  text-align:center;padding:40px;
+  color:var(--text3);font-size:14px;
 }
+.history-empty span{font-size:32px;display:block;margin-bottom:8px}
 
-@keyframes pulse {
-  0%, 100% { opacity: 1; transform: scale(1); }
-  50% { opacity: 0.7; transform: scale(1.15); }
+/* Setup screen */
+.setup-card{
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  padding:32px;
+  max-width:600px;margin:60px auto;
+  box-shadow:var(--shadow2);
 }
-
-.tagline {
-  color: var(--text-dim);
-  font-size: 15px;
-  margin-bottom: 8px;
+.setup-card h2{font-size:18px;margin-bottom:16px}
+.setup-card ol{padding-left:20px;margin-bottom:20px}
+.setup-card li{margin-bottom:10px;font-size:14px;line-height:1.6;color:var(--text2)}
+.setup-card code{
+  background:var(--surface2);padding:2px 6px;
+  border-radius:4px;font-family:var(--mono);font-size:13px;
 }
+.setup-card .field{margin-bottom:12px}
 
-.contact-bar {
-  display: inline-flex;
-  align-items: center;
-  gap: 14px;
-  padding: 8px 18px;
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: 50px;
-  margin-top: 14px;
-  font-size: 13px;
-  color: var(--text-dim);
+/* Loader */
+.loader{
+  display:inline-block;
+  width:16px;height:16px;
+  border:2px solid rgba(255,255,255,0.3);
+  border-top-color:#fff;
+  border-radius:50%;
+  animation:spin .6s linear infinite;
 }
+@keyframes spin{to{transform:rotate(360deg)}}
 
-.contact-bar a {
-  color: var(--text);
-  text-decoration: none;
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  font-weight: 500;
-  transition: color 0.2s;
+/* Topup banner */
+.topup-banner{
+  background:var(--amber-soft);
+  border:1px solid #f0d8a8;
+  border-radius:var(--radius);
+  padding:14px 20px;
+  font-size:13px;
+  color:#7f5600;
+  margin-bottom:12px;
+  display:flex;
+  align-items:center;
+  gap:10px;
 }
+.topup-banner a{color:var(--accent);font-weight:600}
 
-.contact-bar a:hover { color: var(--accent); }
-
-.section-title {
-  font-family: 'Bricolage Grotesque', sans-serif;
-  font-size: 24px;
-  font-weight: 700;
-  margin: 40px 0 16px;
-  display: flex;
-  align-items: center;
-  gap: 10px;
+/* Refresh */
+.btn-refresh{
+  background:var(--surface);border:1px solid var(--border);
+  padding:6px 14px;border-radius:24px;
+  font-size:12px;color:var(--text2);
+  cursor:pointer;font-family:var(--font);
+  display:inline-flex;align-items:center;gap:5px;
 }
+.btn-refresh:hover{background:var(--surface2)}
 
-.section-title::before {
-  content: '';
-  width: 4px;
-  height: 22px;
-  background: var(--accent);
-  border-radius: 2px;
-}
-
-.grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 16px;
-}
-
-.card {
-  position: relative;
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: 16px;
-  padding: 22px;
-  cursor: pointer;
-  transition: all 0.25s;
-  overflow: hidden;
-}
-
-.card:hover {
-  background: var(--bg-card-hover);
-  border-color: var(--accent);
-  transform: translateY(-3px);
-  box-shadow: 0 10px 30px -10px var(--accent-glow);
-}
-
-.card::after {
-  content: '👆 ORDER SEKARANG';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(135deg, rgba(124, 92, 255, 0.9), rgba(124, 92, 255, 0.7));
-  color: white;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: 700;
-  font-size: 16px;
-  opacity: 0;
-  transition: opacity 0.25s;
-  pointer-events: none;
-  border-radius: 16px;
-}
-
-.card:hover::after { opacity: 1; }
-
-.badge {
-  display: inline-block;
-  padding: 4px 10px;
-  border-radius: 20px;
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.5px;
-  text-transform: uppercase;
-  margin-bottom: 10px;
-}
-
-.badge-hot {
-  background: linear-gradient(135deg, #ff4d4d, #ff8c00);
-  color: white;
-  box-shadow: 0 0 16px rgba(255, 77, 77, 0.4);
-}
-
-.badge-premium {
-  background: linear-gradient(135deg, var(--gold), #f59e0b);
-  color: #1a1a1a;
-}
-
-.badge-baru {
-  background: linear-gradient(135deg, #10b981, #059669);
-  color: white;
-}
-
-.badge-best {
-  background: linear-gradient(135deg, var(--accent), #5b21b6);
-  color: white;
-}
-
-.badge-stok {
-  background: var(--bg);
-  color: var(--text-dim);
-  border: 1px solid var(--border);
-}
-
-.card-title {
-  font-family: 'Bricolage Grotesque', sans-serif;
-  font-size: 22px;
-  font-weight: 700;
-  margin-bottom: 6px;
-  line-height: 1.2;
-}
-
-.card-desc {
-  color: var(--text-dim);
-  font-size: 13px;
-  line-height: 1.55;
-  margin-bottom: 14px;
-}
-
-.card-price {
-  font-family: 'Bricolage Grotesque', sans-serif;
-  font-size: 28px;
-  font-weight: 800;
-  color: var(--accent);
-  letter-spacing: -0.02em;
-}
-
-.card-price-small {
-  font-size: 13px;
-  color: var(--text-dim);
-  font-weight: 400;
-  margin-left: 6px;
-}
-
-.card-min {
-  display: inline-block;
-  margin-top: 8px;
-  font-size: 12px;
-  color: var(--gold);
-  font-weight: 600;
-}
-
-/* Modal */
-.modal-overlay {
-  display: none;
-  position: fixed;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.85);
-  backdrop-filter: blur(8px);
-  z-index: 100;
-  align-items: center;
-  justify-content: center;
-  padding: 20px;
-  animation: fadeIn 0.2s;
-}
-
-.modal-overlay.active { display: flex; }
-
-@keyframes fadeIn {
-  from { opacity: 0; } to { opacity: 1; }
-}
-
-.modal {
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: 20px;
-  padding: 32px;
-  max-width: 440px;
-  width: 100%;
-  position: relative;
-  animation: slideUp 0.3s;
-}
-
-@keyframes slideUp {
-  from { transform: translateY(20px); opacity: 0; }
-  to { transform: translateY(0); opacity: 1; }
-}
-
-.modal-close {
-  position: absolute;
-  top: 16px;
-  right: 16px;
-  background: none;
-  border: none;
-  color: var(--text-dim);
-  font-size: 28px;
-  cursor: pointer;
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.2s;
-}
-
-.modal-close:hover { background: var(--border); color: var(--text); }
-
-.modal-title {
-  font-family: 'Bricolage Grotesque', sans-serif;
-  font-size: 26px;
-  font-weight: 700;
-  margin-bottom: 8px;
-}
-
-.modal-price {
-  font-family: 'Bricolage Grotesque', sans-serif;
-  font-size: 32px;
-  font-weight: 800;
-  color: var(--accent);
-  margin-bottom: 4px;
-}
-
-.modal-info {
-  color: var(--text-dim);
-  font-size: 14px;
-  line-height: 1.6;
-  margin-bottom: 20px;
-}
-
-.modal-btn-row {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.btn {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  padding: 14px 22px;
-  border-radius: 12px;
-  font-weight: 600;
-  font-size: 15px;
-  text-decoration: none;
-  transition: all 0.2s;
-  border: none;
-  cursor: pointer;
-}
-
-.btn-wa {
-  background: var(--green);
-  color: white;
-}
-
-.btn-wa:hover {
-  background: #1da851;
-  transform: translateY(-2px);
-  box-shadow: 0 8px 20px rgba(37, 211, 102, 0.3);
-}
-
-.btn-tg {
-  background: var(--blue);
-  color: white;
-}
-
-.btn-tg:hover {
-  background: #1e8bbf;
-  transform: translateY(-2px);
-  box-shadow: 0 8px 20px rgba(42, 171, 238, 0.3);
-}
-
-.payment {
-  margin-top: 60px;
-  padding: 24px;
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: 16px;
-  text-align: center;
-}
-
-.payment-title {
-  font-family: 'Bricolage Grotesque', sans-serif;
-  font-size: 18px;
-  font-weight: 700;
-  margin-bottom: 12px;
-}
-
-.payment-methods {
-  display: flex;
-  gap: 10px;
-  flex-wrap: wrap;
-  justify-content: center;
-}
-
-.payment-pill {
-  padding: 8px 16px;
-  background: var(--bg);
-  border: 1px solid var(--border);
-  border-radius: 50px;
-  font-size: 13px;
-  color: var(--text-dim);
-  font-weight: 500;
-}
-
-footer {
-  margin-top: 50px;
-  text-align: center;
-  color: var(--text-dim);
-  font-size: 13px;
-  line-height: 1.7;
-}
-
-footer a { color: var(--text); text-decoration: none; }
-footer a:hover { color: var(--accent); }
-
-@media (max-width: 600px) {
-  .logo { font-size: 28px; }
-  .grid { grid-template-columns: 1fr; }
-  .card-title { font-size: 19px; }
-  .card-price { font-size: 24px; }
-  .modal { padding: 24px; }
+/* Responsive */
+@media(max-width:520px){
+  .auth-card{padding:28px 20px}
+  .prod-header{flex-direction:column}
+  .stats{grid-template-columns:1fr 1fr}
+  .stat-value{font-size:22px}
+  .history-table{font-size:12px}
+  .history-table th,.history-table td{padding:8px 10px}
 }
 </style>
 </head>
 <body>
 
-<div class="container">
-  <header>
-    <div class="logo">
-      <span class="logo-dot"></span>
-      MetaHub
+<!-- ═══ SETUP SCREEN ═══ -->
+<div id="setupScreen" class="app" style="display:none">
+  <div class="setup-card">
+    <div class="logo" style="justify-content:center;margin-bottom:20px">
+      <div class="logo-mark">M</div>
+      <div><div class="logo-text">MetaHub</div><div class="logo-sub">Panel Setup</div></div>
     </div>
-    <p class="tagline">Katalog Akun FB & WA Premium · Garansi Login · Fast Response</p>
-    <div class="contact-bar">
-      <a href="https://wa.me/6282127341669" target="_blank">📱 WhatsApp</a>
-      <span>·</span>
-      <a href="https://t.me/dwmlt11" target="_blank">✈️ Telegram</a>
-      <span>·</span>
-      <a href="https://t.me/dwmlt111" target="_blank">📢 Channel</a>
-    </div>
-  </header>
-
-  <h2 class="section-title">🔥 Produk Unggulan</h2>
-  <div class="grid">
-
-    <div class="card" onclick="openModal('WA Meta Spam', 'Rp 150.000', 'Akun WhatsApp Meta untuk kebutuhan messaging skala besar. Custom Numbers INDO/HK/CANADA, limit 10/hari. Garansi 2 hari setelah dikirim.')">
-      <span class="badge badge-hot">🔥 HOT</span>
-      <div class="card-title">WA Meta Spam</div>
-      <div class="card-desc">Akun WA Meta · Custom Numbers INDO/HK/CANADA · Limit 10/hari · Garansi 2 hari (Bisa Untuk ADS namun tanpa garansi) </div>
-      <div class="card-price">Rp 150.000</div>
-    </div>
-
-    <div class="card" onclick="openModal('WA Meta Iklan', 'Rp 350.000', 'Akun WhatsApp Meta khusus iklan/bisnis premium. Custom Numbers INDO/HK/CANADA, Garansi Sampai Iklan Jalan/Aktif dikirim.')">
-      <span class="badge badge-premium">⭐ PREMIUM</span>
-      <div class="card-title">WA Meta Iklan</div>
-      <div class="card-desc">Akun WA Meta khusus iklan · Custom Numbers INDO/HK/CANADA · Limit 10/hari · Garansi sampai iklan jalan</div>
-      <div class="card-price">Rp 350.000</div>
-    </div>
-
-    <div class="card" onclick="openModal('FB Fresh', 'Rp 2.500/akun', 'Akun Facebook fresh siap pakai. Minimal pengambilan 10 akun (Rp 25.000). Cocok untuk stok cadangan, warming, atau kebutuhan banyak.')">
-      <span class="badge badge-baru">🆕 BARU</span>
-      <div class="card-title">FB Fresh</div>
-      <div class="card-desc">Akun FB fresh siap pakai · Cocok untuk stok cadangan & warming</div>
-      <div class="card-price">Rp 2.500<span class="card-price-small">/akun</span></div>
-      <div class="card-min">⚡ Min order 10 akun (Rp 25.000)</div>
-    </div>
-
-  </div>
-
-  <h2 class="section-title">📦 FB Business Manager</h2>
-  <div class="grid">
-
-    <div class="card" onclick="openModal('FB 2BM + 2FP', 'Rp 120.000', 'Akun Facebook lengkap dengan 2 Business Manager + 2 Fanpage. Paket favorit untuk reseller & advertiser.')">
-      <span class="badge badge-best">⭐ BEST SELLER</span>
-      <div class="card-title">FB 2BM + 2FP</div>
-      <div class="card-desc">FB + 2 Business Manager + 2 Fanpage · Login credentials disertakan</div>
-      <div class="card-price">Rp 120.000</div>
-    </div>
-
-    <div class="card" onclick="openModal('FB 1BM + 1FP', 'Rp 65.000', 'Akun Facebook dengan 1 Business Manager + 1 Fanpage. Cocok untuk testing atau bisnis personal.')">
-      <span class="badge badge-stok">STOK READY</span>
-      <div class="card-title">FB 1BM + 1FP</div>
-      <div class="card-desc">FB + 1 Business Manager + 1 Fanpage · Login credentials disertakan</div>
-      <div class="card-price">Rp 65.000</div>
-    </div>
-
-  </div>
-
-  <h2 class="section-title">📘 FB Old Account</h2>
-  <div class="grid">
-
-    <div class="card" onclick="openModal('FB Old + 1FP', 'Rp 30.000', 'Akun Facebook aged sudah dilengkapi 1 Fanpage. Login credentials disertakan.')">
-      <span class="badge badge-stok">STOK READY</span>
-      <div class="card-title">FB Old + 1FP</div>
-      <div class="card-desc">Akun FB aged + 1 Fanpage · Login credentials disertakan</div>
-      <div class="card-price">Rp 30.000</div>
-    </div>
-
-    <div class="card" onclick="openModal('FB Old Polos', 'Rp 25.000', 'Akun Facebook aged polos. Login credentials disertakan.')">
-      <span class="badge badge-stok">STOK READY</span>
-      <div class="card-title">FB Old Polos</div>
-      <div class="card-desc">Akun FB aged tanpa Fanpage · Login credentials disertakan</div>
-      <div class="card-price">Rp 25.000</div>
-    </div>
-
-  </div>
-
-  <div class="payment">
-    <div class="payment-title">💳 Metode Pembayaran</div>
-    <div class="payment-methods">
-      <span class="payment-pill">🏦 BCA</span>
-      <span class="payment-pill">🏦 SeaBank</span>
-      <span class="payment-pill">💜 DANA</span>
-      <span class="payment-pill">💳 OVO</span>
-      <span class="payment-pill">💰 USDT TRC20</span>
-    </div>
-  </div>
-
-  <footer>
-    <p>© 2026 MetaHub · Katalog Akun FB & WA Premium</p>
-    <p style="margin-top: 8px;">
-      <a href="https://wa.me/6282127341669" target="_blank">WhatsApp</a> ·
-      <a href="https://t.me/dwmlt11" target="_blank">Telegram</a> ·
-      <a href="https://t.me/dwmlt111" target="_blank">Channel</a> ·
-      <a href="mailto:admin@metahubid.com">Email</a>
+    <h2>Hubungkan ke Google Sheet</h2>
+    <p style="font-size:14px;color:var(--text2);margin-bottom:20px">
+      Paste URL Apps Script Web App kamu di bawah. Ini URL yang muncul setelah kamu deploy Apps Script dari Google Sheet.
     </p>
-  </footer>
+    <ol>
+      <li>Buka Google Sheet → Extensions → Apps Script</li>
+      <li>Paste kode backend → pilih fungsi <code>SETUP_SHEET</code> → klik Run</li>
+      <li>Klik Deploy → New deployment → Web app</li>
+      <li>Execute as: <code>Me</code> — Who has access: <code>Anyone</code></li>
+      <li>Copy URL yang muncul, paste di bawah</li>
+    </ol>
+    <div class="field">
+      <label>Apps Script Web App URL</label>
+      <input type="text" id="apiUrlInput" placeholder="https://script.google.com/macros/s/xxx/exec">
+    </div>
+    <div id="setupMsg" class="msg"></div>
+    <button class="btn-primary" onclick="testAndSaveApi()">Hubungkan</button>
+    <p style="font-size:11px;color:var(--text3);margin-top:16px;text-align:center">
+      URL disimpan di browser kamu saja (localStorage). Tidak dikirim ke siapapun.
+    </p>
+  </div>
 </div>
 
-<div class="modal-overlay" id="modal" onclick="if(event.target===this)closeModal()">
-  <div class="modal">
-    <button class="modal-close" onclick="closeModal()">×</button>
-    <div class="modal-title" id="modal-title"></div>
-    <div class="modal-price" id="modal-price"></div>
-    <div class="modal-info" id="modal-info"></div>
-    <div class="modal-btn-row">
-      <a href="#" id="btn-wa" class="btn btn-wa" target="_blank">
-        📱 Order via WhatsApp
-      </a>
-      <a href="#" id="btn-tg" class="btn btn-tg" target="_blank">
-        ✈️ Order via Telegram
-      </a>
+<!-- ═══ AUTH SCREEN ═══ -->
+<div id="authScreen" style="display:none">
+  <div class="auth-wrap">
+    <div class="auth-card">
+      <div class="logo">
+        <div class="logo-mark">M</div>
+        <div><div class="logo-text">MetaHub</div><div class="logo-sub">BM Panel</div></div>
+      </div>
+
+      <!-- Login Form -->
+      <div id="loginForm">
+        <div class="auth-title">Masuk</div>
+        <div class="auth-sub">Login untuk beli BM & cek saldo</div>
+        <div id="loginMsg" class="msg"></div>
+        <div class="field">
+          <label>Username</label>
+          <input type="text" id="loginUser" placeholder="username kamu" autocomplete="username">
+        </div>
+        <div class="field">
+          <label>Password</label>
+          <input type="password" id="loginPass" placeholder="password" autocomplete="current-password">
+        </div>
+        <button class="btn-primary" id="loginBtn" onclick="doLogin()">Masuk</button>
+        <div class="auth-switch">
+          Belum punya akun? <a onclick="showRegister()">Daftar</a>
+        </div>
+      </div>
+
+      <!-- Register Form -->
+      <div id="registerForm" style="display:none">
+        <div class="auth-title">Daftar Akun</div>
+        <div class="auth-sub">Buat akun baru, lalu hubungi admin untuk top-up saldo</div>
+        <div id="regMsg" class="msg"></div>
+        <div class="field">
+          <label>Username</label>
+          <input type="text" id="regUser" placeholder="min. 3 karakter" autocomplete="username">
+        </div>
+        <div class="field">
+          <label>Password</label>
+          <input type="password" id="regPass" placeholder="min. 6 karakter" autocomplete="new-password">
+        </div>
+        <button class="btn-primary" id="regBtn" onclick="doRegister()">Daftar</button>
+        <div class="auth-switch">
+          Sudah punya akun? <a onclick="showLogin()">Masuk</a>
+        </div>
+      </div>
     </div>
   </div>
 </div>
+
+<!-- ═══ DASHBOARD ═══ -->
+<div id="dashScreen" class="app dash">
+  
+  <!-- Header -->
+  <div class="header">
+    <div class="logo">
+      <div class="logo-mark">M</div>
+      <div><div class="logo-text">MetaHub</div><div class="logo-sub">BM Panel</div></div>
+    </div>
+    <div class="header-right">
+      <div class="user-badge"><span class="dot"></span><span id="dispUser">-</span></div>
+      <button class="btn-logout" onclick="doLogout()">Keluar</button>
+    </div>
+  </div>
+
+  <!-- Topup banner (jika saldo 0) -->
+  <div id="topupBanner" class="topup-banner" style="display:none">
+    ⚠️ Saldo kamu Rp 0. Top-up minimum Rp 50.000 via <a href="https://t.me/dwmlt11" target="_blank">Telegram @dwmlt11</a>
+  </div>
+
+  <!-- Stats -->
+  <div class="section-title">Overview</div>
+  <div class="stats">
+    <div class="stat-card saldo">
+      <div class="stat-label">Saldo</div>
+      <div class="stat-value" id="dispSaldo">Rp 0</div>
+      <div class="stat-hint">Top-up via admin</div>
+    </div>
+    <div class="stat-card stok">
+      <div class="stat-label">Stok Tersedia</div>
+      <div class="stat-value" id="dispStok">-</div>
+      <div class="stat-hint">BM Fresh Siap Pakai</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Total Beli</div>
+      <div class="stat-value" id="dispBeli">0</div>
+      <div class="stat-hint">Riwayat pembelian kamu</div>
+    </div>
+  </div>
+
+  <!-- Products -->
+  <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px">
+    <div class="section-title" style="margin-bottom:0">Katalog</div>
+    <button class="btn-refresh" onclick="refreshAll()">↻ Refresh</button>
+  </div>
+  <div id="productList" style="margin-top:12px">
+    <div style="text-align:center;padding:40px;color:var(--text3)">Memuat produk...</div>
+  </div>
+
+  <!-- History -->
+  <div class="section-title">Riwayat Pembelian</div>
+  <div id="historyList">
+    <div style="text-align:center;padding:40px;color:var(--text3)">Memuat...</div>
+  </div>
+
+  <!-- Footer -->
+  <div style="text-align:center;margin-top:40px;padding:20px;font-size:12px;color:var(--text3)">
+    MetaHub Panel &middot; Butuh bantuan? 
+    <a href="https://t.me/dwmlt11" target="_blank">Telegram @dwmlt11</a>
+    <br>
+    <a href="#" onclick="resetApi();return false" style="font-size:11px;color:var(--text3)">Reset koneksi</a>
+  </div>
+</div>
+
+<!-- ═══ BUY SUCCESS MODAL ═══ -->
+<div id="buyModal" class="modal-overlay">
+  <div class="modal-box">
+    <div class="modal-icon">✅</div>
+    <div class="modal-title">Pembelian Berhasil!</div>
+    <div class="modal-sub" id="modalSub">BM FRESH SIAP PAKAI</div>
+    <p style="font-size:12px;color:var(--text2);margin-bottom:8px;font-weight:600">Invite Link kamu:</p>
+    <div class="link-box" id="modalLink">-</div>
+    <button class="btn-copy" onclick="copyLink()">📋 Copy Link</button>
+    <button class="btn-close-modal" onclick="closeModal()">Tutup</button>
+    <p style="font-size:11px;color:var(--text3);text-align:center;margin-top:12px">
+      ⚠️ Simpan link ini! Link hanya ditampilkan sekali.
+    </p>
+  </div>
+</div>
+
 
 <script>
-function openModal(name, price, info) {
-  document.getElementById('modal-title').textContent = name;
-  document.getElementById('modal-price').textContent = price;
-  document.getElementById('modal-info').textContent = info;
+// ═══════════════════════════════════════════════════
+//  CONFIG
+// ═══════════════════════════════════════════════════
+let API_URL = localStorage.getItem("metahub_api_url") || "";
+let currentUser = null;
 
-  const msg = encodeURIComponent(`Halo MetaHub! 👋\nSaya tertarik order produk:\n\n📦 ${name}\n💰 ${price}\n\nMohon info stok & cara order ya. Terima kasih!`);
-  document.getElementById('btn-wa').href = `https://wa.me/6282127341669?text=${msg}`;
-  document.getElementById('btn-tg').href = `https://t.me/dwmlt11?text=${msg}`;
+// ─── INIT ────────────────────────────────────────
+window.onload = function() {
+  if (!API_URL) {
+    showSetup();
+  } else {
+    showAuth();
+  }
+  
+  // Enter key handlers
+  document.getElementById("loginPass").addEventListener("keydown", function(e) {
+    if (e.key === "Enter") doLogin();
+  });
+  document.getElementById("regPass").addEventListener("keydown", function(e) {
+    if (e.key === "Enter") doRegister();
+  });
+  document.getElementById("apiUrlInput").addEventListener("keydown", function(e) {
+    if (e.key === "Enter") testAndSaveApi();
+  });
+};
 
-  document.getElementById('modal').classList.add('active');
-  document.body.style.overflow = 'hidden';
+// ─── SCREENS ─────────────────────────────────────
+function showSetup() {
+  document.getElementById("setupScreen").style.display = "block";
+  document.getElementById("authScreen").style.display = "none";
+  document.getElementById("dashScreen").style.display = "none";
+}
+
+function showAuth() {
+  document.getElementById("setupScreen").style.display = "none";
+  document.getElementById("authScreen").style.display = "block";
+  document.getElementById("dashScreen").style.display = "none";
+}
+
+function showDash() {
+  document.getElementById("setupScreen").style.display = "none";
+  document.getElementById("authScreen").style.display = "none";
+  document.getElementById("dashScreen").style.display = "block";
+  document.getElementById("dashScreen").classList.add("dash");
+  document.getElementById("dispUser").textContent = currentUser;
+  refreshAll();
+}
+
+function showLogin() {
+  document.getElementById("loginForm").style.display = "block";
+  document.getElementById("registerForm").style.display = "none";
+  clearMsgs();
+}
+
+function showRegister() {
+  document.getElementById("loginForm").style.display = "none";
+  document.getElementById("registerForm").style.display = "block";
+  clearMsgs();
+}
+
+function clearMsgs() {
+  ["loginMsg","regMsg","setupMsg"].forEach(id => {
+    var el = document.getElementById(id);
+    el.className = "msg";
+    el.textContent = "";
+  });
+}
+
+// ─── SETUP / API CONNECTION ─────────────────────
+async function testAndSaveApi() {
+  var url = document.getElementById("apiUrlInput").value.trim();
+  var msgEl = document.getElementById("setupMsg");
+
+  if (!url) {
+    msgEl.className = "msg err";
+    msgEl.textContent = "URL tidak boleh kosong";
+    return;
+  }
+
+  if (!url.startsWith("https://script.google.com/")) {
+    msgEl.className = "msg err";
+    msgEl.textContent = "URL harus dimulai dengan https://script.google.com/";
+    return;
+  }
+
+  msgEl.className = "msg ok";
+  msgEl.textContent = "Menghubungkan...";
+
+  try {
+    var res = await apiCall({ action: "ping" }, url);
+    if (res.success) {
+      API_URL = url;
+      localStorage.setItem("metahub_api_url", url);
+      msgEl.className = "msg ok";
+      msgEl.textContent = "Terhubung! Mengalihkan ke login...";
+      setTimeout(showAuth, 800);
+    } else {
+      msgEl.className = "msg err";
+      msgEl.textContent = "Gagal: " + (res.error || "Response tidak valid");
+    }
+  } catch(e) {
+    msgEl.className = "msg err";
+    msgEl.textContent = "Gagal konek. Pastikan URL benar dan Apps Script sudah di-deploy. Error: " + e.message;
+  }
+}
+
+function resetApi() {
+  if (confirm("Reset koneksi API? Kamu perlu memasukkan URL lagi.")) {
+    localStorage.removeItem("metahub_api_url");
+    API_URL = "";
+    currentUser = null;
+    showSetup();
+  }
+}
+
+// ─── API CALL ────────────────────────────────────
+async function apiCall(data, customUrl) {
+  var url = customUrl || API_URL;
+  
+  var res = await fetch(url, {
+    method: "POST",
+    headers: { "Content-Type": "text/plain" },
+    body: JSON.stringify(data),
+    redirect: "follow"
+  });
+
+  // Apps Script redirect returns opaque response with no-cors
+  // Use GET with query params as fallback
+  if (!res.ok && res.type === "opaque") {
+    throw new Error("Response blocked. Cek CORS settings di Apps Script.");
+  }
+
+  return await res.json();
+}
+
+// GET-based API call (more reliable for Apps Script)
+async function apiGet(params) {
+  var url = API_URL + "?" + new URLSearchParams(params).toString();
+  var res = await fetch(url, { redirect: "follow" });
+  return await res.json();
+}
+
+// Smart API call - try POST first, fallback to GET
+async function api(data) {
+  try {
+    return await apiCall(data);
+  } catch(e) {
+    // Fallback to GET
+    return await apiGet(data);
+  }
+}
+
+// ─── LOGIN ───────────────────────────────────────
+async function doLogin() {
+  var user = document.getElementById("loginUser").value.trim();
+  var pass = document.getElementById("loginPass").value;
+  var msgEl = document.getElementById("loginMsg");
+  var btn = document.getElementById("loginBtn");
+
+  if (!user || !pass) {
+    msgEl.className = "msg err";
+    msgEl.textContent = "Isi username dan password";
+    return;
+  }
+
+  btn.disabled = true;
+  btn.innerHTML = '<span class="loader"></span>';
+
+  try {
+    var res = await api({ action: "login", username: user, password: pass });
+    
+    if (res.success) {
+      currentUser = user;
+      msgEl.className = "msg ok";
+      msgEl.textContent = "Login berhasil!";
+      setTimeout(showDash, 500);
+    } else {
+      msgEl.className = "msg err";
+      msgEl.textContent = res.error || "Login gagal";
+    }
+  } catch(e) {
+    msgEl.className = "msg err";
+    msgEl.textContent = "Koneksi gagal. Coba lagi.";
+  }
+
+  btn.disabled = false;
+  btn.textContent = "Masuk";
+}
+
+// ─── REGISTER ────────────────────────────────────
+async function doRegister() {
+  var user = document.getElementById("regUser").value.trim();
+  var pass = document.getElementById("regPass").value;
+  var msgEl = document.getElementById("regMsg");
+  var btn = document.getElementById("regBtn");
+
+  if (!user || !pass) {
+    msgEl.className = "msg err";
+    msgEl.textContent = "Isi username dan password";
+    return;
+  }
+
+  btn.disabled = true;
+  btn.innerHTML = '<span class="loader"></span>';
+
+  try {
+    var res = await api({ action: "register", username: user, password: pass });
+    
+    if (res.success) {
+      msgEl.className = "msg ok";
+      msgEl.textContent = "Akun berhasil dibuat! Hubungi admin untuk top-up saldo, lalu login.";
+    } else {
+      msgEl.className = "msg err";
+      msgEl.textContent = res.error || "Registrasi gagal";
+    }
+  } catch(e) {
+    msgEl.className = "msg err";
+    msgEl.textContent = "Koneksi gagal. Coba lagi.";
+  }
+
+  btn.disabled = false;
+  btn.textContent = "Daftar";
+}
+
+// ─── LOGOUT ──────────────────────────────────────
+function doLogout() {
+  currentUser = null;
+  document.getElementById("loginUser").value = "";
+  document.getElementById("loginPass").value = "";
+  clearMsgs();
+  showAuth();
+}
+
+// ─── REFRESH ALL DATA ────────────────────────────
+async function refreshAll() {
+  loadBalance();
+  loadProducts();
+  loadHistory();
+}
+
+// ─── LOAD BALANCE ────────────────────────────────
+async function loadBalance() {
+  try {
+    var res = await api({ action: "getBalance", username: currentUser });
+    if (res.success) {
+      var saldo = parseInt(res.saldo) || 0;
+      document.getElementById("dispSaldo").textContent = "Rp " + formatNum(saldo);
+      document.getElementById("topupBanner").style.display = saldo === 0 ? "flex" : "none";
+    }
+  } catch(e) {}
+}
+
+// ─── LOAD PRODUCTS ───────────────────────────────
+async function loadProducts() {
+  var container = document.getElementById("productList");
+  
+  try {
+    var res = await api({ action: "getProducts" });
+    
+    if (res.success && res.products.length > 0) {
+      var html = "";
+      var totalStok = 0;
+
+      res.products.forEach(function(p) {
+        var stok = parseInt(p.stok) || 0;
+        totalStok += stok;
+        var stokClass = stok > 0 ? "available" : "empty";
+        var stokText = stok > 0 ? ("● " + stok + " tersedia") : "● Habis";
+        var btnDisabled = stok === 0 ? "disabled" : "";
+
+        html += '<div class="prod-card">' +
+          '<div class="prod-header">' +
+            '<div>' +
+              '<div class="prod-name">' + escHtml(p.nama) + '</div>' +
+              '<div class="prod-desc">' + escHtml(p.deskripsi) + '</div>' +
+              '<div class="prod-stock ' + stokClass + '">' + stokText + '</div>' +
+            '</div>' +
+            '<div class="prod-price">Rp ' + formatNum(p.harga) + '</div>' +
+          '</div>' +
+          '<button class="btn-buy" ' + btnDisabled + ' onclick="doBuy(\'' + escAttr(p.id) + '\',\'' + escAttr(p.nama) + '\')">' +
+            '🛒 Beli Sekarang' +
+          '</button>' +
+        '</div>';
+      });
+
+      container.innerHTML = html;
+      document.getElementById("dispStok").textContent = totalStok;
+    } else {
+      container.innerHTML = '<div style="text-align:center;padding:40px;color:var(--text3)">Belum ada produk</div>';
+      document.getElementById("dispStok").textContent = "0";
+    }
+  } catch(e) {
+    container.innerHTML = '<div style="text-align:center;padding:40px;color:var(--red)">Gagal memuat produk. Coba refresh.</div>';
+  }
+}
+
+// ─── BUY ─────────────────────────────────────────
+async function doBuy(productId, productName) {
+  if (!confirm("Beli " + productName + "?\nSaldo akan dipotong otomatis.")) return;
+
+  // Disable all buy buttons
+  document.querySelectorAll(".btn-buy").forEach(b => { b.disabled = true; b.innerHTML = '<span class="loader"></span> Memproses...'; });
+
+  try {
+    var res = await api({ action: "buy", username: currentUser, productId: productId });
+    
+    if (res.success) {
+      // Show success modal
+      document.getElementById("modalSub").textContent = res.produk + " — Rp " + formatNum(res.harga);
+      document.getElementById("modalLink").textContent = res.inviteLink;
+      document.getElementById("buyModal").classList.add("active");
+      
+      // Refresh data
+      refreshAll();
+    } else {
+      alert("Gagal: " + res.error);
+      refreshAll();
+    }
+  } catch(e) {
+    alert("Koneksi gagal. Coba lagi.");
+    refreshAll();
+  }
+}
+
+function copyLink() {
+  var link = document.getElementById("modalLink").textContent;
+  navigator.clipboard.writeText(link).then(function() {
+    document.querySelector(".btn-copy").textContent = "✅ Tercopy!";
+    setTimeout(function() {
+      document.querySelector(".btn-copy").textContent = "📋 Copy Link";
+    }, 2000);
+  }).catch(function() {
+    // Fallback
+    var ta = document.createElement("textarea");
+    ta.value = link;
+    document.body.appendChild(ta);
+    ta.select();
+    document.execCommand("copy");
+    document.body.removeChild(ta);
+    document.querySelector(".btn-copy").textContent = "✅ Tercopy!";
+    setTimeout(function() {
+      document.querySelector(".btn-copy").textContent = "📋 Copy Link";
+    }, 2000);
+  });
 }
 
 function closeModal() {
-  document.getElementById('modal').classList.remove('active');
-  document.body.style.overflow = '';
+  document.getElementById("buyModal").classList.remove("active");
 }
 
-document.addEventListener('keydown', e => {
-  if (e.key === 'Escape') closeModal();
+// ─── LOAD HISTORY ────────────────────────────────
+async function loadHistory() {
+  var container = document.getElementById("historyList");
+  
+  try {
+    var res = await api({ action: "getHistory", username: currentUser });
+    
+    if (res.success && res.history.length > 0) {
+      document.getElementById("dispBeli").textContent = res.history.length;
+
+      var html = '<table class="history-table"><thead><tr>' +
+        '<th>Waktu</th><th>Produk</th><th>Harga</th><th>Invite Link</th>' +
+        '</tr></thead><tbody>';
+      
+      res.history.forEach(function(h) {
+        html += '<tr>' +
+          '<td>' + escHtml(h.timestamp) + '</td>' +
+          '<td>' + escHtml(h.produk) + '</td>' +
+          '<td>Rp ' + formatNum(h.harga) + '</td>' +
+          '<td class="link-cell">' + escHtml(h.link) + '</td>' +
+          '</tr>';
+      });
+
+      html += '</tbody></table>';
+      container.innerHTML = html;
+    } else {
+      container.innerHTML = '<div class="history-empty"><span>📦</span>Belum ada pembelian</div>';
+      document.getElementById("dispBeli").textContent = "0";
+    }
+  } catch(e) {
+    container.innerHTML = '<div style="text-align:center;padding:40px;color:var(--red)">Gagal memuat riwayat</div>';
+  }
+}
+
+// ─── HELPERS ─────────────────────────────────────
+function formatNum(n) {
+  return parseInt(n).toLocaleString("id-ID");
+}
+
+function escHtml(s) {
+  if (!s) return "";
+  var d = document.createElement("div");
+  d.textContent = String(s);
+  return d.innerHTML;
+}
+
+function escAttr(s) {
+  return String(s).replace(/'/g, "\\'").replace(/"/g, "&quot;");
+}
+
+// Close modal on overlay click
+document.addEventListener("click", function(e) {
+  if (e.target.id === "buyModal") closeModal();
+});
+document.addEventListener("keydown", function(e) {
+  if (e.key === "Escape") closeModal();
 });
 </script>
 
