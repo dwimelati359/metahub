@@ -3,916 +3,546 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <title>MetaHub — Panel</title>
 <style>
-/* ─── RESET & BASE ─── */
 *{margin:0;padding:0;box-sizing:border-box}
 :root{
-  --bg:#f7f6f3;
-  --surface:#ffffff;
-  --surface2:#f0efec;
-  --border:#e5e3de;
-  --text:#1a1a1a;
-  --text2:#6b6b6b;
-  --text3:#999;
-  --accent:#5b6abf;
-  --accent2:#4a57a3;
-  --accent-soft:#eef0ff;
-  --green:#2d8a4e;
-  --green-soft:#e8f5e9;
-  --red:#c0392b;
-  --red-soft:#fdecea;
-  --amber:#e67e22;
-  --amber-soft:#fef3e2;
-  --radius:12px;
-  --shadow:0 1px 3px rgba(0,0,0,0.06),0 1px 2px rgba(0,0,0,0.04);
-  --shadow2:0 4px 12px rgba(0,0,0,0.08);
+  --bg:#f5f5f0;--surface:#fff;--surface2:#f0efeb;--border:#e2e0da;
+  --text:#1a1a1a;--text2:#666;--text3:#999;
+  --accent:#5b6abf;--accent2:#4a57a3;--accent-soft:#eef0ff;
+  --green:#2d8a4e;--green-soft:#e8f5e9;--red:#c0392b;--red-soft:#fdecea;
+  --amber:#e67e22;--amber-soft:#fef3e2;--purple:#7c3aed;--purple-soft:#f3e8ff;
+  --sidebar:#1a1a2e;--sidebar2:#252545;--sidebar-text:#b0b0cc;--sidebar-active:#5b6abf;
+  --radius:10px;--shadow:0 1px 3px rgba(0,0,0,0.05);--shadow2:0 4px 16px rgba(0,0,0,0.08);
   --font:-apple-system,BlinkMacSystemFont,'Segoe UI','Hiragino Sans',sans-serif;
   --mono:'SF Mono','Consolas','Roboto Mono',monospace;
 }
-body{
-  font-family:var(--font);
-  background:var(--bg);
-  color:var(--text);
-  min-height:100vh;
-  line-height:1.6;
-  font-size:15px;
-}
+body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:100vh;font-size:14px;line-height:1.5}
 a{color:var(--accent);text-decoration:none}
 a:hover{text-decoration:underline}
 
 /* ─── LAYOUT ─── */
-.app{max-width:860px;margin:0 auto;padding:24px 16px 80px}
+.layout{display:flex;min-height:100vh}
+.sidebar{width:240px;background:var(--sidebar);color:var(--sidebar-text);padding:0;display:flex;flex-direction:column;position:fixed;top:0;left:0;bottom:0;z-index:50;transition:transform .3s}
+.main{margin-left:240px;flex:1;min-height:100vh;padding:28px 32px 60px}
+.page{display:none}
+.page.active{display:block}
 
-/* ─── HEADER ─── */
-.header{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  padding:16px 0;
-  margin-bottom:8px;
-}
-.logo{
-  display:flex;
-  align-items:center;
-  gap:10px;
-}
-.logo-mark{
-  width:36px;height:36px;
-  background:var(--accent);
-  border-radius:10px;
-  display:flex;align-items:center;justify-content:center;
-  color:#fff;font-weight:700;font-size:16px;
-  letter-spacing:-0.5px;
-}
-.logo-text{font-size:18px;font-weight:700;letter-spacing:-0.3px}
-.logo-sub{font-size:11px;color:var(--text3);margin-top:-2px}
-.header-right{display:flex;align-items:center;gap:12px}
-.user-badge{
-  display:flex;align-items:center;gap:8px;
-  background:var(--surface);
-  border:1px solid var(--border);
-  padding:6px 14px;border-radius:24px;
-  font-size:13px;font-weight:500;
-}
-.user-badge .dot{width:7px;height:7px;border-radius:50%;background:var(--green)}
-.btn-logout{
-  background:none;border:1px solid var(--border);
-  padding:6px 14px;border-radius:24px;
-  font-size:13px;color:var(--text2);
-  cursor:pointer;font-family:var(--font);
-}
-.btn-logout:hover{background:var(--red-soft);color:var(--red);border-color:var(--red)}
+/* ─── SIDEBAR ─── */
+.sb-header{padding:24px 20px 20px;border-bottom:1px solid rgba(255,255,255,0.06)}
+.sb-logo{display:flex;align-items:center;gap:10px}
+.sb-mark{width:34px;height:34px;background:var(--accent);border-radius:9px;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:15px}
+.sb-name{font-size:16px;font-weight:700;color:#fff;letter-spacing:-.3px}
+.sb-sub{font-size:11px;color:var(--sidebar-text);margin-top:1px}
+.sb-user{margin-top:16px;padding:10px 12px;background:var(--sidebar2);border-radius:8px;display:flex;align-items:center;gap:9px}
+.sb-avatar{width:30px;height:30px;background:var(--accent);border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:12px}
+.sb-uname{font-size:13px;color:#ddd;font-weight:500}
+.sb-role{font-size:10px;color:var(--sidebar-text)}
+.sb-balance{font-size:12px;color:var(--accent);font-weight:600;font-family:var(--mono);margin-top:2px}
 
-/* ─── AUTH SCREENS ─── */
-.auth-wrap{
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  min-height:80vh;
-}
-.auth-card{
-  background:var(--surface);
-  border:1px solid var(--border);
-  border-radius:var(--radius);
-  padding:40px 36px;
-  width:100%;max-width:400px;
-  box-shadow:var(--shadow2);
-}
-.auth-card .logo{justify-content:center;margin-bottom:28px}
-.auth-card .logo-mark{width:44px;height:44px;font-size:20px;border-radius:12px}
-.auth-title{font-size:20px;font-weight:700;text-align:center;margin-bottom:4px}
-.auth-sub{font-size:13px;color:var(--text2);text-align:center;margin-bottom:24px}
+.sb-nav{padding:16px 12px;flex:1}
+.sb-label{font-size:10px;text-transform:uppercase;letter-spacing:.08em;color:rgba(255,255,255,0.25);padding:8px 8px 4px;font-weight:700}
+.sb-item{display:flex;align-items:center;gap:10px;padding:9px 12px;border-radius:8px;font-size:13px;color:var(--sidebar-text);cursor:pointer;margin-bottom:2px;transition:all .15s;font-weight:500}
+.sb-item:hover{background:var(--sidebar2);color:#fff}
+.sb-item.active{background:var(--accent);color:#fff;font-weight:600}
+.sb-item .icon{width:18px;text-align:center;font-size:14px}
+.sb-item .badge-count{margin-left:auto;background:var(--red);color:#fff;font-size:10px;padding:1px 6px;border-radius:10px;font-weight:700}
 
-.field{margin-bottom:16px}
-.field label{display:block;font-size:12px;font-weight:600;color:var(--text2);margin-bottom:5px;text-transform:uppercase;letter-spacing:0.04em}
-.field input{
-  width:100%;padding:10px 14px;
-  border:1px solid var(--border);border-radius:8px;
-  font-size:14px;font-family:var(--font);
-  background:var(--surface2);
-  transition:border-color .2s;
+.sb-footer{padding:12px 16px;border-top:1px solid rgba(255,255,255,0.06)}
+.sb-logout{display:flex;align-items:center;gap:8px;padding:8px 12px;border-radius:8px;font-size:13px;color:var(--sidebar-text);cursor:pointer;width:100%;border:none;background:none;font-family:var(--font)}
+.sb-logout:hover{background:rgba(192,57,43,0.15);color:#ff6b6b}
+
+/* ─── MOBILE ─── */
+.mobile-header{display:none;position:fixed;top:0;left:0;right:0;background:var(--sidebar);padding:12px 16px;z-index:40;justify-content:space-between;align-items:center}
+.hamburger{background:none;border:none;color:#fff;font-size:22px;cursor:pointer;padding:4px}
+.overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:45}
+.overlay.active{display:block}
+
+@media(max-width:768px){
+  .sidebar{transform:translateX(-100%)}
+  .sidebar.open{transform:translateX(0)}
+  .main{margin-left:0;padding:68px 16px 60px}
+  .mobile-header{display:flex}
+  .stats-grid{grid-template-columns:1fr 1fr!important}
 }
+
+/* ─── CONTENT COMPONENTS ─── */
+.page-title{font-size:22px;font-weight:700;letter-spacing:-.3px;margin-bottom:4px}
+.page-sub{font-size:13px;color:var(--text2);margin-bottom:24px}
+.section-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--text3);margin:24px 0 10px}
+
+/* Stats */
+.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.stat{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:18px 20px;box-shadow:var(--shadow)}
+.stat-label{font-size:11px;color:var(--text3);text-transform:uppercase;letter-spacing:.04em;font-weight:600}
+.stat-val{font-size:26px;font-weight:700;font-family:var(--mono);margin-top:4px;letter-spacing:-.5px}
+.stat-hint{font-size:11px;color:var(--text3);margin-top:3px}
+.stat.blue .stat-val{color:var(--accent)}
+.stat.green .stat-val{color:var(--green)}
+.stat.purple .stat-val{color:var(--purple)}
+.stat.amber .stat-val{color:var(--amber)}
+
+/* Product card */
+.prod{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:22px;box-shadow:var(--shadow);margin-bottom:12px}
+.prod-top{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;flex-wrap:wrap}
+.prod-name{font-size:17px;font-weight:700}
+.prod-desc{font-size:13px;color:var(--text2);margin-top:5px;line-height:1.5}
+.prod-price{font-size:24px;font-weight:700;color:var(--accent);font-family:var(--mono);white-space:nowrap}
+.prod-stock{display:inline-flex;align-items:center;gap:4px;padding:3px 10px;border-radius:6px;font-size:12px;font-weight:600;margin-top:8px}
+.prod-stock.ok{background:var(--green-soft);color:var(--green)}
+.prod-stock.empty{background:var(--red-soft);color:var(--red)}
+.prod-actions{display:flex;align-items:center;gap:12px;margin-top:16px;flex-wrap:wrap}
+.qty-wrap{display:flex;align-items:center;gap:0;border:1px solid var(--border);border-radius:8px;overflow:hidden}
+.qty-btn{width:34px;height:36px;border:none;background:var(--surface2);cursor:pointer;font-size:16px;font-weight:700;color:var(--text);font-family:var(--font);display:flex;align-items:center;justify-content:center}
+.qty-btn:hover{background:var(--border)}
+.qty-val{width:44px;height:36px;text-align:center;border:none;font-size:14px;font-weight:600;font-family:var(--mono);background:var(--surface)}
+.btn-buy{padding:9px 24px;background:var(--accent);color:#fff;border:none;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;font-family:var(--font);transition:all .15s;display:flex;align-items:center;gap:6px}
+.btn-buy:hover{background:var(--accent2);transform:translateY(-1px);box-shadow:var(--shadow2)}
+.btn-buy:disabled{opacity:.4;cursor:not-allowed;transform:none;box-shadow:none}
+.buy-total{font-size:13px;color:var(--text2);font-weight:500}
+
+/* Deposit */
+.dep-methods{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px;margin-bottom:20px}
+.dep-method{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:16px;cursor:pointer;transition:all .15s}
+.dep-method:hover,.dep-method.selected{border-color:var(--accent);box-shadow:0 0 0 2px var(--accent-soft)}
+.dep-method.selected{background:var(--accent-soft)}
+.dep-method-name{font-weight:700;font-size:14px}
+.dep-method-info{font-size:12px;color:var(--text2);margin-top:4px;font-family:var(--mono)}
+.dep-amounts{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
+.dep-amt{padding:8px 18px;border:1px solid var(--border);border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;background:var(--surface);font-family:var(--font);transition:all .15s}
+.dep-amt:hover,.dep-amt.selected{border-color:var(--accent);background:var(--accent-soft);color:var(--accent)}
+.dep-custom{display:flex;gap:8px;align-items:center;margin-bottom:20px}
+.dep-custom input{padding:10px 14px;border:1px solid var(--border);border-radius:8px;font-size:14px;font-family:var(--mono);width:200px;background:var(--surface)}
+.dep-custom input:focus{outline:none;border-color:var(--accent)}
+.btn-dep{padding:11px 28px;background:var(--accent);color:#fff;border:none;border-radius:8px;font-size:14px;font-weight:600;cursor:pointer;font-family:var(--font)}
+.btn-dep:hover{background:var(--accent2)}
+.btn-dep:disabled{opacity:.4;cursor:not-allowed}
+
+/* Table */
+.tbl-wrap{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow)}
+table{width:100%;border-collapse:collapse}
+th{font-size:11px;text-transform:uppercase;letter-spacing:.04em;color:var(--text3);background:var(--surface2);padding:10px 14px;text-align:left;font-weight:600;border-bottom:1px solid var(--border);white-space:nowrap}
+td{padding:10px 14px;border-bottom:1px solid var(--border);font-size:13px;vertical-align:top}
+tr:last-child td{border-bottom:none}
+.link-cell{font-family:var(--mono);font-size:11px;color:var(--accent);word-break:break-all;max-width:220px}
+.badge-sm{display:inline-block;padding:2px 8px;border-radius:5px;font-size:11px;font-weight:600}
+.badge-sm.ok{background:var(--green-soft);color:var(--green)}
+.badge-sm.pending{background:var(--amber-soft);color:var(--amber)}
+.badge-sm.rejected{background:var(--red-soft);color:var(--red)}
+.empty-state{text-align:center;padding:40px;color:var(--text3)}
+.empty-state span{font-size:32px;display:block;margin-bottom:6px}
+
+/* Modal */
+.modal-bg{position:fixed;inset:0;background:rgba(0,0,0,0.4);display:none;align-items:center;justify-content:center;z-index:100;padding:16px;backdrop-filter:blur(3px)}
+.modal-bg.active{display:flex}
+.modal{background:var(--surface);border-radius:14px;padding:28px;max-width:520px;width:100%;box-shadow:0 20px 60px rgba(0,0,0,0.15);animation:mIn .2s ease}
+@keyframes mIn{from{transform:scale(.96);opacity:0}to{transform:scale(1);opacity:1}}
+.modal-icon{font-size:40px;text-align:center;margin-bottom:8px}
+.modal-title{font-size:17px;font-weight:700;text-align:center;margin-bottom:6px}
+.modal-sub{font-size:13px;color:var(--text2);text-align:center;margin-bottom:16px}
+.link-box{background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:12px;font-family:var(--mono);font-size:11px;word-break:break-all;line-height:1.7;margin-bottom:4px;max-height:200px;overflow-y:auto}
+.link-item{padding:6px 0;border-bottom:1px solid var(--border)}
+.link-item:last-child{border-bottom:none}
+.btn-full{width:100%;padding:10px;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;font-family:var(--font);border:none;margin-top:8px}
+.btn-full.primary{background:var(--accent);color:#fff}
+.btn-full.primary:hover{background:var(--accent2)}
+.btn-full.ghost{background:none;color:var(--text2);border:1px solid var(--border)}
+
+/* Auth */
+.auth-wrap{display:flex;align-items:center;justify-content:center;min-height:100vh;background:var(--bg);padding:20px}
+.auth-card{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:36px;width:100%;max-width:380px;box-shadow:var(--shadow2)}
+.auth-card .sb-logo{justify-content:center;margin-bottom:24px}
+.auth-title{font-size:19px;font-weight:700;text-align:center;margin-bottom:3px}
+.auth-sub{font-size:13px;color:var(--text2);text-align:center;margin-bottom:20px}
+.field{margin-bottom:14px}
+.field label{display:block;font-size:11px;font-weight:700;color:var(--text2);margin-bottom:4px;text-transform:uppercase;letter-spacing:.04em}
+.field input{width:100%;padding:10px 12px;border:1px solid var(--border);border-radius:8px;font-size:14px;font-family:var(--font);background:var(--surface2)}
 .field input:focus{outline:none;border-color:var(--accent);background:#fff}
-.btn-primary{
-  width:100%;padding:12px;
-  background:var(--accent);color:#fff;
-  border:none;border-radius:8px;
-  font-size:14px;font-weight:600;
-  cursor:pointer;font-family:var(--font);
-  transition:background .2s;
-  margin-top:8px;
-}
-.btn-primary:hover{background:var(--accent2)}
-.btn-primary:disabled{opacity:0.5;cursor:not-allowed}
-.auth-switch{text-align:center;margin-top:20px;font-size:13px;color:var(--text2)}
+.btn-auth{width:100%;padding:11px;background:var(--accent);color:#fff;border:none;border-radius:8px;font-size:14px;font-weight:600;cursor:pointer;font-family:var(--font);margin-top:6px}
+.btn-auth:hover{background:var(--accent2)}
+.btn-auth:disabled{opacity:.5;cursor:not-allowed}
+.auth-switch{text-align:center;margin-top:16px;font-size:13px;color:var(--text2)}
 .auth-switch a{cursor:pointer;font-weight:600}
-.msg{padding:10px 14px;border-radius:8px;font-size:13px;margin-bottom:16px;display:none}
+.msg{padding:10px 12px;border-radius:8px;font-size:13px;margin-bottom:14px;display:none}
 .msg.err{display:block;background:var(--red-soft);color:var(--red)}
 .msg.ok{display:block;background:var(--green-soft);color:var(--green)}
 
-/* ─── DASHBOARD ─── */
-.dash{display:none}
-.section-title{
-  font-size:12px;font-weight:700;
-  text-transform:uppercase;letter-spacing:0.06em;
-  color:var(--text3);margin:28px 0 12px;
-}
-
-/* Stat cards */
-.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin-bottom:8px}
-.stat-card{
-  background:var(--surface);
-  border:1px solid var(--border);
-  border-radius:var(--radius);
-  padding:18px 20px;
-  box-shadow:var(--shadow);
-}
-.stat-label{font-size:11px;color:var(--text3);text-transform:uppercase;letter-spacing:0.04em}
-.stat-value{font-size:28px;font-weight:700;font-family:var(--mono);margin-top:4px;letter-spacing:-0.5px}
-.stat-card.saldo .stat-value{color:var(--accent)}
-.stat-card.stok .stat-value{color:var(--green)}
-.stat-hint{font-size:11px;color:var(--text3);margin-top:4px}
-
-/* Product card */
-.prod-card{
-  background:var(--surface);
-  border:1px solid var(--border);
-  border-radius:var(--radius);
-  padding:24px;
-  box-shadow:var(--shadow);
-  margin-bottom:12px;
-}
-.prod-header{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;flex-wrap:wrap}
-.prod-name{font-size:18px;font-weight:700}
-.prod-desc{font-size:13px;color:var(--text2);margin-top:6px;line-height:1.5}
-.prod-price{
-  font-size:22px;font-weight:700;
-  color:var(--accent);
-  white-space:nowrap;
-}
-.prod-stock{
-  display:inline-flex;align-items:center;gap:5px;
-  padding:4px 10px;border-radius:6px;
-  font-size:12px;font-weight:600;
-  margin-top:8px;
-}
-.prod-stock.available{background:var(--green-soft);color:var(--green)}
-.prod-stock.empty{background:var(--red-soft);color:var(--red)}
-.btn-buy{
-  display:inline-flex;align-items:center;gap:6px;
-  padding:10px 24px;
-  background:var(--accent);color:#fff;
-  border:none;border-radius:8px;
-  font-size:14px;font-weight:600;
-  cursor:pointer;font-family:var(--font);
-  transition:all .2s;
-  margin-top:16px;
-}
-.btn-buy:hover{background:var(--accent2);transform:translateY(-1px);box-shadow:var(--shadow2)}
-.btn-buy:disabled{opacity:0.4;cursor:not-allowed;transform:none;box-shadow:none}
-
-/* Success modal */
-.modal-overlay{
-  position:fixed;top:0;left:0;right:0;bottom:0;
-  background:rgba(0,0,0,0.4);
-  display:none;align-items:center;justify-content:center;
-  z-index:100;padding:16px;
-  backdrop-filter:blur(4px);
-}
-.modal-overlay.active{display:flex}
-.modal-box{
-  background:var(--surface);
-  border-radius:16px;
-  padding:32px;
-  max-width:520px;width:100%;
-  box-shadow:0 20px 60px rgba(0,0,0,0.15);
-  animation:modalIn .25s ease;
-}
-@keyframes modalIn{from{transform:scale(0.95);opacity:0}to{transform:scale(1);opacity:1}}
-.modal-icon{font-size:48px;text-align:center;margin-bottom:12px}
-.modal-title{font-size:18px;font-weight:700;text-align:center;margin-bottom:8px}
-.modal-sub{font-size:13px;color:var(--text2);text-align:center;margin-bottom:20px}
-.link-box{
-  background:var(--surface2);
-  border:1px solid var(--border);
-  border-radius:8px;
-  padding:12px 16px;
-  font-family:var(--mono);
-  font-size:12px;
-  word-break:break-all;
-  line-height:1.6;
-  margin-bottom:16px;
-  position:relative;
-  max-height:120px;
-  overflow-y:auto;
-}
-.btn-copy{
-  width:100%;padding:10px;
-  background:var(--accent);color:#fff;
-  border:none;border-radius:8px;
-  font-size:14px;font-weight:600;
-  cursor:pointer;font-family:var(--font);
-}
-.btn-copy:hover{background:var(--accent2)}
-.btn-close-modal{
-  width:100%;padding:10px;
-  background:none;color:var(--text2);
-  border:1px solid var(--border);border-radius:8px;
-  font-size:13px;cursor:pointer;font-family:var(--font);
-  margin-top:8px;
-}
-
-/* History */
-.history-table{
-  width:100%;border-collapse:collapse;
-  background:var(--surface);
-  border:1px solid var(--border);
-  border-radius:var(--radius);
-  overflow:hidden;
-  box-shadow:var(--shadow);
-}
-.history-table th{
-  font-size:11px;text-transform:uppercase;letter-spacing:0.04em;
-  color:var(--text3);background:var(--surface2);
-  padding:10px 14px;text-align:left;font-weight:600;
-  border-bottom:1px solid var(--border);
-}
-.history-table td{
-  padding:10px 14px;
-  border-bottom:1px solid var(--border);
-  font-size:13px;
-  vertical-align:top;
-}
-.history-table tr:last-child td{border-bottom:none}
-.history-table .link-cell{
-  font-family:var(--mono);font-size:11px;
-  color:var(--accent);word-break:break-all;
-  max-width:200px;
-}
-.history-empty{
-  text-align:center;padding:40px;
-  color:var(--text3);font-size:14px;
-}
-.history-empty span{font-size:32px;display:block;margin-bottom:8px}
-
-/* Setup screen */
-.setup-card{
-  background:var(--surface);
-  border:1px solid var(--border);
-  border-radius:var(--radius);
-  padding:32px;
-  max-width:600px;margin:60px auto;
-  box-shadow:var(--shadow2);
-}
-.setup-card h2{font-size:18px;margin-bottom:16px}
-.setup-card ol{padding-left:20px;margin-bottom:20px}
-.setup-card li{margin-bottom:10px;font-size:14px;line-height:1.6;color:var(--text2)}
-.setup-card code{
-  background:var(--surface2);padding:2px 6px;
-  border-radius:4px;font-family:var(--mono);font-size:13px;
-}
-.setup-card .field{margin-bottom:12px}
-
-/* Loader */
-.loader{
-  display:inline-block;
-  width:16px;height:16px;
-  border:2px solid rgba(255,255,255,0.3);
-  border-top-color:#fff;
-  border-radius:50%;
-  animation:spin .6s linear infinite;
-}
+/* Setup */
+.setup-card{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:32px;max-width:500px;margin:60px auto;box-shadow:var(--shadow2)}
+.setup-card h2{font-size:17px;margin-bottom:14px}
+.setup-card ol{padding-left:18px;margin-bottom:16px}
+.setup-card li{margin-bottom:8px;font-size:13px;color:var(--text2);line-height:1.5}
+.setup-card code{background:var(--surface2);padding:1px 5px;border-radius:3px;font-family:var(--mono);font-size:12px}
+.loader{display:inline-block;width:14px;height:14px;border:2px solid rgba(255,255,255,.3);border-top-color:#fff;border-radius:50%;animation:spin .6s linear infinite}
 @keyframes spin{to{transform:rotate(360deg)}}
-
-/* Topup banner */
-.topup-banner{
-  background:var(--amber-soft);
-  border:1px solid #f0d8a8;
-  border-radius:var(--radius);
-  padding:14px 20px;
-  font-size:13px;
-  color:#7f5600;
-  margin-bottom:12px;
-  display:flex;
-  align-items:center;
-  gap:10px;
-}
+.topup-banner{background:var(--amber-soft);border:1px solid #f0d8a8;border-radius:var(--radius);padding:12px 16px;font-size:13px;color:#7f5600;margin-bottom:16px;display:flex;align-items:center;gap:8px}
 .topup-banner a{color:var(--accent);font-weight:600}
-
-/* Refresh */
-.btn-refresh{
-  background:var(--surface);border:1px solid var(--border);
-  padding:6px 14px;border-radius:24px;
-  font-size:12px;color:var(--text2);
-  cursor:pointer;font-family:var(--font);
-  display:inline-flex;align-items:center;gap:5px;
-}
-.btn-refresh:hover{background:var(--surface2)}
-
-/* Responsive */
-@media(max-width:520px){
-  .auth-card{padding:28px 20px}
-  .prod-header{flex-direction:column}
-  .stats{grid-template-columns:1fr 1fr}
-  .stat-value{font-size:22px}
-  .history-table{font-size:12px}
-  .history-table th,.history-table td{padding:8px 10px}
-}
 </style>
 </head>
 <body>
 
-<!-- ═══ SETUP SCREEN ═══ -->
-<div id="setupScreen" class="app" style="display:none">
-  <div class="setup-card">
-    <div class="logo" style="justify-content:center;margin-bottom:20px">
-      <div class="logo-mark">M</div>
-      <div><div class="logo-text">MetaHub</div><div class="logo-sub">Panel Setup</div></div>
+<!-- ═══ SETUP ═══ -->
+<div id="setupScreen" style="display:none">
+  <div class="auth-wrap">
+    <div class="setup-card">
+      <div class="sb-logo" style="justify-content:center;margin-bottom:20px"><div class="sb-mark">M</div><div><div class="sb-name">MetaHub</div><div class="sb-sub">Panel Setup</div></div></div>
+      <h2>Hubungkan ke Google Sheet</h2>
+      <ol>
+        <li>Buka Sheet → Extensions → Apps Script</li>
+        <li>Paste kode backend → pilih <code>SETUP_SHEET</code> → Run</li>
+        <li>Deploy → New deployment → Web app → Anyone</li>
+        <li>Copy URL yang muncul, paste di bawah</li>
+      </ol>
+      <div class="field"><label>Apps Script URL</label><input type="text" id="apiUrlInput" placeholder="https://script.google.com/macros/s/xxx/exec"></div>
+      <div id="setupMsg" class="msg"></div>
+      <button class="btn-auth" onclick="testApi()">Hubungkan</button>
     </div>
-    <h2>Hubungkan ke Google Sheet</h2>
-    <p style="font-size:14px;color:var(--text2);margin-bottom:20px">
-      Paste URL Apps Script Web App kamu di bawah. Ini URL yang muncul setelah kamu deploy Apps Script dari Google Sheet.
-    </p>
-    <ol>
-      <li>Buka Google Sheet → Extensions → Apps Script</li>
-      <li>Paste kode backend → pilih fungsi <code>SETUP_SHEET</code> → klik Run</li>
-      <li>Klik Deploy → New deployment → Web app</li>
-      <li>Execute as: <code>Me</code> — Who has access: <code>Anyone</code></li>
-      <li>Copy URL yang muncul, paste di bawah</li>
-    </ol>
-    <div class="field">
-      <label>Apps Script Web App URL</label>
-      <input type="text" id="apiUrlInput" placeholder="https://script.google.com/macros/s/xxx/exec">
-    </div>
-    <div id="setupMsg" class="msg"></div>
-    <button class="btn-primary" onclick="testAndSaveApi()">Hubungkan</button>
-    <p style="font-size:11px;color:var(--text3);margin-top:16px;text-align:center">
-      URL disimpan di browser kamu saja (localStorage). Tidak dikirim ke siapapun.
-    </p>
   </div>
 </div>
 
-<!-- ═══ AUTH SCREEN ═══ -->
+<!-- ═══ AUTH ═══ -->
 <div id="authScreen" style="display:none">
   <div class="auth-wrap">
     <div class="auth-card">
-      <div class="logo">
-        <div class="logo-mark">M</div>
-        <div><div class="logo-text">MetaHub</div><div class="logo-sub">BM Panel</div></div>
-      </div>
-
-      <!-- Login Form -->
+      <div class="sb-logo"><div class="sb-mark">M</div><div><div class="sb-name">MetaHub</div><div class="sb-sub">BM Panel</div></div></div>
       <div id="loginForm">
         <div class="auth-title">Masuk</div>
         <div class="auth-sub">Login untuk beli BM & cek saldo</div>
         <div id="loginMsg" class="msg"></div>
-        <div class="field">
-          <label>Username</label>
-          <input type="text" id="loginUser" placeholder="username kamu" autocomplete="username">
-        </div>
-        <div class="field">
-          <label>Password</label>
-          <input type="password" id="loginPass" placeholder="password" autocomplete="current-password">
-        </div>
-        <button class="btn-primary" id="loginBtn" onclick="doLogin()">Masuk</button>
-        <div class="auth-switch">
-          Belum punya akun? <a onclick="showRegister()">Daftar</a>
-        </div>
+        <div class="field"><label>Username</label><input type="text" id="loginUser" placeholder="username"></div>
+        <div class="field"><label>Password</label><input type="password" id="loginPass" placeholder="password"></div>
+        <button class="btn-auth" id="loginBtn" onclick="doLogin()">Masuk</button>
+        <div class="auth-switch">Belum punya akun? <a onclick="showReg()">Daftar</a></div>
       </div>
-
-      <!-- Register Form -->
-      <div id="registerForm" style="display:none">
+      <div id="regForm" style="display:none">
         <div class="auth-title">Daftar Akun</div>
-        <div class="auth-sub">Buat akun baru, lalu hubungi admin untuk top-up saldo</div>
+        <div class="auth-sub">Buat akun, lalu top-up saldo via admin</div>
         <div id="regMsg" class="msg"></div>
-        <div class="field">
-          <label>Username</label>
-          <input type="text" id="regUser" placeholder="min. 3 karakter" autocomplete="username">
-        </div>
-        <div class="field">
-          <label>Password</label>
-          <input type="password" id="regPass" placeholder="min. 6 karakter" autocomplete="new-password">
-        </div>
-        <button class="btn-primary" id="regBtn" onclick="doRegister()">Daftar</button>
-        <div class="auth-switch">
-          Sudah punya akun? <a onclick="showLogin()">Masuk</a>
-        </div>
+        <div class="field"><label>Username</label><input type="text" id="regUser" placeholder="min. 3 karakter"></div>
+        <div class="field"><label>Password</label><input type="password" id="regPass" placeholder="min. 6 karakter"></div>
+        <button class="btn-auth" id="regBtn" onclick="doRegister()">Daftar</button>
+        <div class="auth-switch">Sudah punya akun? <a onclick="showLog()">Masuk</a></div>
       </div>
     </div>
   </div>
 </div>
 
 <!-- ═══ DASHBOARD ═══ -->
-<div id="dashScreen" class="app dash">
-  
-  <!-- Header -->
-  <div class="header">
-    <div class="logo">
-      <div class="logo-mark">M</div>
-      <div><div class="logo-text">MetaHub</div><div class="logo-sub">BM Panel</div></div>
-    </div>
-    <div class="header-right">
-      <div class="user-badge"><span class="dot"></span><span id="dispUser">-</span></div>
-      <button class="btn-logout" onclick="doLogout()">Keluar</button>
-    </div>
+<div id="appScreen" style="display:none">
+  <!-- Mobile header -->
+  <div class="mobile-header">
+    <button class="hamburger" onclick="toggleSidebar()">☰</button>
+    <div style="color:#fff;font-weight:700;font-size:15px">MetaHub</div>
+    <div style="width:30px"></div>
   </div>
+  <div class="overlay" id="overlay" onclick="toggleSidebar()"></div>
 
-  <!-- Topup banner (jika saldo 0) -->
-  <div id="topupBanner" class="topup-banner" style="display:none">
-    ⚠️ Saldo kamu Rp 0. Top-up minimum Rp 50.000 via <a href="https://t.me/dwmlt11" target="_blank">Telegram @dwmlt11</a>
-  </div>
+  <div class="layout">
+    <!-- Sidebar -->
+    <nav class="sidebar" id="sidebar">
+      <div class="sb-header">
+        <div class="sb-logo"><div class="sb-mark">M</div><div><div class="sb-name">MetaHub</div><div class="sb-sub">BM Panel</div></div></div>
+        <div class="sb-user">
+          <div class="sb-avatar" id="sbAvatar">A</div>
+          <div>
+            <div class="sb-uname" id="sbUser">admin</div>
+            <div class="sb-role">Member</div>
+            <div class="sb-balance" id="sbBalance">Rp 0</div>
+          </div>
+        </div>
+      </div>
+      <div class="sb-nav">
+        <div class="sb-label">Menu Utama</div>
+        <div class="sb-item active" onclick="goPage('dashboard')"><span class="icon">📊</span>Dashboard</div>
+        <div class="sb-item" onclick="goPage('katalog')"><span class="icon">📦</span>Katalog</div>
+        <div class="sb-item" onclick="goPage('deposit')"><span class="icon">💳</span>Deposit</div>
+        <div class="sb-item" onclick="goPage('riwayat')"><span class="icon">📋</span>Riwayat</div>
+      </div>
+      <div class="sb-footer">
+        <button class="sb-logout" onclick="doLogout()"><span class="icon">🚪</span>Keluar</button>
+      </div>
+    </nav>
 
-  <!-- Stats -->
-  <div class="section-title">Overview</div>
-  <div class="stats">
-    <div class="stat-card saldo">
-      <div class="stat-label">Saldo</div>
-      <div class="stat-value" id="dispSaldo">Rp 0</div>
-      <div class="stat-hint">Top-up via admin</div>
+    <div class="main">
+      <!-- PAGE: Dashboard -->
+      <div class="page active" id="pg-dashboard">
+        <div class="page-title">Dashboard</div>
+        <div class="page-sub">Selamat datang di MetaHub Panel</div>
+        <div id="topupBanner" class="topup-banner" style="display:none">⚠️ Saldo kosong. <a href="#" onclick="goPage('deposit');return false">Top-up sekarang</a> untuk mulai beli BM.</div>
+        <div class="stats-grid">
+          <div class="stat blue"><div class="stat-label">Saldo</div><div class="stat-val" id="dSaldo">Rp 0</div><div class="stat-hint">Top-up via menu Deposit</div></div>
+          <div class="stat green"><div class="stat-label">Stok Tersedia</div><div class="stat-val" id="dStok">-</div><div class="stat-hint">BM siap dibeli</div></div>
+          <div class="stat purple"><div class="stat-label">Total Pembelian</div><div class="stat-val" id="dBeli">0</div><div class="stat-hint" id="dTrx">0 transaksi</div></div>
+          <div class="stat amber"><div class="stat-label">Total Bayar</div><div class="stat-val" id="dBayar">Rp 0</div><div class="stat-hint" id="dDep">0 deposit</div></div>
+        </div>
+        <div class="section-label">Aktivitas Terakhir</div>
+        <div id="dashHistory"></div>
+      </div>
+
+      <!-- PAGE: Katalog -->
+      <div class="page" id="pg-katalog">
+        <div class="page-title">Katalog Produk</div>
+        <div class="page-sub">Pilih produk dan jumlah, lalu klik beli</div>
+        <div id="productList"><div class="empty-state">Memuat produk...</div></div>
+      </div>
+
+      <!-- PAGE: Deposit -->
+      <div class="page" id="pg-deposit">
+        <div class="page-title">Deposit Saldo</div>
+        <div class="page-sub">Transfer ke rekening di bawah, lalu konfirmasi</div>
+        
+        <div class="section-label">1. Pilih Metode Pembayaran</div>
+        <div class="dep-methods">
+          <div class="dep-method" onclick="selMethod(this,'BCA')" data-m="BCA"><div class="dep-method-name">🏦 BCA</div><div class="dep-method-info">1234567890<br>a.n. Dwi Melati</div></div>
+          <div class="dep-method" onclick="selMethod(this,'SeaBank')" data-m="SeaBank"><div class="dep-method-name">🏦 SeaBank</div><div class="dep-method-info">9012345678<br>a.n. Dwi Melati</div></div>
+          <div class="dep-method" onclick="selMethod(this,'DANA')" data-m="DANA"><div class="dep-method-name">💜 DANA</div><div class="dep-method-info">082127341669</div></div>
+          <div class="dep-method" onclick="selMethod(this,'OVO')" data-m="OVO"><div class="dep-method-name">💳 OVO</div><div class="dep-method-info">082127341669</div></div>
+        </div>
+        
+        <div class="section-label">2. Pilih Nominal</div>
+        <div class="dep-amounts">
+          <button class="dep-amt" onclick="selAmt(this,50000)">Rp 50.000</button>
+          <button class="dep-amt" onclick="selAmt(this,100000)">Rp 100.000</button>
+          <button class="dep-amt" onclick="selAmt(this,200000)">Rp 200.000</button>
+          <button class="dep-amt" onclick="selAmt(this,500000)">Rp 500.000</button>
+        </div>
+        <div class="dep-custom">
+          <span style="font-size:13px;color:var(--text2)">Atau nominal lain:</span>
+          <input type="number" id="depCustom" placeholder="min. 50.000" onchange="selAmtCustom()">
+        </div>
+        
+        <div class="section-label">3. Konfirmasi</div>
+        <div id="depMsg" class="msg"></div>
+        <button class="btn-dep" id="depBtn" onclick="doDeposit()" disabled>Konfirmasi Deposit</button>
+        <p style="font-size:11px;color:var(--text3);margin-top:10px">Transfer dulu ke rekening di atas, baru klik konfirmasi. Admin akan verifikasi dan menambahkan saldo kamu.</p>
+        
+        <div class="section-label" style="margin-top:32px">Riwayat Deposit</div>
+        <div id="depHistory"></div>
+      </div>
+
+      <!-- PAGE: Riwayat -->
+      <div class="page" id="pg-riwayat">
+        <div class="page-title">Riwayat Transaksi</div>
+        <div class="page-sub">Semua pembelian kamu tercatat di sini</div>
+        <div id="fullHistory"></div>
+      </div>
     </div>
-    <div class="stat-card stok">
-      <div class="stat-label">Stok Tersedia</div>
-      <div class="stat-value" id="dispStok">-</div>
-      <div class="stat-hint">BM Fresh Siap Pakai</div>
-    </div>
-    <div class="stat-card">
-      <div class="stat-label">Total Beli</div>
-      <div class="stat-value" id="dispBeli">0</div>
-      <div class="stat-hint">Riwayat pembelian kamu</div>
-    </div>
-  </div>
-
-  <!-- Products -->
-  <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px">
-    <div class="section-title" style="margin-bottom:0">Katalog</div>
-    <button class="btn-refresh" onclick="refreshAll()">↻ Refresh</button>
-  </div>
-  <div id="productList" style="margin-top:12px">
-    <div style="text-align:center;padding:40px;color:var(--text3)">Memuat produk...</div>
-  </div>
-
-  <!-- History -->
-  <div class="section-title">Riwayat Pembelian</div>
-  <div id="historyList">
-    <div style="text-align:center;padding:40px;color:var(--text3)">Memuat...</div>
-  </div>
-
-  <!-- Footer -->
-  <div style="text-align:center;margin-top:40px;padding:20px;font-size:12px;color:var(--text3)">
-    MetaHub Panel &middot; Butuh bantuan? 
-    <a href="https://t.me/dwmlt11" target="_blank">Telegram @dwmlt11</a>
-    <br>
-    <a href="#" onclick="resetApi();return false" style="font-size:11px;color:var(--text3)">Reset koneksi</a>
   </div>
 </div>
 
-<!-- ═══ BUY SUCCESS MODAL ═══ -->
-<div id="buyModal" class="modal-overlay">
-  <div class="modal-box">
+<!-- ═══ BUY MODAL ═══ -->
+<div class="modal-bg" id="buyModal">
+  <div class="modal">
     <div class="modal-icon">✅</div>
     <div class="modal-title">Pembelian Berhasil!</div>
-    <div class="modal-sub" id="modalSub">BM FRESH SIAP PAKAI</div>
-    <p style="font-size:12px;color:var(--text2);margin-bottom:8px;font-weight:600">Invite Link kamu:</p>
-    <div class="link-box" id="modalLink">-</div>
-    <button class="btn-copy" onclick="copyLink()">📋 Copy Link</button>
-    <button class="btn-close-modal" onclick="closeModal()">Tutup</button>
-    <p style="font-size:11px;color:var(--text3);text-align:center;margin-top:12px">
-      ⚠️ Simpan link ini! Link hanya ditampilkan sekali.
-    </p>
+    <div class="modal-sub" id="mSub"></div>
+    <p style="font-size:12px;color:var(--text2);margin-bottom:6px;font-weight:600">Invite Link:</p>
+    <div class="link-box" id="mLinks"></div>
+    <button class="btn-full primary" onclick="copyLinks()">📋 Copy Semua Link</button>
+    <button class="btn-full ghost" onclick="closeBuyModal()">Tutup</button>
+    <p style="font-size:11px;color:var(--text3);text-align:center;margin-top:10px">⚠️ Simpan link ini! Bisa dilihat lagi di Riwayat.</p>
   </div>
 </div>
 
-
 <script>
-// ═══════════════════════════════════════════════════
-//  CONFIG
-// ═══════════════════════════════════════════════════
-let API_URL = localStorage.getItem("metahub_api_url") || "";
-let currentUser = null;
+let API_URL=localStorage.getItem("metahub_api_url")||"";
+let U=null;
+let depMethod="",depAmount=0;
+let allLinks=[];
 
-// ─── INIT ────────────────────────────────────────
-window.onload = function() {
-  if (!API_URL) {
-    showSetup();
-  } else {
-    showAuth();
-  }
-  
-  // Enter key handlers
-  document.getElementById("loginPass").addEventListener("keydown", function(e) {
-    if (e.key === "Enter") doLogin();
-  });
-  document.getElementById("regPass").addEventListener("keydown", function(e) {
-    if (e.key === "Enter") doRegister();
-  });
-  document.getElementById("apiUrlInput").addEventListener("keydown", function(e) {
-    if (e.key === "Enter") testAndSaveApi();
-  });
+window.onload=function(){
+  if(!API_URL)showScreen("setup");else showScreen("auth");
+  $$("loginPass").onkeydown=e=>{if(e.key==="Enter")doLogin()};
+  $$("regPass").onkeydown=e=>{if(e.key==="Enter")doRegister()};
+  $$("apiUrlInput").onkeydown=e=>{if(e.key==="Enter")testApi()};
 };
 
-// ─── SCREENS ─────────────────────────────────────
-function showSetup() {
-  document.getElementById("setupScreen").style.display = "block";
-  document.getElementById("authScreen").style.display = "none";
-  document.getElementById("dashScreen").style.display = "none";
+function $$(id){return document.getElementById(id)}
+function showScreen(s){["setupScreen","authScreen","appScreen"].forEach(x=>$$(x).style.display="none");$$(s+"Screen").style.display="block"}
+function showLog(){$$("loginForm").style.display="block";$$("regForm").style.display="none";clrMsg()}
+function showReg(){$$("loginForm").style.display="none";$$("regForm").style.display="block";clrMsg()}
+function clrMsg(){["loginMsg","regMsg","setupMsg","depMsg"].forEach(id=>{var e=$$(id);if(e){e.className="msg";e.textContent=""}})}
+
+// API
+async function api(d){
+  try{var r=await fetch(API_URL,{method:"POST",headers:{"Content-Type":"text/plain"},body:JSON.stringify(d),redirect:"follow"});return await r.json()}
+  catch(e){var u=API_URL+"?"+new URLSearchParams(d).toString();var r2=await fetch(u,{redirect:"follow"});return await r2.json()}
 }
 
-function showAuth() {
-  document.getElementById("setupScreen").style.display = "none";
-  document.getElementById("authScreen").style.display = "block";
-  document.getElementById("dashScreen").style.display = "none";
+// Setup
+async function testApi(){
+  var url=$$("apiUrlInput").value.trim(),m=$$("setupMsg");
+  if(!url||!url.startsWith("https://script.google.com/")){m.className="msg err";m.textContent="URL tidak valid";return}
+  m.className="msg ok";m.textContent="Menghubungkan...";
+  try{var r=await(await fetch(url+"?action=ping",{redirect:"follow"})).json();
+    if(r.success){API_URL=url;localStorage.setItem("metahub_api_url",url);m.className="msg ok";m.textContent="Terhubung!";setTimeout(()=>showScreen("auth"),600)}
+    else{m.className="msg err";m.textContent=r.error||"Gagal"}
+  }catch(e){m.className="msg err";m.textContent="Gagal konek: "+e.message}
+}
+function resetApi(){if(confirm("Reset koneksi?")){localStorage.removeItem("metahub_api_url");API_URL="";U=null;showScreen("setup")}}
+
+// Auth
+async function doLogin(){
+  var u=$$("loginUser").value.trim(),p=$$("loginPass").value,m=$$("loginMsg"),b=$$("loginBtn");
+  if(!u||!p){m.className="msg err";m.textContent="Isi username dan password";return}
+  b.disabled=true;b.innerHTML='<span class="loader"></span>';
+  try{var r=await api({action:"login",username:u,password:p});
+    if(r.success){U=u;m.className="msg ok";m.textContent="Berhasil!";setTimeout(()=>{showScreen("app");initDash()},400)}
+    else{m.className="msg err";m.textContent=r.error}
+  }catch(e){m.className="msg err";m.textContent="Koneksi gagal"}
+  b.disabled=false;b.textContent="Masuk";
+}
+async function doRegister(){
+  var u=$$("regUser").value.trim(),p=$$("regPass").value,m=$$("regMsg"),b=$$("regBtn");
+  if(!u||!p){m.className="msg err";m.textContent="Isi semua field";return}
+  b.disabled=true;b.innerHTML='<span class="loader"></span>';
+  try{var r=await api({action:"register",username:u,password:p});
+    if(r.success){m.className="msg ok";m.textContent="Akun dibuat! Top-up saldo, lalu login."}
+    else{m.className="msg err";m.textContent=r.error}
+  }catch(e){m.className="msg err";m.textContent="Koneksi gagal"}
+  b.disabled=false;b.textContent="Daftar";
+}
+function doLogout(){U=null;$$("loginUser").value="";$$("loginPass").value="";clrMsg();showScreen("auth")}
+
+// Sidebar
+function goPage(p){
+  document.querySelectorAll(".page").forEach(x=>x.classList.remove("active"));
+  document.querySelectorAll(".sb-item").forEach(x=>x.classList.remove("active"));
+  $$("pg-"+p).classList.add("active");
+  document.querySelector('[onclick="goPage(\''+p+'\')"]').classList.add("active");
+  if(p==="dashboard")loadStats();
+  if(p==="katalog")loadProducts();
+  if(p==="deposit")loadDeposits();
+  if(p==="riwayat")loadHistory("fullHistory");
+  if(window.innerWidth<=768)toggleSidebar();
+}
+function toggleSidebar(){$$("sidebar").classList.toggle("open");$$("overlay").classList.toggle("active")}
+
+// Dashboard
+async function initDash(){
+  $$("sbUser").textContent=U;
+  $$("sbAvatar").textContent=U[0].toUpperCase();
+  loadStats();loadProducts();loadHistory("dashHistory",5);loadDeposits();
 }
 
-function showDash() {
-  document.getElementById("setupScreen").style.display = "none";
-  document.getElementById("authScreen").style.display = "none";
-  document.getElementById("dashScreen").style.display = "block";
-  document.getElementById("dashScreen").classList.add("dash");
-  document.getElementById("dispUser").textContent = currentUser;
-  refreshAll();
-}
-
-function showLogin() {
-  document.getElementById("loginForm").style.display = "block";
-  document.getElementById("registerForm").style.display = "none";
-  clearMsgs();
-}
-
-function showRegister() {
-  document.getElementById("loginForm").style.display = "none";
-  document.getElementById("registerForm").style.display = "block";
-  clearMsgs();
-}
-
-function clearMsgs() {
-  ["loginMsg","regMsg","setupMsg"].forEach(id => {
-    var el = document.getElementById(id);
-    el.className = "msg";
-    el.textContent = "";
-  });
-}
-
-// ─── SETUP / API CONNECTION ─────────────────────
-async function testAndSaveApi() {
-  var url = document.getElementById("apiUrlInput").value.trim();
-  var msgEl = document.getElementById("setupMsg");
-
-  if (!url) {
-    msgEl.className = "msg err";
-    msgEl.textContent = "URL tidak boleh kosong";
-    return;
-  }
-
-  if (!url.startsWith("https://script.google.com/")) {
-    msgEl.className = "msg err";
-    msgEl.textContent = "URL harus dimulai dengan https://script.google.com/";
-    return;
-  }
-
-  msgEl.className = "msg ok";
-  msgEl.textContent = "Menghubungkan...";
-
-  try {
-    var res = await apiCall({ action: "ping" }, url);
-    if (res.success) {
-      API_URL = url;
-      localStorage.setItem("metahub_api_url", url);
-      msgEl.className = "msg ok";
-      msgEl.textContent = "Terhubung! Mengalihkan ke login...";
-      setTimeout(showAuth, 800);
-    } else {
-      msgEl.className = "msg err";
-      msgEl.textContent = "Gagal: " + (res.error || "Response tidak valid");
+async function loadStats(){
+  try{var r=await api({action:"getStats",username:U});
+    if(r.success){
+      $$("dSaldo").textContent="Rp "+fmt(r.saldo);
+      $$("dStok").textContent=r.totalStok;
+      $$("dBeli").textContent=r.totalBeli;
+      $$("dBayar").textContent="Rp "+fmt(r.totalBayar);
+      $$("dTrx").textContent=r.trxCount+" transaksi";
+      $$("dDep").textContent=r.depCount+" deposit";
+      $$("sbBalance").textContent="Rp "+fmt(r.saldo);
+      $$("topupBanner").style.display=r.saldo===0?"flex":"none";
     }
-  } catch(e) {
-    msgEl.className = "msg err";
-    msgEl.textContent = "Gagal konek. Pastikan URL benar dan Apps Script sudah di-deploy. Error: " + e.message;
-  }
+  }catch(e){}
 }
 
-function resetApi() {
-  if (confirm("Reset koneksi API? Kamu perlu memasukkan URL lagi.")) {
-    localStorage.removeItem("metahub_api_url");
-    API_URL = "";
-    currentUser = null;
-    showSetup();
-  }
-}
-
-// ─── API CALL ────────────────────────────────────
-async function apiCall(data, customUrl) {
-  var url = customUrl || API_URL;
-  
-  var res = await fetch(url, {
-    method: "POST",
-    headers: { "Content-Type": "text/plain" },
-    body: JSON.stringify(data),
-    redirect: "follow"
-  });
-
-  // Apps Script redirect returns opaque response with no-cors
-  // Use GET with query params as fallback
-  if (!res.ok && res.type === "opaque") {
-    throw new Error("Response blocked. Cek CORS settings di Apps Script.");
-  }
-
-  return await res.json();
-}
-
-// GET-based API call (more reliable for Apps Script)
-async function apiGet(params) {
-  var url = API_URL + "?" + new URLSearchParams(params).toString();
-  var res = await fetch(url, { redirect: "follow" });
-  return await res.json();
-}
-
-// Smart API call - try POST first, fallback to GET
-async function api(data) {
-  try {
-    return await apiCall(data);
-  } catch(e) {
-    // Fallback to GET
-    return await apiGet(data);
-  }
-}
-
-// ─── LOGIN ───────────────────────────────────────
-async function doLogin() {
-  var user = document.getElementById("loginUser").value.trim();
-  var pass = document.getElementById("loginPass").value;
-  var msgEl = document.getElementById("loginMsg");
-  var btn = document.getElementById("loginBtn");
-
-  if (!user || !pass) {
-    msgEl.className = "msg err";
-    msgEl.textContent = "Isi username dan password";
-    return;
-  }
-
-  btn.disabled = true;
-  btn.innerHTML = '<span class="loader"></span>';
-
-  try {
-    var res = await api({ action: "login", username: user, password: pass });
-    
-    if (res.success) {
-      currentUser = user;
-      msgEl.className = "msg ok";
-      msgEl.textContent = "Login berhasil!";
-      setTimeout(showDash, 500);
-    } else {
-      msgEl.className = "msg err";
-      msgEl.textContent = res.error || "Login gagal";
-    }
-  } catch(e) {
-    msgEl.className = "msg err";
-    msgEl.textContent = "Koneksi gagal. Coba lagi.";
-  }
-
-  btn.disabled = false;
-  btn.textContent = "Masuk";
-}
-
-// ─── REGISTER ────────────────────────────────────
-async function doRegister() {
-  var user = document.getElementById("regUser").value.trim();
-  var pass = document.getElementById("regPass").value;
-  var msgEl = document.getElementById("regMsg");
-  var btn = document.getElementById("regBtn");
-
-  if (!user || !pass) {
-    msgEl.className = "msg err";
-    msgEl.textContent = "Isi username dan password";
-    return;
-  }
-
-  btn.disabled = true;
-  btn.innerHTML = '<span class="loader"></span>';
-
-  try {
-    var res = await api({ action: "register", username: user, password: pass });
-    
-    if (res.success) {
-      msgEl.className = "msg ok";
-      msgEl.textContent = "Akun berhasil dibuat! Hubungi admin untuk top-up saldo, lalu login.";
-    } else {
-      msgEl.className = "msg err";
-      msgEl.textContent = res.error || "Registrasi gagal";
-    }
-  } catch(e) {
-    msgEl.className = "msg err";
-    msgEl.textContent = "Koneksi gagal. Coba lagi.";
-  }
-
-  btn.disabled = false;
-  btn.textContent = "Daftar";
-}
-
-// ─── LOGOUT ──────────────────────────────────────
-function doLogout() {
-  currentUser = null;
-  document.getElementById("loginUser").value = "";
-  document.getElementById("loginPass").value = "";
-  clearMsgs();
-  showAuth();
-}
-
-// ─── REFRESH ALL DATA ────────────────────────────
-async function refreshAll() {
-  loadBalance();
-  loadProducts();
-  loadHistory();
-}
-
-// ─── LOAD BALANCE ────────────────────────────────
-async function loadBalance() {
-  try {
-    var res = await api({ action: "getBalance", username: currentUser });
-    if (res.success) {
-      var saldo = parseInt(res.saldo) || 0;
-      document.getElementById("dispSaldo").textContent = "Rp " + formatNum(saldo);
-      document.getElementById("topupBanner").style.display = saldo === 0 ? "flex" : "none";
-    }
-  } catch(e) {}
-}
-
-// ─── LOAD PRODUCTS ───────────────────────────────
-async function loadProducts() {
-  var container = document.getElementById("productList");
-  
-  try {
-    var res = await api({ action: "getProducts" });
-    
-    if (res.success && res.products.length > 0) {
-      var html = "";
-      var totalStok = 0;
-
-      res.products.forEach(function(p) {
-        var stok = parseInt(p.stok) || 0;
-        totalStok += stok;
-        var stokClass = stok > 0 ? "available" : "empty";
-        var stokText = stok > 0 ? ("● " + stok + " tersedia") : "● Habis";
-        var btnDisabled = stok === 0 ? "disabled" : "";
-
-        html += '<div class="prod-card">' +
-          '<div class="prod-header">' +
-            '<div>' +
-              '<div class="prod-name">' + escHtml(p.nama) + '</div>' +
-              '<div class="prod-desc">' + escHtml(p.deskripsi) + '</div>' +
-              '<div class="prod-stock ' + stokClass + '">' + stokText + '</div>' +
-            '</div>' +
-            '<div class="prod-price">Rp ' + formatNum(p.harga) + '</div>' +
-          '</div>' +
-          '<button class="btn-buy" ' + btnDisabled + ' onclick="doBuy(\'' + escAttr(p.id) + '\',\'' + escAttr(p.nama) + '\')">' +
-            '🛒 Beli Sekarang' +
-          '</button>' +
-        '</div>';
+async function loadProducts(){
+  var c=$$("productList");
+  try{var r=await api({action:"getProducts"});
+    if(r.success&&r.products.length>0){
+      var h="";
+      r.products.forEach(function(p){
+        var stok=parseInt(p.stok)||0;
+        var sc=stok>0?"ok":"empty",st=stok>0?"● "+stok+" tersedia":"● Habis";
+        var dis=stok===0?"disabled":"";
+        h+='<div class="prod"><div class="prod-top"><div><div class="prod-name">'+esc(p.nama)+'</div><div class="prod-desc">'+esc(p.deskripsi)+'</div><div class="prod-stock '+sc+'">'+st+'</div></div><div class="prod-price">Rp '+fmt(p.harga)+'</div></div>'+
+          '<div class="prod-actions"><div class="qty-wrap"><button class="qty-btn" onclick="qtyChange(this,-1)">−</button><input class="qty-val" type="number" value="1" min="1" max="'+stok+'" data-price="'+p.harga+'" onchange="qtyUpdate(this)"><button class="qty-btn" onclick="qtyChange(this,1)">+</button></div>'+
+          '<button class="btn-buy" '+dis+' onclick="doBuy(\''+ea(p.id)+'\',\''+ea(p.nama)+'\',this)">🛒 Beli</button>'+
+          '<span class="buy-total">Total: Rp '+fmt(p.harga)+'</span></div></div>';
       });
-
-      container.innerHTML = html;
-      document.getElementById("dispStok").textContent = totalStok;
-    } else {
-      container.innerHTML = '<div style="text-align:center;padding:40px;color:var(--text3)">Belum ada produk</div>';
-      document.getElementById("dispStok").textContent = "0";
-    }
-  } catch(e) {
-    container.innerHTML = '<div style="text-align:center;padding:40px;color:var(--red)">Gagal memuat produk. Coba refresh.</div>';
-  }
+      c.innerHTML=h;
+    }else c.innerHTML='<div class="empty-state"><span>📦</span>Belum ada produk</div>';
+  }catch(e){c.innerHTML='<div class="empty-state" style="color:var(--red)">Gagal memuat</div>'}
 }
 
-// ─── BUY ─────────────────────────────────────────
-async function doBuy(productId, productName) {
-  if (!confirm("Beli " + productName + "?\nSaldo akan dipotong otomatis.")) return;
+function qtyChange(btn,d){var inp=btn.parentElement.querySelector(".qty-val");var v=Math.max(1,Math.min(parseInt(inp.max)||99,(parseInt(inp.value)||1)+d));inp.value=v;qtyUpdate(inp)}
+function qtyUpdate(inp){var p=parseInt(inp.dataset.price)||0;var q=parseInt(inp.value)||1;inp.closest(".prod-actions").querySelector(".buy-total").textContent="Total: Rp "+fmt(p*q)}
 
-  // Disable all buy buttons
-  document.querySelectorAll(".btn-buy").forEach(b => { b.disabled = true; b.innerHTML = '<span class="loader"></span> Memproses...'; });
-
-  try {
-    var res = await api({ action: "buy", username: currentUser, productId: productId });
-    
-    if (res.success) {
-      // Show success modal
-      document.getElementById("modalSub").textContent = res.produk + " — Rp " + formatNum(res.harga);
-      document.getElementById("modalLink").textContent = res.inviteLink;
-      document.getElementById("buyModal").classList.add("active");
-      
-      // Refresh data
-      refreshAll();
-    } else {
-      alert("Gagal: " + res.error);
-      refreshAll();
-    }
-  } catch(e) {
-    alert("Koneksi gagal. Coba lagi.");
-    refreshAll();
-  }
+async function doBuy(pid,pname,btn){
+  var qtyEl=btn.parentElement.querySelector(".qty-val");
+  var qty=parseInt(qtyEl.value)||1;
+  if(!confirm("Beli "+qty+"x "+pname+"?\nTotal: "+btn.parentElement.querySelector(".buy-total").textContent))return;
+  btn.disabled=true;btn.innerHTML='<span class="loader"></span>';
+  try{var r=await api({action:"buy",username:U,productId:pid,qty:qty});
+    if(r.success){
+      allLinks=r.inviteLinks||[];
+      $$("mSub").textContent=r.qty+"x "+r.produk+" — Rp "+fmt(r.harga);
+      var lh="";allLinks.forEach((l,i)=>{lh+='<div class="link-item">'+(allLinks.length>1?(i+1)+". ":"")+esc(l)+'</div>'});
+      $$("mLinks").innerHTML=lh;
+      $$("buyModal").classList.add("active");
+      loadStats();loadProducts();loadHistory("dashHistory",5);
+    }else{alert(r.error);loadProducts()}
+  }catch(e){alert("Koneksi gagal")}
+  btn.disabled=false;btn.innerHTML="🛒 Beli";
 }
-
-function copyLink() {
-  var link = document.getElementById("modalLink").textContent;
-  navigator.clipboard.writeText(link).then(function() {
-    document.querySelector(".btn-copy").textContent = "✅ Tercopy!";
-    setTimeout(function() {
-      document.querySelector(".btn-copy").textContent = "📋 Copy Link";
-    }, 2000);
-  }).catch(function() {
-    // Fallback
-    var ta = document.createElement("textarea");
-    ta.value = link;
-    document.body.appendChild(ta);
-    ta.select();
-    document.execCommand("copy");
-    document.body.removeChild(ta);
-    document.querySelector(".btn-copy").textContent = "✅ Tercopy!";
-    setTimeout(function() {
-      document.querySelector(".btn-copy").textContent = "📋 Copy Link";
-    }, 2000);
-  });
+function copyLinks(){
+  navigator.clipboard.writeText(allLinks.join("\n")).then(()=>{document.querySelector("#buyModal .primary").textContent="✅ Tercopy!"
+    ;setTimeout(()=>{document.querySelector("#buyModal .primary").textContent="📋 Copy Semua Link"},2e3)}).catch(()=>{var t=document.createElement("textarea");t.value=allLinks.join("\n");document.body.appendChild(t);t.select();document.execCommand("copy");document.body.removeChild(t)})
 }
+function closeBuyModal(){$$("buyModal").classList.remove("active")}
 
-function closeModal() {
-  document.getElementById("buyModal").classList.remove("active");
-}
-
-// ─── LOAD HISTORY ────────────────────────────────
-async function loadHistory() {
-  var container = document.getElementById("historyList");
-  
-  try {
-    var res = await api({ action: "getHistory", username: currentUser });
-    
-    if (res.success && res.history.length > 0) {
-      document.getElementById("dispBeli").textContent = res.history.length;
-
-      var html = '<table class="history-table"><thead><tr>' +
-        '<th>Waktu</th><th>Produk</th><th>Harga</th><th>Invite Link</th>' +
-        '</tr></thead><tbody>';
-      
-      res.history.forEach(function(h) {
-        html += '<tr>' +
-          '<td>' + escHtml(h.timestamp) + '</td>' +
-          '<td>' + escHtml(h.produk) + '</td>' +
-          '<td>Rp ' + formatNum(h.harga) + '</td>' +
-          '<td class="link-cell">' + escHtml(h.link) + '</td>' +
-          '</tr>';
+// History
+async function loadHistory(target,limit){
+  var c=$$(target);if(!c)return;
+  try{var r=await api({action:"getHistory",username:U});
+    if(r.success&&r.history.length>0){
+      var list=limit?r.history.slice(0,limit):r.history;
+      var h='<div class="tbl-wrap"><table><thead><tr><th>Waktu</th><th>Produk</th><th>Qty</th><th>Harga</th><th>Invite Link</th></tr></thead><tbody>';
+      list.forEach(function(t){
+        var links=(t.link||"").split("\n").filter(Boolean);
+        var linkHtml=links.map(l=>'<div>'+esc(l)+'</div>').join("");
+        h+='<tr><td style="white-space:nowrap">'+esc(t.timestamp)+'</td><td>'+esc(t.produk)+'</td><td style="text-align:center">'+(t.jumlah||1)+'</td><td>Rp '+fmt(t.harga)+'</td><td class="link-cell">'+linkHtml+'</td></tr>';
       });
-
-      html += '</tbody></table>';
-      container.innerHTML = html;
-    } else {
-      container.innerHTML = '<div class="history-empty"><span>📦</span>Belum ada pembelian</div>';
-      document.getElementById("dispBeli").textContent = "0";
-    }
-  } catch(e) {
-    container.innerHTML = '<div style="text-align:center;padding:40px;color:var(--red)">Gagal memuat riwayat</div>';
-  }
+      h+='</tbody></table></div>';
+      if(limit&&r.history.length>limit)h+='<div style="text-align:center;margin-top:10px"><a href="#" onclick="goPage(\'riwayat\');return false" style="font-size:13px">Lihat semua ('+r.history.length+' transaksi) →</a></div>';
+      c.innerHTML=h;
+    }else c.innerHTML='<div class="empty-state"><span>📦</span>Belum ada pembelian</div>';
+  }catch(e){c.innerHTML='<div class="empty-state" style="color:var(--red)">Gagal memuat</div>'}
 }
 
-// ─── HELPERS ─────────────────────────────────────
-function formatNum(n) {
-  return parseInt(n).toLocaleString("id-ID");
+// Deposit
+function selMethod(el,m){document.querySelectorAll(".dep-method").forEach(x=>x.classList.remove("selected"));el.classList.add("selected");depMethod=m;checkDep()}
+function selAmt(el,a){document.querySelectorAll(".dep-amt").forEach(x=>x.classList.remove("selected"));el.classList.add("selected");depAmount=a;$$("depCustom").value="";checkDep()}
+function selAmtCustom(){var v=parseInt($$("depCustom").value)||0;document.querySelectorAll(".dep-amt").forEach(x=>x.classList.remove("selected"));depAmount=v;checkDep()}
+function checkDep(){$$("depBtn").disabled=!(depMethod&&depAmount>=50000)}
+
+async function doDeposit(){
+  var m=$$("depMsg"),b=$$("depBtn");
+  if(!depMethod||depAmount<50000){m.className="msg err";m.textContent="Pilih metode dan nominal (min. Rp 50.000)";return}
+  if(!confirm("Konfirmasi deposit Rp "+fmt(depAmount)+" via "+depMethod+"?\n\nPastikan kamu SUDAH TRANSFER sebelum konfirmasi."))return;
+  b.disabled=true;b.innerHTML='<span class="loader"></span>';
+  try{var r=await api({action:"deposit",username:U,jumlah:depAmount,metode:depMethod});
+    if(r.success){m.className="msg ok";m.textContent="Deposit Rp "+fmt(depAmount)+" tercatat! Admin akan konfirmasi & menambahkan saldo kamu.";loadDeposits();loadStats()}
+    else{m.className="msg err";m.textContent=r.error}
+  }catch(e){m.className="msg err";m.textContent="Koneksi gagal"}
+  b.disabled=false;b.textContent="Konfirmasi Deposit";
 }
 
-function escHtml(s) {
-  if (!s) return "";
-  var d = document.createElement("div");
-  d.textContent = String(s);
-  return d.innerHTML;
+async function loadDeposits(){
+  var c=$$("depHistory");if(!c)return;
+  try{var r=await api({action:"getDeposits",username:U});
+    if(r.success&&r.deposits.length>0){
+      var h='<div class="tbl-wrap"><table><thead><tr><th>ID</th><th>Waktu</th><th>Jumlah</th><th>Metode</th><th>Status</th></tr></thead><tbody>';
+      r.deposits.forEach(function(d){
+        var bc=d.status==="APPROVED"?"ok":d.status==="PENDING"?"pending":"rejected";
+        h+='<tr><td style="font-family:var(--mono);font-size:11px">'+esc(d.id)+'</td><td style="white-space:nowrap">'+esc(d.timestamp)+'</td><td>Rp '+fmt(d.jumlah)+'</td><td>'+esc(d.metode)+'</td><td><span class="badge-sm '+bc+'">'+esc(d.status)+'</span></td></tr>';
+      });
+      h+='</tbody></table></div>';c.innerHTML=h;
+    }else c.innerHTML='<div class="empty-state"><span>💳</span>Belum ada deposit</div>';
+  }catch(e){}
 }
 
-function escAttr(s) {
-  return String(s).replace(/'/g, "\\'").replace(/"/g, "&quot;");
-}
+function fmt(n){return parseInt(n).toLocaleString("id-ID")}
+function esc(s){if(!s)return"";var d=document.createElement("div");d.textContent=String(s);return d.innerHTML}
+function ea(s){return String(s).replace(/'/g,"\\'").replace(/"/g,"&quot;")}
 
-// Close modal on overlay click
-document.addEventListener("click", function(e) {
-  if (e.target.id === "buyModal") closeModal();
-});
-document.addEventListener("keydown", function(e) {
-  if (e.key === "Escape") closeModal();
-});
+document.addEventListener("click",e=>{if(e.target.id==="buyModal")closeBuyModal()});
+document.addEventListener("keydown",e=>{if(e.key==="Escape")closeBuyModal()});
 </script>
-
 </body>
 </html>
