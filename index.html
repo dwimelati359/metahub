@@ -13,350 +13,293 @@
   --accent:#5b6abf;--accent2:#4a57a3;--accent-soft:#eef0ff;
   --green:#2d8a4e;--green-soft:#e8f5e9;--red:#c0392b;--red-soft:#fdecea;
   --amber:#e67e22;--amber-soft:#fef3e2;--purple:#7c3aed;--purple-soft:#f3e8ff;
-  --sidebar:#1a1a2e;--sidebar2:#252545;--sidebar-text:#b0b0cc;--sidebar-active:#5b6abf;
+  --sidebar:#1a1a2e;--sidebar2:#252545;--sidebar-text:#b0b0cc;
   --radius:10px;--shadow:0 1px 3px rgba(0,0,0,0.05);--shadow2:0 4px 16px rgba(0,0,0,0.08);
   --font:-apple-system,BlinkMacSystemFont,'Segoe UI','Hiragino Sans',sans-serif;
   --mono:'SF Mono','Consolas','Roboto Mono',monospace;
 }
 body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:100vh;font-size:14px;line-height:1.5}
-a{color:var(--accent);text-decoration:none}
-a:hover{text-decoration:underline}
-
-/* ─── LAYOUT ─── */
+a{color:var(--accent);text-decoration:none}a:hover{text-decoration:underline}
 .layout{display:flex;min-height:100vh}
-.sidebar{width:240px;background:var(--sidebar);color:var(--sidebar-text);padding:0;display:flex;flex-direction:column;position:fixed;top:0;left:0;bottom:0;z-index:50;transition:transform .3s}
-.main{margin-left:240px;flex:1;min-height:100vh;padding:28px 32px 60px}
-.page{display:none}
-.page.active{display:block}
+.sidebar{width:250px;background:var(--sidebar);color:var(--sidebar-text);display:flex;flex-direction:column;position:fixed;top:0;left:0;bottom:0;z-index:50;transition:transform .3s}
+.main{margin-left:250px;flex:1;min-height:100vh;padding:28px 36px 60px}
+.page{display:none}.page.active{display:block}
 
-/* ─── SIDEBAR ─── */
-.sb-header{padding:24px 20px 20px;border-bottom:1px solid rgba(255,255,255,0.06)}
+/* Sidebar */
+.sb-hd{padding:24px 20px 16px;border-bottom:1px solid rgba(255,255,255,.06)}
 .sb-logo{display:flex;align-items:center;gap:10px}
-.sb-mark{width:34px;height:34px;background:var(--accent);border-radius:9px;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:15px}
-.sb-name{font-size:16px;font-weight:700;color:#fff;letter-spacing:-.3px}
-.sb-sub{font-size:11px;color:var(--sidebar-text);margin-top:1px}
-.sb-user{margin-top:16px;padding:10px 12px;background:var(--sidebar2);border-radius:8px;display:flex;align-items:center;gap:9px}
-.sb-avatar{width:30px;height:30px;background:var(--accent);border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:12px}
-.sb-uname{font-size:13px;color:#ddd;font-weight:500}
-.sb-role{font-size:10px;color:var(--sidebar-text)}
-.sb-balance{font-size:12px;color:var(--accent);font-weight:600;font-family:var(--mono);margin-top:2px}
+.sb-mk{width:36px;height:36px;background:var(--accent);border-radius:10px;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:16px}
+.sb-nm{font-size:17px;font-weight:700;color:#fff;letter-spacing:-.3px}
+.sb-tl{font-size:10px;color:var(--sidebar-text);margin-top:1px;text-transform:uppercase;letter-spacing:.06em}
+.sb-usr{margin-top:14px;padding:10px 12px;background:var(--sidebar2);border-radius:8px;display:flex;align-items:center;gap:10px}
+.sb-av{width:32px;height:32px;background:var(--accent);border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:13px}
+.sb-un{font-size:13px;color:#ddd;font-weight:600}.sb-rl{font-size:10px;color:var(--sidebar-text)}.sb-bl{font-size:12px;color:#8b8bff;font-weight:700;font-family:var(--mono);margin-top:1px}
+.sb-nav{padding:14px 10px;flex:1;overflow-y:auto}
+.sb-lb{font-size:9px;text-transform:uppercase;letter-spacing:.1em;color:rgba(255,255,255,.2);padding:10px 10px 4px;font-weight:800}
+.sb-it{display:flex;align-items:center;gap:10px;padding:9px 12px;border-radius:8px;font-size:13px;color:var(--sidebar-text);cursor:pointer;margin-bottom:1px;transition:all .12s;font-weight:500}
+.sb-it:hover{background:var(--sidebar2);color:#fff}.sb-it.active{background:var(--accent);color:#fff;font-weight:600}
+.sb-it .i{width:20px;text-align:center;font-size:15px}
+.sb-it .cnt{margin-left:auto;background:var(--red);color:#fff;font-size:10px;padding:1px 7px;border-radius:10px;font-weight:700}
+.sb-ft{padding:10px 14px;border-top:1px solid rgba(255,255,255,.06)}
+.sb-out{display:flex;align-items:center;gap:8px;padding:8px 12px;border-radius:8px;font-size:13px;color:var(--sidebar-text);cursor:pointer;width:100%;border:none;background:none;font-family:var(--font)}
+.sb-out:hover{background:rgba(192,57,43,.15);color:#ff6b6b}
 
-.sb-nav{padding:16px 12px;flex:1}
-.sb-label{font-size:10px;text-transform:uppercase;letter-spacing:.08em;color:rgba(255,255,255,0.25);padding:8px 8px 4px;font-weight:700}
-.sb-item{display:flex;align-items:center;gap:10px;padding:9px 12px;border-radius:8px;font-size:13px;color:var(--sidebar-text);cursor:pointer;margin-bottom:2px;transition:all .15s;font-weight:500}
-.sb-item:hover{background:var(--sidebar2);color:#fff}
-.sb-item.active{background:var(--accent);color:#fff;font-weight:600}
-.sb-item .icon{width:18px;text-align:center;font-size:14px}
-.sb-item .badge-count{margin-left:auto;background:var(--red);color:#fff;font-size:10px;padding:1px 6px;border-radius:10px;font-weight:700}
+/* Mobile */
+.mob-hd{display:none;position:fixed;top:0;left:0;right:0;background:var(--sidebar);padding:12px 16px;z-index:40;justify-content:space-between;align-items:center}
+.hmb{background:none;border:none;color:#fff;font-size:22px;cursor:pointer}
+.ovl{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:45}.ovl.active{display:block}
+@media(max-width:768px){.sidebar{transform:translateX(-100%)}.sidebar.open{transform:translateX(0)}.main{margin-left:0;padding:64px 14px 60px}.mob-hd{display:flex}.stats-grid{grid-template-columns:1fr 1fr!important}}
 
-.sb-footer{padding:12px 16px;border-top:1px solid rgba(255,255,255,0.06)}
-.sb-logout{display:flex;align-items:center;gap:8px;padding:8px 12px;border-radius:8px;font-size:13px;color:var(--sidebar-text);cursor:pointer;width:100%;border:none;background:none;font-family:var(--font)}
-.sb-logout:hover{background:rgba(192,57,43,0.15);color:#ff6b6b}
-
-/* ─── MOBILE ─── */
-.mobile-header{display:none;position:fixed;top:0;left:0;right:0;background:var(--sidebar);padding:12px 16px;z-index:40;justify-content:space-between;align-items:center}
-.hamburger{background:none;border:none;color:#fff;font-size:22px;cursor:pointer;padding:4px}
-.overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:45}
-.overlay.active{display:block}
-
-@media(max-width:768px){
-  .sidebar{transform:translateX(-100%)}
-  .sidebar.open{transform:translateX(0)}
-  .main{margin-left:0;padding:68px 16px 60px}
-  .mobile-header{display:flex}
-  .stats-grid{grid-template-columns:1fr 1fr!important}
-}
-
-/* ─── CONTENT COMPONENTS ─── */
-.page-title{font-size:22px;font-weight:700;letter-spacing:-.3px;margin-bottom:4px}
-.page-sub{font-size:13px;color:var(--text2);margin-bottom:24px}
-.section-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--text3);margin:24px 0 10px}
+/* Content */
+.pg-t{font-size:22px;font-weight:700;letter-spacing:-.3px;margin-bottom:3px}
+.pg-s{font-size:13px;color:var(--text2);margin-bottom:22px}
+.sec-lb{font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.07em;color:var(--text3);margin:24px 0 10px}
 
 /* Stats */
 .stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
-.stat{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:18px 20px;box-shadow:var(--shadow)}
-.stat-label{font-size:11px;color:var(--text3);text-transform:uppercase;letter-spacing:.04em;font-weight:600}
-.stat-val{font-size:26px;font-weight:700;font-family:var(--mono);margin-top:4px;letter-spacing:-.5px}
-.stat-hint{font-size:11px;color:var(--text3);margin-top:3px}
-.stat.blue .stat-val{color:var(--accent)}
-.stat.green .stat-val{color:var(--green)}
-.stat.purple .stat-val{color:var(--purple)}
-.stat.amber .stat-val{color:var(--amber)}
+.st{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:16px 18px;box-shadow:var(--shadow)}
+.st-lb{font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:.04em;font-weight:700}
+.st-vl{font-size:24px;font-weight:700;font-family:var(--mono);margin-top:3px;letter-spacing:-.5px}
+.st-ht{font-size:11px;color:var(--text3);margin-top:2px}
+.st.blue .st-vl{color:var(--accent)}.st.green .st-vl{color:var(--green)}.st.purple .st-vl{color:var(--purple)}.st.amber .st-vl{color:var(--amber)}
 
-/* Product card */
-.prod{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:22px;box-shadow:var(--shadow);margin-bottom:12px}
-.prod-top{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;flex-wrap:wrap}
-.prod-name{font-size:17px;font-weight:700}
-.prod-desc{font-size:13px;color:var(--text2);margin-top:5px;line-height:1.5}
-.prod-price{font-size:24px;font-weight:700;color:var(--accent);font-family:var(--mono);white-space:nowrap}
-.prod-stock{display:inline-flex;align-items:center;gap:4px;padding:3px 10px;border-radius:6px;font-size:12px;font-weight:600;margin-top:8px}
-.prod-stock.ok{background:var(--green-soft);color:var(--green)}
-.prod-stock.empty{background:var(--red-soft);color:var(--red)}
-.prod-actions{display:flex;align-items:center;gap:12px;margin-top:16px;flex-wrap:wrap}
-.qty-wrap{display:flex;align-items:center;gap:0;border:1px solid var(--border);border-radius:8px;overflow:hidden}
-.qty-btn{width:34px;height:36px;border:none;background:var(--surface2);cursor:pointer;font-size:16px;font-weight:700;color:var(--text);font-family:var(--font);display:flex;align-items:center;justify-content:center}
-.qty-btn:hover{background:var(--border)}
-.qty-val{width:44px;height:36px;text-align:center;border:none;font-size:14px;font-weight:600;font-family:var(--mono);background:var(--surface)}
-.btn-buy{padding:9px 24px;background:var(--accent);color:#fff;border:none;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;font-family:var(--font);transition:all .15s;display:flex;align-items:center;gap:6px}
-.btn-buy:hover{background:var(--accent2);transform:translateY(-1px);box-shadow:var(--shadow2)}
-.btn-buy:disabled{opacity:.4;cursor:not-allowed;transform:none;box-shadow:none}
-.buy-total{font-size:13px;color:var(--text2);font-weight:500}
+/* Product */
+.prod{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:20px;box-shadow:var(--shadow);margin-bottom:10px}
+.prod-top{display:flex;justify-content:space-between;align-items:flex-start;gap:14px;flex-wrap:wrap}
+.prod-nm{font-size:16px;font-weight:700}.prod-ds{font-size:13px;color:var(--text2);margin-top:4px;line-height:1.5}
+.prod-pr{font-size:22px;font-weight:700;color:var(--accent);font-family:var(--mono);white-space:nowrap}
+.prod-sk{display:inline-flex;align-items:center;gap:4px;padding:3px 9px;border-radius:6px;font-size:11px;font-weight:700;margin-top:6px}
+.prod-sk.ok{background:var(--green-soft);color:var(--green)}.prod-sk.no{background:var(--red-soft);color:var(--red)}
+.prod-act{display:flex;align-items:center;gap:10px;margin-top:14px;flex-wrap:wrap}
+.qty-w{display:flex;border:1px solid var(--border);border-radius:7px;overflow:hidden}
+.qty-b{width:32px;height:34px;border:none;background:var(--surface2);cursor:pointer;font-size:15px;font-weight:700;display:flex;align-items:center;justify-content:center}
+.qty-b:hover{background:var(--border)}
+.qty-v{width:40px;height:34px;text-align:center;border:none;font-size:13px;font-weight:600;font-family:var(--mono);background:var(--surface)}
+.btn-buy{padding:8px 20px;background:var(--accent);color:#fff;border:none;border-radius:7px;font-size:13px;font-weight:600;cursor:pointer;font-family:var(--font);transition:all .12s;display:flex;align-items:center;gap:5px}
+.btn-buy:hover{background:var(--accent2);transform:translateY(-1px)}.btn-buy:disabled{opacity:.35;cursor:not-allowed;transform:none}
+.buy-tot{font-size:12px;color:var(--text2);font-weight:500}
 
 /* Deposit */
-.dep-methods{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px;margin-bottom:20px}
-.dep-method{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:16px;cursor:pointer;transition:all .15s}
-.dep-method:hover,.dep-method.selected{border-color:var(--accent);box-shadow:0 0 0 2px var(--accent-soft)}
-.dep-method.selected{background:var(--accent-soft)}
-.dep-method-name{font-weight:700;font-size:14px}
-.dep-method-info{font-size:12px;color:var(--text2);margin-top:4px;font-family:var(--mono)}
-.dep-amounts{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
-.dep-amt{padding:8px 18px;border:1px solid var(--border);border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;background:var(--surface);font-family:var(--font);transition:all .15s}
-.dep-amt:hover,.dep-amt.selected{border-color:var(--accent);background:var(--accent-soft);color:var(--accent)}
-.dep-custom{display:flex;gap:8px;align-items:center;margin-bottom:20px}
-.dep-custom input{padding:10px 14px;border:1px solid var(--border);border-radius:8px;font-size:14px;font-family:var(--mono);width:200px;background:var(--surface)}
-.dep-custom input:focus{outline:none;border-color:var(--accent)}
-.btn-dep{padding:11px 28px;background:var(--accent);color:#fff;border:none;border-radius:8px;font-size:14px;font-weight:600;cursor:pointer;font-family:var(--font)}
-.btn-dep:hover{background:var(--accent2)}
-.btn-dep:disabled{opacity:.4;cursor:not-allowed}
+.dep-ms{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:10px;margin-bottom:18px}
+.dep-m{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:14px;cursor:pointer;transition:all .12s}
+.dep-m:hover,.dep-m.sel{border-color:var(--accent);box-shadow:0 0 0 2px var(--accent-soft)}.dep-m.sel{background:var(--accent-soft)}
+.dep-m-n{font-weight:700;font-size:14px}.dep-m-i{font-size:12px;color:var(--text2);margin-top:3px;font-family:var(--mono)}
+.dep-as{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:14px}
+.dep-a{padding:7px 16px;border:1px solid var(--border);border-radius:7px;font-size:13px;font-weight:600;cursor:pointer;background:var(--surface);font-family:var(--font);transition:all .12s}
+.dep-a:hover,.dep-a.sel{border-color:var(--accent);background:var(--accent-soft);color:var(--accent)}
+.dep-ci{display:flex;gap:8px;align-items:center;margin-bottom:18px}
+.dep-ci input{padding:9px 12px;border:1px solid var(--border);border-radius:7px;font-size:14px;font-family:var(--mono);width:180px;background:var(--surface)}
+.dep-ci input:focus{outline:none;border-color:var(--accent)}
+.btn-dep{padding:10px 24px;background:var(--accent);color:#fff;border:none;border-radius:7px;font-size:13px;font-weight:600;cursor:pointer;font-family:var(--font)}
+.btn-dep:hover{background:var(--accent2)}.btn-dep:disabled{opacity:.35;cursor:not-allowed}
 
 /* Table */
-.tbl-wrap{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow)}
+.tw{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow)}
 table{width:100%;border-collapse:collapse}
-th{font-size:11px;text-transform:uppercase;letter-spacing:.04em;color:var(--text3);background:var(--surface2);padding:10px 14px;text-align:left;font-weight:600;border-bottom:1px solid var(--border);white-space:nowrap}
-td{padding:10px 14px;border-bottom:1px solid var(--border);font-size:13px;vertical-align:top}
+th{font-size:10px;text-transform:uppercase;letter-spacing:.05em;color:var(--text3);background:var(--surface2);padding:9px 12px;text-align:left;font-weight:700;border-bottom:1px solid var(--border);white-space:nowrap}
+td{padding:9px 12px;border-bottom:1px solid var(--border);font-size:13px;vertical-align:top}
 tr:last-child td{border-bottom:none}
-.link-cell{font-family:var(--mono);font-size:11px;color:var(--accent);word-break:break-all;max-width:220px}
-.badge-sm{display:inline-block;padding:2px 8px;border-radius:5px;font-size:11px;font-weight:600}
-.badge-sm.ok{background:var(--green-soft);color:var(--green)}
-.badge-sm.pending{background:var(--amber-soft);color:var(--amber)}
-.badge-sm.rejected{background:var(--red-soft);color:var(--red)}
-.empty-state{text-align:center;padding:40px;color:var(--text3)}
-.empty-state span{font-size:32px;display:block;margin-bottom:6px}
+.lc{font-family:var(--mono);font-size:10px;color:var(--accent);word-break:break-all;max-width:200px}
+.bdg{display:inline-block;padding:2px 8px;border-radius:5px;font-size:10px;font-weight:700}
+.bdg.ok{background:var(--green-soft);color:var(--green)}.bdg.pend{background:var(--amber-soft);color:var(--amber)}.bdg.rej{background:var(--red-soft);color:var(--red)}
+.empty{text-align:center;padding:36px;color:var(--text3)}.empty span{font-size:28px;display:block;margin-bottom:4px}
+
+/* Admin */
+.adm-act{display:flex;gap:6px;flex-wrap:wrap}
+.btn-sm{padding:4px 10px;border-radius:5px;font-size:11px;font-weight:600;cursor:pointer;border:none;font-family:var(--font)}
+.btn-sm.green{background:var(--green-soft);color:var(--green)}.btn-sm.green:hover{background:var(--green);color:#fff}
+.btn-sm.red{background:var(--red-soft);color:var(--red)}.btn-sm.red:hover{background:var(--red);color:#fff}
+.adm-add{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:20px;margin-bottom:16px}
+.adm-add textarea{width:100%;height:120px;padding:10px;border:1px solid var(--border);border-radius:7px;font-family:var(--mono);font-size:12px;resize:vertical;background:var(--surface2)}
+.adm-add textarea:focus{outline:none;border-color:var(--accent)}
 
 /* Modal */
-.modal-bg{position:fixed;inset:0;background:rgba(0,0,0,0.4);display:none;align-items:center;justify-content:center;z-index:100;padding:16px;backdrop-filter:blur(3px)}
-.modal-bg.active{display:flex}
-.modal{background:var(--surface);border-radius:14px;padding:28px;max-width:520px;width:100%;box-shadow:0 20px 60px rgba(0,0,0,0.15);animation:mIn .2s ease}
+.mdl-bg{position:fixed;inset:0;background:rgba(0,0,0,.4);display:none;align-items:center;justify-content:center;z-index:100;padding:16px;backdrop-filter:blur(3px)}
+.mdl-bg.active{display:flex}
+.mdl{background:var(--surface);border-radius:14px;padding:28px;max-width:540px;width:100%;box-shadow:0 20px 60px rgba(0,0,0,.15);animation:mIn .2s ease}
 @keyframes mIn{from{transform:scale(.96);opacity:0}to{transform:scale(1);opacity:1}}
-.modal-icon{font-size:40px;text-align:center;margin-bottom:8px}
-.modal-title{font-size:17px;font-weight:700;text-align:center;margin-bottom:6px}
-.modal-sub{font-size:13px;color:var(--text2);text-align:center;margin-bottom:16px}
-.link-box{background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:12px;font-family:var(--mono);font-size:11px;word-break:break-all;line-height:1.7;margin-bottom:4px;max-height:200px;overflow-y:auto}
-.link-item{padding:6px 0;border-bottom:1px solid var(--border)}
-.link-item:last-child{border-bottom:none}
-.btn-full{width:100%;padding:10px;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;font-family:var(--font);border:none;margin-top:8px}
-.btn-full.primary{background:var(--accent);color:#fff}
-.btn-full.primary:hover{background:var(--accent2)}
-.btn-full.ghost{background:none;color:var(--text2);border:1px solid var(--border)}
+.mdl-ic{font-size:36px;text-align:center;margin-bottom:6px}
+.mdl-tt{font-size:16px;font-weight:700;text-align:center;margin-bottom:4px}
+.mdl-sub{font-size:13px;color:var(--text2);text-align:center;margin-bottom:14px}
+.lnk-box{background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:12px;font-family:var(--mono);font-size:11px;word-break:break-all;line-height:1.7;margin-bottom:4px;max-height:200px;overflow-y:auto}
+.lnk-item{padding:5px 0;border-bottom:1px solid var(--border)}.lnk-item:last-child{border-bottom:none}
+.btn-fl{width:100%;padding:10px;border-radius:7px;font-size:13px;font-weight:600;cursor:pointer;font-family:var(--font);border:none;margin-top:6px}
+.btn-fl.pri{background:var(--accent);color:#fff}.btn-fl.pri:hover{background:var(--accent2)}
+.btn-fl.gho{background:none;color:var(--text2);border:1px solid var(--border)}
 
 /* Auth */
 .auth-wrap{display:flex;align-items:center;justify-content:center;min-height:100vh;background:var(--bg);padding:20px}
 .auth-card{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:36px;width:100%;max-width:380px;box-shadow:var(--shadow2)}
 .auth-card .sb-logo{justify-content:center;margin-bottom:24px}
-.auth-title{font-size:19px;font-weight:700;text-align:center;margin-bottom:3px}
-.auth-sub{font-size:13px;color:var(--text2);text-align:center;margin-bottom:20px}
-.field{margin-bottom:14px}
-.field label{display:block;font-size:11px;font-weight:700;color:var(--text2);margin-bottom:4px;text-transform:uppercase;letter-spacing:.04em}
-.field input{width:100%;padding:10px 12px;border:1px solid var(--border);border-radius:8px;font-size:14px;font-family:var(--font);background:var(--surface2)}
-.field input:focus{outline:none;border-color:var(--accent);background:#fff}
-.btn-auth{width:100%;padding:11px;background:var(--accent);color:#fff;border:none;border-radius:8px;font-size:14px;font-weight:600;cursor:pointer;font-family:var(--font);margin-top:6px}
-.btn-auth:hover{background:var(--accent2)}
-.btn-auth:disabled{opacity:.5;cursor:not-allowed}
-.auth-switch{text-align:center;margin-top:16px;font-size:13px;color:var(--text2)}
-.auth-switch a{cursor:pointer;font-weight:600}
-.msg{padding:10px 12px;border-radius:8px;font-size:13px;margin-bottom:14px;display:none}
-.msg.err{display:block;background:var(--red-soft);color:var(--red)}
-.msg.ok{display:block;background:var(--green-soft);color:var(--green)}
-
-/* Setup */
-.setup-card{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:32px;max-width:500px;margin:60px auto;box-shadow:var(--shadow2)}
-.setup-card h2{font-size:17px;margin-bottom:14px}
-.setup-card ol{padding-left:18px;margin-bottom:16px}
-.setup-card li{margin-bottom:8px;font-size:13px;color:var(--text2);line-height:1.5}
+.auth-tt{font-size:19px;font-weight:700;text-align:center;margin-bottom:2px}
+.auth-st{font-size:13px;color:var(--text2);text-align:center;margin-bottom:18px}
+.fld{margin-bottom:12px}.fld label{display:block;font-size:10px;font-weight:800;color:var(--text2);margin-bottom:4px;text-transform:uppercase;letter-spacing:.05em}
+.fld input{width:100%;padding:10px 12px;border:1px solid var(--border);border-radius:7px;font-size:14px;font-family:var(--font);background:var(--surface2)}
+.fld input:focus{outline:none;border-color:var(--accent);background:#fff}
+.btn-auth{width:100%;padding:11px;background:var(--accent);color:#fff;border:none;border-radius:7px;font-size:14px;font-weight:600;cursor:pointer;font-family:var(--font);margin-top:4px}
+.btn-auth:hover{background:var(--accent2)}.btn-auth:disabled{opacity:.5;cursor:not-allowed}
+.auth-sw{text-align:center;margin-top:14px;font-size:13px;color:var(--text2)}.auth-sw a{cursor:pointer;font-weight:600}
+.msg{padding:9px 12px;border-radius:7px;font-size:13px;margin-bottom:12px;display:none}
+.msg.err{display:block;background:var(--red-soft);color:var(--red)}.msg.ok{display:block;background:var(--green-soft);color:var(--green)}
+.setup-card{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:32px;max-width:480px;margin:60px auto;box-shadow:var(--shadow2)}
+.setup-card h2{font-size:16px;margin-bottom:12px}
+.setup-card ol{padding-left:18px;margin-bottom:14px}.setup-card li{margin-bottom:6px;font-size:13px;color:var(--text2);line-height:1.5}
 .setup-card code{background:var(--surface2);padding:1px 5px;border-radius:3px;font-family:var(--mono);font-size:12px}
 .loader{display:inline-block;width:14px;height:14px;border:2px solid rgba(255,255,255,.3);border-top-color:#fff;border-radius:50%;animation:spin .6s linear infinite}
 @keyframes spin{to{transform:rotate(360deg)}}
-.topup-banner{background:var(--amber-soft);border:1px solid #f0d8a8;border-radius:var(--radius);padding:12px 16px;font-size:13px;color:#7f5600;margin-bottom:16px;display:flex;align-items:center;gap:8px}
-.topup-banner a{color:var(--accent);font-weight:600}
+.topup-b{background:var(--amber-soft);border:1px solid #f0d8a8;border-radius:var(--radius);padding:11px 14px;font-size:13px;color:#7f5600;margin-bottom:14px;display:flex;align-items:center;gap:8px}
+.topup-b a{color:var(--accent);font-weight:600}
 </style>
 </head>
 <body>
 
-<!-- ═══ SETUP ═══ -->
-<div id="setupScreen" style="display:none">
-  <div class="auth-wrap">
-    <div class="setup-card">
-      <div class="sb-logo" style="justify-content:center;margin-bottom:20px"><div class="sb-mark">M</div><div><div class="sb-name">MetaHub</div><div class="sb-sub">Panel Setup</div></div></div>
-      <h2>Hubungkan ke Google Sheet</h2>
-      <ol>
-        <li>Buka Sheet → Extensions → Apps Script</li>
-        <li>Paste kode backend → pilih <code>SETUP_SHEET</code> → Run</li>
-        <li>Deploy → New deployment → Web app → Anyone</li>
-        <li>Copy URL yang muncul, paste di bawah</li>
-      </ol>
-      <div class="field"><label>Apps Script URL</label><input type="text" id="apiUrlInput" placeholder="https://script.google.com/macros/s/xxx/exec"></div>
-      <div id="setupMsg" class="msg"></div>
-      <button class="btn-auth" onclick="testApi()">Hubungkan</button>
-    </div>
-  </div>
-</div>
+<!-- SETUP -->
+<div id="setupScreen" style="display:none"><div class="auth-wrap"><div class="setup-card">
+  <div class="sb-logo" style="justify-content:center;margin-bottom:18px"><div class="sb-mk">M</div><div><div class="sb-nm">MetaHub</div><div class="sb-tl">Panel Setup</div></div></div>
+  <h2>Hubungkan ke Google Sheet</h2>
+  <ol><li>Buka Sheet → Extensions → Apps Script</li><li>Paste kode → pilih <code>SETUP_SHEET</code> → Run</li><li>Deploy → New deployment → Web app → Anyone</li><li>Copy URL, paste di bawah</li></ol>
+  <div class="fld"><label>Apps Script URL</label><input type="text" id="apiUrlInput" placeholder="https://script.google.com/macros/s/xxx/exec"></div>
+  <div id="setupMsg" class="msg"></div>
+  <button class="btn-auth" onclick="testApi()">Hubungkan</button>
+</div></div></div>
 
-<!-- ═══ AUTH ═══ -->
-<div id="authScreen" style="display:none">
-  <div class="auth-wrap">
-    <div class="auth-card">
-      <div class="sb-logo"><div class="sb-mark">M</div><div><div class="sb-name">MetaHub</div><div class="sb-sub">BM Panel</div></div></div>
-      <div id="loginForm">
-        <div class="auth-title">Masuk</div>
-        <div class="auth-sub">Login untuk beli BM & cek saldo</div>
-        <div id="loginMsg" class="msg"></div>
-        <div class="field"><label>Username</label><input type="text" id="loginUser" placeholder="username"></div>
-        <div class="field"><label>Password</label><input type="password" id="loginPass" placeholder="password"></div>
-        <button class="btn-auth" id="loginBtn" onclick="doLogin()">Masuk</button>
-        <div class="auth-switch">Belum punya akun? <a onclick="showReg()">Daftar</a></div>
-      </div>
-      <div id="regForm" style="display:none">
-        <div class="auth-title">Daftar Akun</div>
-        <div class="auth-sub">Buat akun, lalu top-up saldo via admin</div>
-        <div id="regMsg" class="msg"></div>
-        <div class="field"><label>Username</label><input type="text" id="regUser" placeholder="min. 3 karakter"></div>
-        <div class="field"><label>Password</label><input type="password" id="regPass" placeholder="min. 6 karakter"></div>
-        <button class="btn-auth" id="regBtn" onclick="doRegister()">Daftar</button>
-        <div class="auth-switch">Sudah punya akun? <a onclick="showLog()">Masuk</a></div>
-      </div>
-    </div>
+<!-- AUTH -->
+<div id="authScreen" style="display:none"><div class="auth-wrap"><div class="auth-card">
+  <div class="sb-logo"><div class="sb-mk">M</div><div><div class="sb-nm">MetaHub</div><div class="sb-tl">BM Panel</div></div></div>
+  <div id="loginForm">
+    <div class="auth-tt">Masuk</div><div class="auth-st">Login untuk akses panel</div>
+    <div id="loginMsg" class="msg"></div>
+    <div class="fld"><label>Username</label><input type="text" id="loginUser" placeholder="username"></div>
+    <div class="fld"><label>Password</label><input type="password" id="loginPass" placeholder="password"></div>
+    <button class="btn-auth" id="loginBtn" onclick="doLogin()">Masuk</button>
+    <div class="auth-sw">Belum punya akun? <a onclick="showReg()">Daftar</a></div>
   </div>
-</div>
+  <div id="regForm" style="display:none">
+    <div class="auth-tt">Daftar Akun</div><div class="auth-st">Buat akun, top-up via Deposit</div>
+    <div id="regMsg" class="msg"></div>
+    <div class="fld"><label>Username</label><input type="text" id="regUser" placeholder="min. 3 karakter"></div>
+    <div class="fld"><label>Password</label><input type="password" id="regPass" placeholder="min. 6 karakter"></div>
+    <button class="btn-auth" id="regBtn" onclick="doRegister()">Daftar</button>
+    <div class="auth-sw">Sudah punya akun? <a onclick="showLog()">Masuk</a></div>
+  </div>
+</div></div></div>
 
-<!-- ═══ DASHBOARD ═══ -->
+<!-- APP -->
 <div id="appScreen" style="display:none">
-  <!-- Mobile header -->
-  <div class="mobile-header">
-    <button class="hamburger" onclick="toggleSidebar()">☰</button>
-    <div style="color:#fff;font-weight:700;font-size:15px">MetaHub</div>
-    <div style="width:30px"></div>
+<div class="mob-hd"><button class="hmb" onclick="togSb()">☰</button><div style="color:#fff;font-weight:700">MetaHub</div><div style="width:30px"></div></div>
+<div class="ovl" id="overlay" onclick="togSb()"></div>
+<div class="layout">
+<nav class="sidebar" id="sidebar">
+  <div class="sb-hd">
+    <div class="sb-logo"><div class="sb-mk">M</div><div><div class="sb-nm">MetaHub</div><div class="sb-tl">BM Panel</div></div></div>
+    <div class="sb-usr"><div class="sb-av" id="sbAv">A</div><div><div class="sb-un" id="sbUn">-</div><div class="sb-rl" id="sbRl">Member</div><div class="sb-bl" id="sbBl">Rp 0</div></div></div>
   </div>
-  <div class="overlay" id="overlay" onclick="toggleSidebar()"></div>
-
-  <div class="layout">
-    <!-- Sidebar -->
-    <nav class="sidebar" id="sidebar">
-      <div class="sb-header">
-        <div class="sb-logo"><div class="sb-mark">M</div><div><div class="sb-name">MetaHub</div><div class="sb-sub">BM Panel</div></div></div>
-        <div class="sb-user">
-          <div class="sb-avatar" id="sbAvatar">A</div>
-          <div>
-            <div class="sb-uname" id="sbUser">admin</div>
-            <div class="sb-role">Member</div>
-            <div class="sb-balance" id="sbBalance">Rp 0</div>
-          </div>
-        </div>
-      </div>
-      <div class="sb-nav">
-        <div class="sb-label">Menu Utama</div>
-        <div class="sb-item active" onclick="goPage('dashboard')"><span class="icon">📊</span>Dashboard</div>
-        <div class="sb-item" onclick="goPage('katalog')"><span class="icon">📦</span>Katalog</div>
-        <div class="sb-item" onclick="goPage('deposit')"><span class="icon">💳</span>Deposit</div>
-        <div class="sb-item" onclick="goPage('riwayat')"><span class="icon">📋</span>Riwayat</div>
-      </div>
-      <div class="sb-footer">
-        <button class="sb-logout" onclick="doLogout()"><span class="icon">🚪</span>Keluar</button>
-      </div>
-    </nav>
-
-    <div class="main">
-      <!-- PAGE: Dashboard -->
-      <div class="page active" id="pg-dashboard">
-        <div class="page-title">Dashboard</div>
-        <div class="page-sub">Selamat datang di MetaHub Panel</div>
-        <div id="topupBanner" class="topup-banner" style="display:none">⚠️ Saldo kosong. <a href="#" onclick="goPage('deposit');return false">Top-up sekarang</a> untuk mulai beli BM.</div>
-        <div class="stats-grid">
-          <div class="stat blue"><div class="stat-label">Saldo</div><div class="stat-val" id="dSaldo">Rp 0</div><div class="stat-hint">Top-up via menu Deposit</div></div>
-          <div class="stat green"><div class="stat-label">Stok Tersedia</div><div class="stat-val" id="dStok">-</div><div class="stat-hint">BM siap dibeli</div></div>
-          <div class="stat purple"><div class="stat-label">Total Pembelian</div><div class="stat-val" id="dBeli">0</div><div class="stat-hint" id="dTrx">0 transaksi</div></div>
-          <div class="stat amber"><div class="stat-label">Total Bayar</div><div class="stat-val" id="dBayar">Rp 0</div><div class="stat-hint" id="dDep">0 deposit</div></div>
-        </div>
-        <div class="section-label">Aktivitas Terakhir</div>
-        <div id="dashHistory"></div>
-      </div>
-
-      <!-- PAGE: Katalog -->
-      <div class="page" id="pg-katalog">
-        <div class="page-title">Katalog Produk</div>
-        <div class="page-sub">Pilih produk dan jumlah, lalu klik beli</div>
-        <div id="productList"><div class="empty-state">Memuat produk...</div></div>
-      </div>
-
-      <!-- PAGE: Deposit -->
-      <div class="page" id="pg-deposit">
-        <div class="page-title">Deposit Saldo</div>
-        <div class="page-sub">Transfer ke rekening di bawah, lalu konfirmasi</div>
-        
-        <div class="section-label">1. Pilih Metode Pembayaran</div>
-        <div class="dep-methods">
-          <div class="dep-method" onclick="selMethod(this,'BCA')" data-m="BCA"><div class="dep-method-name">🏦 BCA</div><div class="dep-method-info">1234567890<br>a.n. Dwi Melati</div></div>
-          <div class="dep-method" onclick="selMethod(this,'SeaBank')" data-m="SeaBank"><div class="dep-method-name">🏦 SeaBank</div><div class="dep-method-info">9012345678<br>a.n. Dwi Melati</div></div>
-          <div class="dep-method" onclick="selMethod(this,'DANA')" data-m="DANA"><div class="dep-method-name">💜 DANA</div><div class="dep-method-info">082127341669</div></div>
-          <div class="dep-method" onclick="selMethod(this,'OVO')" data-m="OVO"><div class="dep-method-name">💳 OVO</div><div class="dep-method-info">082127341669</div></div>
-        </div>
-        
-        <div class="section-label">2. Pilih Nominal</div>
-        <div class="dep-amounts">
-          <button class="dep-amt" onclick="selAmt(this,50000)">Rp 50.000</button>
-          <button class="dep-amt" onclick="selAmt(this,100000)">Rp 100.000</button>
-          <button class="dep-amt" onclick="selAmt(this,200000)">Rp 200.000</button>
-          <button class="dep-amt" onclick="selAmt(this,500000)">Rp 500.000</button>
-        </div>
-        <div class="dep-custom">
-          <span style="font-size:13px;color:var(--text2)">Atau nominal lain:</span>
-          <input type="number" id="depCustom" placeholder="min. 50.000" onchange="selAmtCustom()">
-        </div>
-        
-        <div class="section-label">3. Konfirmasi</div>
-        <div id="depMsg" class="msg"></div>
-        <button class="btn-dep" id="depBtn" onclick="doDeposit()" disabled>Konfirmasi Deposit</button>
-        <p style="font-size:11px;color:var(--text3);margin-top:10px">Transfer dulu ke rekening di atas, baru klik konfirmasi. Admin akan verifikasi dan menambahkan saldo kamu.</p>
-        
-        <div class="section-label" style="margin-top:32px">Riwayat Deposit</div>
-        <div id="depHistory"></div>
-      </div>
-
-      <!-- PAGE: Riwayat -->
-      <div class="page" id="pg-riwayat">
-        <div class="page-title">Riwayat Transaksi</div>
-        <div class="page-sub">Semua pembelian kamu tercatat di sini</div>
-        <div id="fullHistory"></div>
-      </div>
+  <div class="sb-nav">
+    <div class="sb-lb">Menu Utama</div>
+    <div class="sb-it active" onclick="go('dashboard')"><span class="i">📊</span>Dashboard</div>
+    <div class="sb-it" onclick="go('katalog')"><span class="i">📦</span>Katalog</div>
+    <div class="sb-it" onclick="go('deposit')"><span class="i">💳</span>Deposit</div>
+    <div class="sb-it" onclick="go('riwayat')"><span class="i">📋</span>Riwayat</div>
+    <div id="adminNav" style="display:none">
+      <div class="sb-lb">Admin</div>
+      <div class="sb-it" onclick="go('adm-deposits')"><span class="i">🔔</span>Kelola Deposit<span class="cnt" id="pendCnt" style="display:none">0</span></div>
+      <div class="sb-it" onclick="go('adm-users')"><span class="i">👥</span>Kelola Users</div>
+      <div class="sb-it" onclick="go('adm-stock')"><span class="i">📂</span>Kelola Stok</div>
     </div>
   </div>
-</div>
+  <div class="sb-ft"><button class="sb-out" onclick="doLogout()">🚪 Keluar</button></div>
+</nav>
 
-<!-- ═══ BUY MODAL ═══ -->
-<div class="modal-bg" id="buyModal">
-  <div class="modal">
-    <div class="modal-icon">✅</div>
-    <div class="modal-title">Pembelian Berhasil!</div>
-    <div class="modal-sub" id="mSub"></div>
-    <p style="font-size:12px;color:var(--text2);margin-bottom:6px;font-weight:600">Invite Link:</p>
-    <div class="link-box" id="mLinks"></div>
-    <button class="btn-full primary" onclick="copyLinks()">📋 Copy Semua Link</button>
-    <button class="btn-full ghost" onclick="closeBuyModal()">Tutup</button>
-    <p style="font-size:11px;color:var(--text3);text-align:center;margin-top:10px">⚠️ Simpan link ini! Bisa dilihat lagi di Riwayat.</p>
+<div class="main">
+  <!-- DASHBOARD -->
+  <div class="page active" id="pg-dashboard">
+    <div class="pg-t">Dashboard</div><div class="pg-s">Selamat datang di MetaHub Panel</div>
+    <div id="topupB" class="topup-b" style="display:none">⚠️ Saldo kosong. <a href="#" onclick="go('deposit');return false">Top-up sekarang</a></div>
+    <div class="stats-grid">
+      <div class="st blue"><div class="st-lb">Saldo</div><div class="st-vl" id="dS">Rp 0</div><div class="st-ht">Top-up via Deposit</div></div>
+      <div class="st green"><div class="st-lb">Stok Tersedia</div><div class="st-vl" id="dSt">-</div><div class="st-ht">BM siap dibeli</div></div>
+      <div class="st purple"><div class="st-lb">Total Pembelian</div><div class="st-vl" id="dB">0</div><div class="st-ht" id="dTx">0 transaksi</div></div>
+      <div class="st amber"><div class="st-lb">Total Bayar</div><div class="st-vl" id="dP">Rp 0</div><div class="st-ht" id="dDp">0 deposit</div></div>
+    </div>
+    <div class="sec-lb">Aktivitas Terakhir</div><div id="dashH"></div>
+  </div>
+
+  <!-- KATALOG -->
+  <div class="page" id="pg-katalog"><div class="pg-t">Katalog Produk</div><div class="pg-s">Pilih produk, atur jumlah, klik beli</div><div id="prodList"><div class="empty">Memuat...</div></div></div>
+
+  <!-- DEPOSIT -->
+  <div class="page" id="pg-deposit">
+    <div class="pg-t">Deposit Saldo</div><div class="pg-s">Transfer ke rekening, lalu konfirmasi di bawah</div>
+    <div class="sec-lb">1. Pilih Metode</div>
+    <div class="dep-ms">
+      <div class="dep-m" onclick="selM(this,'BCA')"><div class="dep-m-n">🏦 BCA</div><div class="dep-m-i">1234567890<br>a.n. Dwi Melati</div></div>
+      <div class="dep-m" onclick="selM(this,'SeaBank')"><div class="dep-m-n">🏦 SeaBank</div><div class="dep-m-i">9012345678<br>a.n. Dwi Melati</div></div>
+      <div class="dep-m" onclick="selM(this,'DANA')"><div class="dep-m-n">💜 DANA</div><div class="dep-m-i">082127341669</div></div>
+      <div class="dep-m" onclick="selM(this,'OVO')"><div class="dep-m-n">💳 OVO</div><div class="dep-m-i">082127341669</div></div>
+    </div>
+    <div class="sec-lb">2. Pilih Nominal</div>
+    <div class="dep-as">
+      <button class="dep-a" onclick="selA(this,50000)">Rp 50.000</button>
+      <button class="dep-a" onclick="selA(this,100000)">Rp 100.000</button>
+      <button class="dep-a" onclick="selA(this,200000)">Rp 200.000</button>
+      <button class="dep-a" onclick="selA(this,500000)">Rp 500.000</button>
+    </div>
+    <div class="dep-ci"><span style="font-size:12px;color:var(--text2)">Nominal lain:</span><input type="number" id="depC" placeholder="min. 50.000" onchange="selAC()"></div>
+    <div class="sec-lb">3. Konfirmasi</div>
+    <div id="depMsg" class="msg"></div>
+    <button class="btn-dep" id="depBtn" onclick="doDep()" disabled>Konfirmasi Deposit</button>
+    <p style="font-size:11px;color:var(--text3);margin-top:8px">Transfer dulu, baru konfirmasi. Admin verifikasi & tambah saldo otomatis.</p>
+    <div class="sec-lb" style="margin-top:28px">Riwayat Deposit</div><div id="depH"></div>
+  </div>
+
+  <!-- RIWAYAT -->
+  <div class="page" id="pg-riwayat"><div class="pg-t">Riwayat Transaksi</div><div class="pg-s">Semua pembelian tercatat</div><div id="fullH"></div></div>
+
+  <!-- ADMIN: DEPOSITS -->
+  <div class="page" id="pg-adm-deposits">
+    <div class="pg-t">Kelola Deposit</div><div class="pg-s">Approve/reject deposit masuk</div><div id="admDepList"></div>
+  </div>
+
+  <!-- ADMIN: USERS -->
+  <div class="page" id="pg-adm-users">
+    <div class="pg-t">Kelola Users</div><div class="pg-s">Lihat semua user & saldo</div><div id="admUserList"></div>
+  </div>
+
+  <!-- ADMIN: STOCK -->
+  <div class="page" id="pg-adm-stock">
+    <div class="pg-t">Kelola Stok</div><div class="pg-s">Tambah invite link BM</div>
+    <div class="adm-add">
+      <p style="font-size:13px;font-weight:600;margin-bottom:8px">Tambah Stok BM</p>
+      <p style="font-size:12px;color:var(--text2);margin-bottom:8px">Paste invite link, 1 link per baris:</p>
+      <textarea id="stockLinks" placeholder="https://business.facebook.com/invitation/?token=xxx&#10;https://business.facebook.com/invitation/?token=yyy"></textarea>
+      <div style="display:flex;gap:8px;align-items:center;margin-top:10px">
+        <button class="btn-buy" onclick="addStock()">Tambah Stok</button>
+        <span id="stockMsg" style="font-size:12px"></span>
+      </div>
+    </div>
+    <div id="admStockInfo"></div>
   </div>
 </div>
+</div></div>
+
+<!-- BUY MODAL -->
+<div class="mdl-bg" id="buyModal"><div class="mdl">
+  <div class="mdl-ic">✅</div><div class="mdl-tt">Pembelian Berhasil!</div>
+  <div class="mdl-sub" id="mSub"></div>
+  <p style="font-size:12px;color:var(--text2);margin-bottom:5px;font-weight:700">Invite Link:</p>
+  <div class="lnk-box" id="mLinks"></div>
+  <button class="btn-fl pri" onclick="cpLinks()">📋 Copy Semua Link</button>
+  <button class="btn-fl gho" onclick="clModal()">Tutup</button>
+  <p style="font-size:10px;color:var(--text3);text-align:center;margin-top:8px">⚠️ Simpan! Bisa dilihat lagi di Riwayat.</p>
+</div></div>
 
 <script>
-let API_URL=localStorage.getItem("metahub_api_url")||"";
-let U=null;
-let depMethod="",depAmount=0;
-let allLinks=[];
+let API=localStorage.getItem("metahub_api_url")||"",U=null,isAdm=false,admKey="",depM="",depA=0,aLinks=[];
 
-window.onload=function(){
-  if(!API_URL){showScreen("setup")}
-  else{
-    var saved=localStorage.getItem("metahub_user");
-    if(saved){U=saved;showScreen("app");initDash()}
-    else{showScreen("auth")}
+window.onload=()=>{
+  if(!API){showScr("setup")}else{
+    var s=localStorage.getItem("metahub_user"),a=localStorage.getItem("metahub_admin"),k=localStorage.getItem("metahub_akey");
+    if(s){U=s;isAdm=a==="1";admKey=k||"";showScr("app");initDash()}else showScr("auth")
   }
   $$("loginPass").onkeydown=e=>{if(e.key==="Enter")doLogin()};
   $$("regPass").onkeydown=e=>{if(e.key==="Enter")doRegister()};
@@ -364,15 +307,17 @@ window.onload=function(){
 };
 
 function $$(id){return document.getElementById(id)}
-function showScreen(s){["setupScreen","authScreen","appScreen"].forEach(x=>$$(x).style.display="none");$$(s+"Screen").style.display="block"}
+function showScr(s){["setupScreen","authScreen","appScreen"].forEach(x=>$$(x).style.display="none");$$(s+"Screen").style.display="block"}
 function showLog(){$$("loginForm").style.display="block";$$("regForm").style.display="none";clrMsg()}
 function showReg(){$$("loginForm").style.display="none";$$("regForm").style.display="block";clrMsg()}
 function clrMsg(){["loginMsg","regMsg","setupMsg","depMsg"].forEach(id=>{var e=$$(id);if(e){e.className="msg";e.textContent=""}})}
+function fmt(n){return parseInt(n||0).toLocaleString("id-ID")}
+function esc(s){if(!s)return"";var d=document.createElement("div");d.textContent=String(s);return d.innerHTML}
+function ea(s){return String(s).replace(/'/g,"\\'").replace(/"/g,"&quot;")}
 
-// API
 async function api(d){
-  try{var r=await fetch(API_URL,{method:"POST",headers:{"Content-Type":"text/plain"},body:JSON.stringify(d),redirect:"follow"});return await r.json()}
-  catch(e){var u=API_URL+"?"+new URLSearchParams(d).toString();var r2=await fetch(u,{redirect:"follow"});return await r2.json()}
+  try{var r=await fetch(API,{method:"POST",headers:{"Content-Type":"text/plain"},body:JSON.stringify(d),redirect:"follow"});return await r.json()}
+  catch(e){var r2=await fetch(API+"?"+new URLSearchParams(d),{redirect:"follow"});return await r2.json()}
 }
 
 // Setup
@@ -381,173 +326,197 @@ async function testApi(){
   if(!url||!url.startsWith("https://script.google.com/")){m.className="msg err";m.textContent="URL tidak valid";return}
   m.className="msg ok";m.textContent="Menghubungkan...";
   try{var r=await(await fetch(url+"?action=ping",{redirect:"follow"})).json();
-    if(r.success){API_URL=url;localStorage.setItem("metahub_api_url",url);m.className="msg ok";m.textContent="Terhubung!";setTimeout(()=>showScreen("auth"),600)}
+    if(r.success){API=url;localStorage.setItem("metahub_api_url",url);m.textContent="Terhubung!";setTimeout(()=>showScr("auth"),500)}
     else{m.className="msg err";m.textContent=r.error||"Gagal"}
-  }catch(e){m.className="msg err";m.textContent="Gagal konek: "+e.message}
+  }catch(e){m.className="msg err";m.textContent="Gagal: "+e.message}
 }
-function resetApi(){if(confirm("Reset koneksi?")){localStorage.removeItem("metahub_api_url");API_URL="";U=null;showScreen("setup")}}
 
 // Auth
 async function doLogin(){
   var u=$$("loginUser").value.trim(),p=$$("loginPass").value,m=$$("loginMsg"),b=$$("loginBtn");
-  if(!u||!p){m.className="msg err";m.textContent="Isi username dan password";return}
+  if(!u||!p){m.className="msg err";m.textContent="Isi semua";return}
   b.disabled=true;b.innerHTML='<span class="loader"></span>';
   try{var r=await api({action:"login",username:u,password:p});
-    if(r.success){U=u;localStorage.setItem("metahub_user",u);m.className="msg ok";m.textContent="Berhasil!";setTimeout(()=>{showScreen("app");initDash()},400)}
-    else{m.className="msg err";m.textContent=r.error}
+    if(r.success){
+      U=u;isAdm=!!r.isAdmin;admKey=isAdm?p:"";
+      localStorage.setItem("metahub_user",u);
+      localStorage.setItem("metahub_admin",isAdm?"1":"0");
+      localStorage.setItem("metahub_akey",admKey);
+      m.className="msg ok";m.textContent="Berhasil!";
+      setTimeout(()=>{showScr("app");initDash()},300);
+    }else{m.className="msg err";m.textContent=r.error}
   }catch(e){m.className="msg err";m.textContent="Koneksi gagal"}
   b.disabled=false;b.textContent="Masuk";
 }
 async function doRegister(){
   var u=$$("regUser").value.trim(),p=$$("regPass").value,m=$$("regMsg"),b=$$("regBtn");
-  if(!u||!p){m.className="msg err";m.textContent="Isi semua field";return}
+  if(!u||!p){m.className="msg err";m.textContent="Isi semua";return}
   b.disabled=true;b.innerHTML='<span class="loader"></span>';
   try{var r=await api({action:"register",username:u,password:p});
-    if(r.success){m.className="msg ok";m.textContent="Akun dibuat! Top-up saldo, lalu login."}
-    else{m.className="msg err";m.textContent=r.error}
-  }catch(e){m.className="msg err";m.textContent="Koneksi gagal"}
+    m.className=r.success?"msg ok":"msg err";m.textContent=r.success?r.message:r.error;
+  }catch(e){m.className="msg err";m.textContent="Gagal"}
   b.disabled=false;b.textContent="Daftar";
 }
-function doLogout(){U=null;localStorage.removeItem("metahub_user");$$("loginUser").value="";$$("loginPass").value="";clrMsg();showScreen("auth")}
+function doLogout(){U=null;isAdm=false;admKey="";localStorage.removeItem("metahub_user");localStorage.removeItem("metahub_admin");localStorage.removeItem("metahub_akey");$$("loginUser").value="";$$("loginPass").value="";clrMsg();showScr("auth")}
 
-// Sidebar
-function goPage(p){
+// Nav
+function go(p){
   document.querySelectorAll(".page").forEach(x=>x.classList.remove("active"));
-  document.querySelectorAll(".sb-item").forEach(x=>x.classList.remove("active"));
+  document.querySelectorAll(".sb-it").forEach(x=>x.classList.remove("active"));
   $$("pg-"+p).classList.add("active");
-  document.querySelector('[onclick="goPage(\''+p+'\')"]').classList.add("active");
-  if(p==="dashboard")loadStats();
-  if(p==="katalog")loadProducts();
-  if(p==="deposit")loadDeposits();
-  if(p==="riwayat")loadHistory("fullHistory");
-  if(window.innerWidth<=768)toggleSidebar();
+  var navItem=document.querySelector('[onclick="go(\''+p+'\')"]');if(navItem)navItem.classList.add("active");
+  if(p==="dashboard"){loadStats();loadHistory("dashH",5)}
+  if(p==="katalog")loadProds();
+  if(p==="deposit"){loadDeps()}
+  if(p==="riwayat")loadHistory("fullH");
+  if(p==="adm-deposits")loadAdmDeps();
+  if(p==="adm-users")loadAdmUsers();
+  if(p==="adm-stock")loadAdmStock();
+  if(window.innerWidth<=768)togSb();
 }
-function toggleSidebar(){$$("sidebar").classList.toggle("open");$$("overlay").classList.toggle("active")}
+function togSb(){$$("sidebar").classList.toggle("open");$$("overlay").classList.toggle("active")}
 
-// Dashboard
-async function initDash(){
-  $$("sbUser").textContent=U;
-  $$("sbAvatar").textContent=U[0].toUpperCase();
-  loadStats();loadProducts();loadHistory("dashHistory",5);loadDeposits();
+function initDash(){
+  $$("sbUn").textContent=U;$$("sbAv").textContent=U[0].toUpperCase();
+  $$("sbRl").textContent=isAdm?"Admin":"Member";
+  $$("adminNav").style.display=isAdm?"block":"none";
+  loadStats();loadProds();loadHistory("dashH",5);loadDeps();
+  if(isAdm)loadAdmDeps();
 }
 
 async function loadStats(){
-  try{var r=await api({action:"getStats",username:U});
-    if(r.success){
-      $$("dSaldo").textContent="Rp "+fmt(r.saldo);
-      $$("dStok").textContent=r.totalStok;
-      $$("dBeli").textContent=r.totalBeli;
-      $$("dBayar").textContent="Rp "+fmt(r.totalBayar);
-      $$("dTrx").textContent=r.trxCount+" transaksi";
-      $$("dDep").textContent=r.depCount+" deposit";
-      $$("sbBalance").textContent="Rp "+fmt(r.saldo);
-      $$("topupBanner").style.display=r.saldo===0?"flex":"none";
-    }
-  }catch(e){}
+  try{var r=await api({action:"getStats",username:U});if(r.success){
+    $$("dS").textContent="Rp "+fmt(r.saldo);$$("dSt").textContent=r.totalStok;$$("dB").textContent=r.totalBeli;
+    $$("dP").textContent="Rp "+fmt(r.totalBayar);$$("dTx").textContent=r.trxCount+" transaksi";$$("dDp").textContent=r.depCount+" deposit";
+    $$("sbBl").textContent="Rp "+fmt(r.saldo);$$("topupB").style.display=r.saldo===0?"flex":"none";
+  }}catch(e){}
 }
 
-async function loadProducts(){
-  var c=$$("productList");
-  try{var r=await api({action:"getProducts"});
-    if(r.success&&r.products.length>0){
-      var h="";
-      r.products.forEach(function(p){
-        var stok=parseInt(p.stok)||0;
-        var sc=stok>0?"ok":"empty",st=stok>0?"● "+stok+" tersedia":"● Habis";
-        var dis=stok===0?"disabled":"";
-        h+='<div class="prod"><div class="prod-top"><div><div class="prod-name">'+esc(p.nama)+'</div><div class="prod-desc">'+esc(p.deskripsi)+'</div><div class="prod-stock '+sc+'">'+st+'</div></div><div class="prod-price">Rp '+fmt(p.harga)+'</div></div>'+
-          '<div class="prod-actions"><div class="qty-wrap"><button class="qty-btn" onclick="qtyChange(this,-1)">−</button><input class="qty-val" type="number" value="1" min="1" max="'+stok+'" data-price="'+p.harga+'" onchange="qtyUpdate(this)"><button class="qty-btn" onclick="qtyChange(this,1)">+</button></div>'+
-          '<button class="btn-buy" '+dis+' onclick="doBuy(\''+ea(p.id)+'\',\''+ea(p.nama)+'\',this)">🛒 Beli</button>'+
-          '<span class="buy-total">Total: Rp '+fmt(p.harga)+'</span></div></div>';
-      });
-      c.innerHTML=h;
-    }else c.innerHTML='<div class="empty-state"><span>📦</span>Belum ada produk</div>';
-  }catch(e){c.innerHTML='<div class="empty-state" style="color:var(--red)">Gagal memuat</div>'}
+async function loadProds(){
+  var c=$$("prodList");
+  try{var r=await api({action:"getProducts"});if(r.success&&r.products.length>0){
+    var h="";r.products.forEach(p=>{
+      var sk=parseInt(p.stok)||0,sc=sk>0?"ok":"no",st=sk>0?"● "+sk+" tersedia":"● Habis",dis=sk===0?"disabled":"";
+      h+='<div class="prod"><div class="prod-top"><div><div class="prod-nm">'+esc(p.nama)+'</div><div class="prod-ds">'+esc(p.deskripsi)+'</div><div class="prod-sk '+sc+'">'+st+'</div></div><div class="prod-pr">Rp '+fmt(p.harga)+'</div></div><div class="prod-act"><div class="qty-w"><button class="qty-b" onclick="qC(this,-1)">−</button><input class="qty-v" type="number" value="1" min="1" max="'+sk+'" data-p="'+p.harga+'" onchange="qU(this)"><button class="qty-b" onclick="qC(this,1)">+</button></div><button class="btn-buy" '+dis+' onclick="doBuy(\''+ea(p.id)+'\',\''+ea(p.nama)+'\',this)">🛒 Beli</button><span class="buy-tot">Total: Rp '+fmt(p.harga)+'</span></div></div>';
+    });c.innerHTML=h;}else c.innerHTML='<div class="empty"><span>📦</span>Belum ada produk</div>';
+  }catch(e){c.innerHTML='<div class="empty" style="color:var(--red)">Gagal memuat</div>'}
 }
 
-function qtyChange(btn,d){var inp=btn.parentElement.querySelector(".qty-val");var v=Math.max(1,Math.min(parseInt(inp.max)||99,(parseInt(inp.value)||1)+d));inp.value=v;qtyUpdate(inp)}
-function qtyUpdate(inp){var p=parseInt(inp.dataset.price)||0;var q=parseInt(inp.value)||1;inp.closest(".prod-actions").querySelector(".buy-total").textContent="Total: Rp "+fmt(p*q)}
+function qC(b,d){var i=b.parentElement.querySelector(".qty-v"),v=Math.max(1,Math.min(parseInt(i.max)||99,(parseInt(i.value)||1)+d));i.value=v;qU(i)}
+function qU(i){var p=parseInt(i.dataset.p)||0,q=parseInt(i.value)||1;i.closest(".prod-act").querySelector(".buy-tot").textContent="Total: Rp "+fmt(p*q)}
 
-async function doBuy(pid,pname,btn){
-  var qtyEl=btn.parentElement.querySelector(".qty-val");
-  var qty=parseInt(qtyEl.value)||1;
-  if(!confirm("Beli "+qty+"x "+pname+"?\nTotal: "+btn.parentElement.querySelector(".buy-total").textContent))return;
+async function doBuy(pid,pn,btn){
+  var q=parseInt(btn.parentElement.querySelector(".qty-v").value)||1;
+  if(!confirm("Beli "+q+"x "+pn+"?"))return;
   btn.disabled=true;btn.innerHTML='<span class="loader"></span>';
-  try{var r=await api({action:"buy",username:U,productId:pid,qty:qty});
-    if(r.success){
-      allLinks=r.inviteLinks||[];
-      $$("mSub").textContent=r.qty+"x "+r.produk+" — Rp "+fmt(r.harga);
-      var lh="";allLinks.forEach((l,i)=>{lh+='<div class="link-item">'+(allLinks.length>1?(i+1)+". ":"")+esc(l)+'</div>'});
-      $$("mLinks").innerHTML=lh;
-      $$("buyModal").classList.add("active");
-      loadStats();loadProducts();loadHistory("dashHistory",5);
-    }else{alert(r.error);loadProducts()}
-  }catch(e){alert("Koneksi gagal")}
+  try{var r=await api({action:"buy",username:U,productId:pid,qty:q});
+    if(r.success){aLinks=r.inviteLinks||[];$$("mSub").textContent=r.qty+"x "+r.produk+" — Rp "+fmt(r.harga);
+      var lh="";aLinks.forEach((l,i)=>{lh+='<div class="lnk-item">'+(aLinks.length>1?(i+1)+". ":"")+esc(l)+'</div>'});
+      $$("mLinks").innerHTML=lh;$$("buyModal").classList.add("active");loadStats();loadProds();loadHistory("dashH",5);
+    }else alert(r.error);
+  }catch(e){alert("Gagal")}
   btn.disabled=false;btn.innerHTML="🛒 Beli";
 }
-function copyLinks(){
-  navigator.clipboard.writeText(allLinks.join("\n")).then(()=>{document.querySelector("#buyModal .primary").textContent="✅ Tercopy!"
-    ;setTimeout(()=>{document.querySelector("#buyModal .primary").textContent="📋 Copy Semua Link"},2e3)}).catch(()=>{var t=document.createElement("textarea");t.value=allLinks.join("\n");document.body.appendChild(t);t.select();document.execCommand("copy");document.body.removeChild(t)})
-}
-function closeBuyModal(){$$("buyModal").classList.remove("active")}
+function cpLinks(){navigator.clipboard.writeText(aLinks.join("\n")).then(()=>{var b=document.querySelector("#buyModal .pri");b.textContent="✅ Tercopy!";setTimeout(()=>b.textContent="📋 Copy Semua Link",2e3)})}
+function clModal(){$$("buyModal").classList.remove("active")}
 
 // History
-async function loadHistory(target,limit){
-  var c=$$(target);if(!c)return;
-  try{var r=await api({action:"getHistory",username:U});
-    if(r.success&&r.history.length>0){
-      var list=limit?r.history.slice(0,limit):r.history;
-      var h='<div class="tbl-wrap"><table><thead><tr><th>Waktu</th><th>Produk</th><th>Qty</th><th>Harga</th><th>Invite Link</th></tr></thead><tbody>';
-      list.forEach(function(t){
-        var links=(t.link||"").split("\n").filter(Boolean);
-        var linkHtml=links.map(l=>'<div>'+esc(l)+'</div>').join("");
-        h+='<tr><td style="white-space:nowrap">'+esc(t.timestamp)+'</td><td>'+esc(t.produk)+'</td><td style="text-align:center">'+(t.jumlah||1)+'</td><td>Rp '+fmt(t.harga)+'</td><td class="link-cell">'+linkHtml+'</td></tr>';
-      });
-      h+='</tbody></table></div>';
-      if(limit&&r.history.length>limit)h+='<div style="text-align:center;margin-top:10px"><a href="#" onclick="goPage(\'riwayat\');return false" style="font-size:13px">Lihat semua ('+r.history.length+' transaksi) →</a></div>';
-      c.innerHTML=h;
-    }else c.innerHTML='<div class="empty-state"><span>📦</span>Belum ada pembelian</div>';
-  }catch(e){c.innerHTML='<div class="empty-state" style="color:var(--red)">Gagal memuat</div>'}
+async function loadHistory(tgt,lim){
+  var c=$$(tgt);if(!c)return;
+  try{var r=await api({action:"getHistory",username:U});if(r.success&&r.history.length>0){
+    var ls=lim?r.history.slice(0,lim):r.history;
+    var h='<div class="tw"><table><thead><tr><th>Waktu</th><th>Produk</th><th>Qty</th><th>Harga</th><th>Link</th></tr></thead><tbody>';
+    ls.forEach(t=>{var lnks=(t.link||"").split("\n").filter(Boolean).map(l=>'<div>'+esc(l)+'</div>').join("");
+      h+='<tr><td style="white-space:nowrap;font-size:12px">'+esc(t.timestamp)+'</td><td>'+esc(t.produk)+'</td><td style="text-align:center">'+(t.jumlah||1)+'</td><td>Rp '+fmt(t.harga)+'</td><td class="lc">'+lnks+'</td></tr>'});
+    h+='</tbody></table></div>';
+    if(lim&&r.history.length>lim)h+='<div style="text-align:center;margin-top:8px"><a href="#" onclick="go(\'riwayat\');return false" style="font-size:12px">Lihat semua →</a></div>';
+    c.innerHTML=h;}else c.innerHTML='<div class="empty"><span>📦</span>Belum ada</div>';
+  }catch(e){c.innerHTML='<div class="empty" style="color:var(--red)">Gagal</div>'}
 }
 
 // Deposit
-function selMethod(el,m){document.querySelectorAll(".dep-method").forEach(x=>x.classList.remove("selected"));el.classList.add("selected");depMethod=m;checkDep()}
-function selAmt(el,a){document.querySelectorAll(".dep-amt").forEach(x=>x.classList.remove("selected"));el.classList.add("selected");depAmount=a;$$("depCustom").value="";checkDep()}
-function selAmtCustom(){var v=parseInt($$("depCustom").value)||0;document.querySelectorAll(".dep-amt").forEach(x=>x.classList.remove("selected"));depAmount=v;checkDep()}
-function checkDep(){$$("depBtn").disabled=!(depMethod&&depAmount>=50000)}
+function selM(el,m){document.querySelectorAll(".dep-m").forEach(x=>x.classList.remove("sel"));el.classList.add("sel");depM=m;chkDep()}
+function selA(el,a){document.querySelectorAll(".dep-a").forEach(x=>x.classList.remove("sel"));el.classList.add("sel");depA=a;$$("depC").value="";chkDep()}
+function selAC(){document.querySelectorAll(".dep-a").forEach(x=>x.classList.remove("sel"));depA=parseInt($$("depC").value)||0;chkDep()}
+function chkDep(){$$("depBtn").disabled=!(depM&&depA>=50000)}
 
-async function doDeposit(){
+async function doDep(){
   var m=$$("depMsg"),b=$$("depBtn");
-  if(!depMethod||depAmount<50000){m.className="msg err";m.textContent="Pilih metode dan nominal (min. Rp 50.000)";return}
-  if(!confirm("Konfirmasi deposit Rp "+fmt(depAmount)+" via "+depMethod+"?\n\nPastikan kamu SUDAH TRANSFER sebelum konfirmasi."))return;
+  if(!depM||depA<50000){m.className="msg err";m.textContent="Pilih metode & nominal (min Rp 50.000)";return}
+  if(!confirm("Konfirmasi deposit Rp "+fmt(depA)+" via "+depM+"?\nPastikan sudah transfer!"))return;
   b.disabled=true;b.innerHTML='<span class="loader"></span>';
-  try{var r=await api({action:"deposit",username:U,jumlah:depAmount,metode:depMethod});
-    if(r.success){m.className="msg ok";m.textContent="Deposit Rp "+fmt(depAmount)+" tercatat! Admin akan konfirmasi & menambahkan saldo kamu.";loadDeposits();loadStats()}
-    else{m.className="msg err";m.textContent=r.error}
-  }catch(e){m.className="msg err";m.textContent="Koneksi gagal"}
+  try{var r=await api({action:"deposit",username:U,jumlah:depA,metode:depM});
+    m.className=r.success?"msg ok":"msg err";m.textContent=r.success?"Deposit Rp "+fmt(depA)+" tercatat! Admin akan konfirmasi.":r.error;
+    if(r.success){loadDeps();loadStats();if(isAdm)loadAdmDeps()}
+  }catch(e){m.className="msg err";m.textContent="Gagal"}
   b.disabled=false;b.textContent="Konfirmasi Deposit";
 }
 
-async function loadDeposits(){
-  var c=$$("depHistory");if(!c)return;
-  try{var r=await api({action:"getDeposits",username:U});
-    if(r.success&&r.deposits.length>0){
-      var h='<div class="tbl-wrap"><table><thead><tr><th>ID</th><th>Waktu</th><th>Jumlah</th><th>Metode</th><th>Status</th></tr></thead><tbody>';
-      r.deposits.forEach(function(d){
-        var bc=d.status==="APPROVED"?"ok":d.status==="PENDING"?"pending":"rejected";
-        h+='<tr><td style="font-family:var(--mono);font-size:11px">'+esc(d.id)+'</td><td style="white-space:nowrap">'+esc(d.timestamp)+'</td><td>Rp '+fmt(d.jumlah)+'</td><td>'+esc(d.metode)+'</td><td><span class="badge-sm '+bc+'">'+esc(d.status)+'</span></td></tr>';
-      });
-      h+='</tbody></table></div>';c.innerHTML=h;
-    }else c.innerHTML='<div class="empty-state"><span>💳</span>Belum ada deposit</div>';
+async function loadDeps(){
+  var c=$$("depH");if(!c)return;
+  try{var r=await api({action:"getDeposits",username:U});if(r.success&&r.deposits.length>0){
+    var h='<div class="tw"><table><thead><tr><th>ID</th><th>Waktu</th><th>Jumlah</th><th>Metode</th><th>Status</th></tr></thead><tbody>';
+    r.deposits.forEach(d=>{var bc=d.status==="APPROVED"?"ok":d.status==="PENDING"?"pend":"rej";
+      h+='<tr><td style="font-family:var(--mono);font-size:10px">'+esc(d.id)+'</td><td style="white-space:nowrap;font-size:12px">'+esc(d.timestamp)+'</td><td>Rp '+fmt(d.jumlah)+'</td><td>'+esc(d.metode)+'</td><td><span class="bdg '+bc+'">'+esc(d.status)+'</span></td></tr>'});
+    h+='</tbody></table></div>';c.innerHTML=h;}else c.innerHTML='<div class="empty"><span>💳</span>Belum ada deposit</div>';
   }catch(e){}
 }
 
-function fmt(n){return parseInt(n).toLocaleString("id-ID")}
-function esc(s){if(!s)return"";var d=document.createElement("div");d.textContent=String(s);return d.innerHTML}
-function ea(s){return String(s).replace(/'/g,"\\'").replace(/"/g,"&quot;")}
+// ═══ ADMIN ═══
+async function loadAdmDeps(){
+  var c=$$("admDepList");if(!c)return;
+  try{var r=await api({action:"adminGetDeposits",adminKey:admKey});if(r.success&&r.deposits.length>0){
+    var pend=r.deposits.filter(d=>d.status==="PENDING").length;
+    var pc=$$("pendCnt");if(pend>0){pc.textContent=pend;pc.style.display="inline"}else pc.style.display="none";
+    var h='<div class="tw"><table><thead><tr><th>ID</th><th>Waktu</th><th>User</th><th>Jumlah</th><th>Metode</th><th>Status</th><th>Aksi</th></tr></thead><tbody>';
+    r.deposits.forEach(d=>{var bc=d.status==="APPROVED"?"ok":d.status==="PENDING"?"pend":"rej";
+      var acts=d.status==="PENDING"?'<div class="adm-act"><button class="btn-sm green" onclick="admApprove(\''+ea(d.id)+'\')">✓ Approve</button><button class="btn-sm red" onclick="admReject(\''+ea(d.id)+'\')">✕ Reject</button></div>':'<span style="font-size:11px;color:var(--text3)">—</span>';
+      h+='<tr><td style="font-family:var(--mono);font-size:10px">'+esc(d.id)+'</td><td style="font-size:12px;white-space:nowrap">'+esc(d.timestamp)+'</td><td style="font-weight:600">'+esc(d.username)+'</td><td>Rp '+fmt(d.jumlah)+'</td><td>'+esc(d.metode)+'</td><td><span class="bdg '+bc+'">'+esc(d.status)+'</span></td><td>'+acts+'</td></tr>'});
+    h+='</tbody></table></div>';c.innerHTML=h;}else{c.innerHTML='<div class="empty"><span>🔔</span>Tidak ada deposit</div>';$$("pendCnt").style.display="none"}
+  }catch(e){c.innerHTML='<div class="empty" style="color:var(--red)">Gagal</div>'}
+}
 
-document.addEventListener("click",e=>{if(e.target.id==="buyModal")closeBuyModal()});
-document.addEventListener("keydown",e=>{if(e.key==="Escape")closeBuyModal()});
+async function admApprove(id){
+  if(!confirm("Approve deposit "+id+"? Saldo user otomatis bertambah."))return;
+  try{var r=await api({action:"adminApprove",adminKey:admKey,depositId:id});
+    alert(r.success?r.message:r.error);loadAdmDeps();loadStats();
+  }catch(e){alert("Gagal")}
+}
+async function admReject(id){
+  if(!confirm("Reject deposit "+id+"?"))return;
+  try{var r=await api({action:"adminReject",adminKey:admKey,depositId:id});
+    alert(r.success?r.message:r.error);loadAdmDeps();
+  }catch(e){alert("Gagal")}
+}
+
+async function loadAdmUsers(){
+  var c=$$("admUserList");if(!c)return;
+  try{var r=await api({action:"adminGetUsers",adminKey:admKey});if(r.success){
+    var h='<div class="tw"><table><thead><tr><th>Username</th><th>Saldo</th><th>Status</th><th>Gagal Login</th><th>Join</th></tr></thead><tbody>';
+    r.users.forEach(u=>{var bc=u.status==="active"?"ok":"rej";
+      h+='<tr><td style="font-weight:600">'+esc(u.username)+'</td><td style="font-family:var(--mono)">Rp '+fmt(u.saldo)+'</td><td><span class="bdg '+bc+'">'+esc(u.status)+'</span></td><td>'+u.gagal+'</td><td>'+esc(u.join)+'</td></tr>'});
+    h+='</tbody></table></div>';c.innerHTML=h;}
+  }catch(e){c.innerHTML='<div class="empty" style="color:var(--red)">Gagal</div>'}
+}
+
+async function loadAdmStock(){
+  var c=$$("admStockInfo");if(!c)return;
+  try{var r=await api({action:"adminGetStock",adminKey:admKey});if(r.success){
+    c.innerHTML='<div class="stats-grid" style="grid-template-columns:repeat(3,1fr)"><div class="st green"><div class="st-lb">Ready</div><div class="st-vl">'+r.ready+'</div></div><div class="st amber"><div class="st-lb">Sold</div><div class="st-vl">'+r.sold+'</div></div><div class="st blue"><div class="st-lb">Total</div><div class="st-vl">'+r.total+'</div></div></div>';
+  }}catch(e){}
+}
+
+async function addStock(){
+  var links=$$("stockLinks").value.trim(),msg=$$("stockMsg");
+  if(!links){msg.textContent="Paste link dulu";msg.style.color="var(--red)";return}
+  try{var r=await api({action:"adminAddStock",adminKey:admKey,productId:"BM001",links:links});
+    if(r.success){msg.textContent="✅ "+r.count+" link ditambahkan!";msg.style.color="var(--green)";$$("stockLinks").value="";loadAdmStock();loadProds();loadStats()}
+    else{msg.textContent=r.error;msg.style.color="var(--red)"}
+  }catch(e){msg.textContent="Gagal";msg.style.color="var(--red)"}
+}
+
+document.addEventListener("click",e=>{if(e.target.id==="buyModal")clModal()});
+document.addEventListener("keydown",e=>{if(e.key==="Escape")clModal()});
 </script>
 </body>
 </html>
